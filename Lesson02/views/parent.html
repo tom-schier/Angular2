@@ -1,0 +1,4 @@
+﻿
+<h3 (click)="sendMsgToDecendants()">This is Parent</h3>
+<div>Message from grandchild: {{msg}}</div>
+<div><child [msgFromBoss]="msgBoss" (msgEventCh)="handleChildEvent($event)"></child></div>

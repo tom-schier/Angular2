@@ -1,0 +1,28 @@
+﻿
+<h2>This is IO Demo</h2>
+<div>
+    <span>Wind speed:<input type="text" [(ngModel)]="aWindspeed"/></span>
+    <span>Wind direction:<input type="text" [(ngModel)]="aDirection" /></span>
+    <span>At altitude:<input type="text" [(ngModel)]="aAltitude" /></span>
+    <span><button (click)="onClick()" style="width: 60px">Add</button></span>
+</div>
+<div>
+    <h2>Selected Wind Component</h2>
+    <h3 (ngModel)="selWindComp.windspeed">Speed: {{selWindComp.windspeed}}</h3>
+    <h3 (ngModel)="selWindComp.direction">Direction: {{selWindComp.direction}}</h3>
+    <h3 (ngModel)="selWindComp.altitude">At Altitude: {{selWindComp.altitude}}</h3>
+    <div>
+        <ul id="windRow">
+            <li *ngFor="#wnd of winds; #i=index" (click)="onSelect(i)">
+                <div>
+                    <span><input id="idxWndDir" [(ngModel)]="wnd.windspeed" [readonly]="wnd.isReadOnly"  type="text" value="{{wnd.windspeed}}" />
+                        <input id="idxWndSpeed" [(ngModel)]="wnd.direction"  [readonly]="wnd.isReadOnly" type="text"  value="{{wnd.direction}}" />
+                        <input id="idxWndDir" [(ngModel)]="wnd.altitude"  [readonly]="wnd.isReadOnly"  type="text"  value="{{wnd.altitude}}" />
+                        <button class="idRemoveBtn" (click)="onRemove(i)" style="width: 60px">Remove</button>
+                        <button class="idEditBtn" (click)="onEdit(i)" style="width: 60px">Edit</button>
+                    </span>  
+                </div>            
+            </li>
+        </ul>
+    </div>
+</div>
