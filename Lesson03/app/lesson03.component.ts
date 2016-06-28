@@ -8,6 +8,7 @@ class windComponent {
     isReadOnly: boolean;
 }
 
+
 @Component({
     selector: 'lesson-03',
     templateUrl: './views/iodemo.html'
@@ -22,6 +23,7 @@ export class Lesson03 implements OnInit {
     selAltitude: number;
     selIdx: number;
     selWindComp: windComponent;
+    
 
     winds: windComponent[];
 
@@ -54,12 +56,24 @@ export class Lesson03 implements OnInit {
     onEdit(idx) {
         this.winds[idx].isReadOnly = !this.winds[idx].isReadOnly;
         var currentCaption = document.getElementsByClassName("idEditBtn")[idx].innerHTML;
-
         if (currentCaption == "Save") {
             document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Edit";
+            let editWndDir = <HTMLElement>(document.getElementsByClassName("idxWndDir")[idx]);
+            editWndDir.style.backgroundColor = "lightgray";         
+            let editWndSpeed = <HTMLElement>(document.getElementsByClassName("idxWndSpeed")[idx]);
+            editWndSpeed.style.backgroundColor = "lightgray";
+            let editWndAlt = <HTMLElement>(document.getElementsByClassName("idxWndAltitude")[idx]);
+            editWndAlt.style.backgroundColor = "lightgray";
         }
         else {
             document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Save";
-        }        
+            let editWndDir = <HTMLElement>(document.getElementsByClassName("idxWndDir")[idx]);
+            editWndDir.style.backgroundColor = "white";
+            let editWndSpeed = <HTMLElement>(document.getElementsByClassName("idxWndSpeed")[idx]);
+            editWndSpeed.style.backgroundColor = "white";
+            let editWndAlt = <HTMLElement>(document.getElementsByClassName("idxWndAltitude")[idx]);
+            editWndAlt.style.backgroundColor = "white";
+        }       
     }
+
 }

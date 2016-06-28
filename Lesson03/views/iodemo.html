@@ -8,16 +8,18 @@
 </div>
 <div>
     <h2>Selected Wind Component</h2>
-    <h3 (ngModel)="selWindComp.windspeed">Speed: {{selWindComp.windspeed}}</h3>
-    <h3 (ngModel)="selWindComp.direction">Direction: {{selWindComp.direction}}</h3>
-    <h3 (ngModel)="selWindComp.altitude">At Altitude: {{selWindComp.altitude}}</h3>
+        <div>
+            <span>Speed:<input type="text" value="{{selWindComp.windspeed}}" readonly="readonly" style="color: red"/></span>
+            <span>Direction:<input type="text" value="{{selWindComp.direction}}" readonly="readonly" style="color: red" /></span>
+            <span>At altitude:<input type="text" value="{{selWindComp.altitude}}" readonly="readonly" style="color: red" /></span>
+        </div>
     <div>
-        <ul id="windRow">
+        <ul id="windData">
             <li *ngFor="#wnd of winds; #i=index" (click)="onSelect(i)">
                 <div>
-                    <span><input id="idxWndDir" [(ngModel)]="wnd.windspeed" [readonly]="wnd.isReadOnly"  type="text" value="{{wnd.windspeed}}" />
-                        <input id="idxWndSpeed" [(ngModel)]="wnd.direction"  [readonly]="wnd.isReadOnly" type="text"  value="{{wnd.direction}}" />
-                        <input id="idxWndDir" [(ngModel)]="wnd.altitude"  [readonly]="wnd.isReadOnly"  type="text"  value="{{wnd.altitude}}" />
+                    <span><input class="idxWndDir" [(ngModel)]="wnd.windspeed" [readonly]="wnd.isReadOnly"  type="text" value="{{wnd.windspeed}}" style="background-color :lightgray"/>
+                        <input class="idxWndSpeed" [(ngModel)]="wnd.direction"  [readonly]="wnd.isReadOnly" type="text"  value="{{wnd.direction}}" style="background-color :lightgray"/>
+                        <input class="idxWndAltitude" [(ngModel)]="wnd.altitude"  [readonly]="wnd.isReadOnly"  type="text"  value="{{wnd.altitude}}" style="background-color :lightgray"/>
                         <button class="idRemoveBtn" (click)="onRemove(i)" style="width: 60px">Remove</button>
                         <button class="idEditBtn" (click)="onEdit(i)" style="width: 60px">Edit</button>
                     </span>  

@@ -50,9 +50,21 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     var currentCaption = document.getElementsByClassName("idEditBtn")[idx].innerHTML;
                     if (currentCaption == "Save") {
                         document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Edit";
+                        var editWndDir = (document.getElementsByClassName("idxWndDir")[idx]);
+                        editWndDir.style.backgroundColor = "lightgray";
+                        var editWndSpeed = (document.getElementsByClassName("idxWndSpeed")[idx]);
+                        editWndSpeed.style.backgroundColor = "lightgray";
+                        var editWndAlt = (document.getElementsByClassName("idxWndAltitude")[idx]);
+                        editWndAlt.style.backgroundColor = "lightgray";
                     }
                     else {
                         document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Save";
+                        var editWndDir = (document.getElementsByClassName("idxWndDir")[idx]);
+                        editWndDir.style.backgroundColor = "white";
+                        var editWndSpeed = (document.getElementsByClassName("idxWndSpeed")[idx]);
+                        editWndSpeed.style.backgroundColor = "white";
+                        var editWndAlt = (document.getElementsByClassName("idxWndAltitude")[idx]);
+                        editWndAlt.style.backgroundColor = "white";
                     }
                 };
                 Lesson03 = __decorate([
