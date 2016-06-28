@@ -1,0 +1,14 @@
+﻿<div class="container">
+    <h1>Test Service</h1>
+    <input  [(ngModel)]="modelMsg" type="text" value="{{modelMsg}}" />
+    <button  (click)="onSetMsg(modelMsg)" >Set Message</button>
+    <div>{{serviceMsg}}</div>
+    <ul>
+        <li><a [routerLink]="['ListA']">Comp A</a></li>
+        <li><a [routerLink]="['ListB']">Comp B</a></li>
+    </ul>
+    <div>
+        <router-outlet></router-outlet>
+    </div>    
+</div>
+
