@@ -1,0 +1,13 @@
+﻿<head>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet">
+</head>
+
+    <h4>Aircraft Speeds</h4>
+<div *ngIf="selectedAircraft != null">
+    <ul class="list-group">
+        <li *ngFor="#speed of selectedAircraft.acSpeeds" class="list-group-item">
+            <span class="badge">{{speed.name}}</span> {{speed.val}}
+        </li>
+    </ul>
+</div>

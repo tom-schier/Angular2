@@ -1,0 +1,15 @@
+﻿<head>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet">
+</head>
+    <div id="sidebar-wrapper">
+            <ul>  
+                <li class="sidebar-brand">
+                    <a>Available Types:</a>
+                </li>           
+                <li *ngFor="#ac of _acList" (click)="onSelect(ac)">
+                    <a>{{ac.name}}</a>
+                </li>             
+            </ul>
+    </div>
+

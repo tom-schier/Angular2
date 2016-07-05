@@ -1,0 +1,39 @@
+﻿<head>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <div id="wrapper">
+        <div id="navbarwrapper">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Back To Main</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a [routerLink]="['FlightPlanning']">Flight Planning</a></li>
+                    <li><a [routerLink]="['AircraftDetails']">Aircraft Details</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div id="ac-list" class="sidebar-nav">
+                <ac-list>
+                </ac-list>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+</body>
+
+

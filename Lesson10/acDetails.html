@@ -1,0 +1,15 @@
+﻿<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+<div class="container-fluid">
+    <h3>{{selectedAircraft.name}}</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{selectedAircraft.imageUrl}}" />
+        </div>
+        <div class="col-md-3" >
+            <ac-speeds [selectedAircraft]="selectedAircraft"></ac-speeds>
+        </div>
+        <div class="col-md-3" >
+            <ac-weights [selectedAircraft]="selectedAircraft"></ac-weights>
+        </div>
+    </div>
+</div>

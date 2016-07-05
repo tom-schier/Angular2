@@ -2,10 +2,9 @@ This example illustrates the use of @Input and @Output directives
 
 To run:
 
-- in a cmd window navigate to the root directory Lesson01
+- in a cmd window navigate to the root directory Lesson05
 - run "npm start". This will open browser
-- in the browser use http://localhost:3000/Lesson02
+- in the browser use http://localhost:3000/Lesson05
 
-Click anywhere on the grand child and a message will be passed through the child, back to the parent.
-Click on the parent which will pass a message don to the child.
-
+This example illustrates the use of the router in combination with a injectable service component.
+Each component created by the router will have a service injected (constructor injection). Since this service is listed as a provider at the root level of the applciation, each component will receive the same route object.

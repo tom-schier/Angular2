@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './test.service', './compB', './compA', './ListB', './ListA'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './test.service', './ListB', './ListA'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './test.service', './compB'
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, test_service_1, compB_1, compA_1, ListB_1, ListA_1;
+    var core_1, router_1, test_service_1, ListB_1, ListA_1;
     var Lesson05;
     return {
         setters:[
@@ -22,12 +22,6 @@ System.register(['angular2/core', 'angular2/router', './test.service', './compB'
             },
             function (test_service_1_1) {
                 test_service_1 = test_service_1_1;
-            },
-            function (compB_1_1) {
-                compB_1 = compB_1_1;
-            },
-            function (compA_1_1) {
-                compA_1 = compA_1_1;
             },
             function (ListB_1_1) {
                 ListB_1 = ListB_1_1;
@@ -61,7 +55,7 @@ System.register(['angular2/core', 'angular2/router', './test.service', './compB'
                     core_1.Component({
                         selector: 'lesson-05',
                         templateUrl: './views/testservice.html',
-                        directives: [router_1.ROUTER_DIRECTIVES, compB_1.CompB, compA_1.CompA]
+                        directives: [router_1.ROUTER_DIRECTIVES, ListA_1.ListA, ListB_1.ListB]
                     }),
                     router_1.RouteConfig([
                         { path: '/ListA', name: 'ListA', component: ListA_1.ListA },

@@ -2,15 +2,15 @@
 import { NgForm }    from 'angular2/common';
 import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/router';
 import { TestService }    from './test.service';
-import {CompB} from './compB';
-import {CompA} from './compA';
+//import {CompB} from './compB';
+//import {CompA} from './compA';
 import {ListB} from './ListB';
 import {ListA} from './ListA';
 
 @Component({
     selector: 'lesson-05',
     templateUrl: './views/testservice.html',
-    directives: [ROUTER_DIRECTIVES, CompB, CompA]
+    directives: [ROUTER_DIRECTIVES, ListA, ListB]
 })
 @RouteConfig([
     { path: '/ListA', name: 'ListA', component: ListA },

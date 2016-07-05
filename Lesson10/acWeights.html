@@ -1,0 +1,12 @@
+﻿<head>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link href="/lib/bootstrap/dist/css/simple-sidebar.css" rel="stylesheet">
+</head>
+    <h4>Aircraft Weights</h4>
+<div *ngIf="selectedAircraft != null">
+    <ul class="list-group">
+        <li *ngFor="#weight of selectedAircraft.acWeights" class="list-group-item">
+            <span class="badge">{{weight.name}}</span> {{weight.val}}
+        </li>
+    </ul>
+</div>
