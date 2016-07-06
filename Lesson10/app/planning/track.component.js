@@ -1,4 +1,4 @@
-System.register(['angular2/core', './weather.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './weather.service', './track.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(['angular2/core', './weather.service'], function(exports_1, cont
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, weather_service_1;
-    var TrackComponent, TrackData;
+    var core_1, weather_service_1, track_service_1;
+    var TrackData;
     return {
         setters:[
             function (core_1_1) {
@@ -19,42 +19,44 @@ System.register(['angular2/core', './weather.service'], function(exports_1, cont
             },
             function (weather_service_1_1) {
                 weather_service_1 = weather_service_1_1;
+            },
+            function (track_service_1_1) {
+                track_service_1 = track_service_1_1;
             }],
         execute: function() {
-            TrackComponent = (function () {
-                function TrackComponent() {
-                }
-                return TrackComponent;
-            }());
             TrackData = (function () {
-                function TrackData(_weatherService) {
+                function TrackData(_weatherService, _trackService) {
                     this._weatherService = _weatherService;
+                    this._trackService = _trackService;
                     this.tracks = new Array();
                 }
                 TrackData.prototype.ngOnInit = function () {
                     var _this = this;
-                    this.selTrackComp = new TrackComponent();
-                    this._weatherService.windDetailsChange$.subscribe(function (windDetails) {
-                        _this.UpdateFlightPlan(windDetails);
+                    this._trackService.trackDetailsChange$.subscribe(function (trackDetails) {
+                        _this.UpdateTracks(trackDetails);
                     });
+                    this.loadTracks();
                 };
-                TrackData.prototype.UpdateFlightPlan = function (theWinds) {
-                    //find all the winds which are used for this plan and require an update
+                TrackData.prototype.loadTracks = function () {
+                    this.tracks = this._trackService.tracks;
+                };
+                TrackData.prototype.UpdateTracks = function (theTracks) {
+                    this.tracks = theTracks;
                 };
                 TrackData.prototype.onClick = function () {
-                    var newTrack = new TrackComponent();
+                    var newTrack = new track_service_1.TrackComponent();
                     newTrack.headingTrue = this.aHeadingTrue;
                     newTrack.distance = this.aDistance;
                     newTrack.tas = this.aTas;
                     newTrack.isReadOnly = true;
-                    this.tracks.push(newTrack);
+                    this._trackService.AddTrack(newTrack);
                 };
-                TrackData.prototype.onRemove = function (idx) {
-                    this.tracks.splice(idx, 1);
+                TrackData.prototype.onRemove = function (aTrack) {
+                    this._trackService.RemoveTrack(aTrack);
                 };
                 TrackData.prototype.onSelect = function (idx) {
-                    this.selTrackComp = this.tracks[idx];
-                    this.selIdx = idx;
+                    //this.selWindComp = this.winds[idx];
+                    //  this.selIdx = idx;
                 };
                 TrackData.prototype.onEdit = function (idx) {
                     this.tracks[idx].isReadOnly = !this.tracks[idx].isReadOnly;
@@ -83,7 +85,7 @@ System.register(['angular2/core', './weather.service'], function(exports_1, cont
                         selector: 'track-data',
                         templateUrl: './trackData.html'
                     }), 
-                    __metadata('design:paramtypes', [weather_service_1.WeatherService])
+                    __metadata('design:paramtypes', [weather_service_1.WeatherService, track_service_1.TrackService])
                 ], TrackData);
                 return TrackData;
             }());

@@ -54,7 +54,7 @@ System.register(['angular2/core', 'rxjs/Subject'], function(exports_1, context_1
                 };
                 WeatherService.prototype.RemoveWind = function (aWind) {
                     var idx = this.winds.indexOf(aWind);
-                    this.winds.splice(idx);
+                    this.winds.splice(idx, 1);
                     this.obWindDetails.next(this.winds);
                 };
                 // Service message commands
@@ -72,8 +72,8 @@ System.register(['angular2/core', 'rxjs/Subject'], function(exports_1, context_1
                 WeatherService.prototype.logError = function (err) {
                     console.error('There was an error: ' + err);
                 };
-                WeatherService.prototype.ngOnInit = function () {
-                    console.log('ngOnInit windDetails');
+                WeatherService.prototype.getWindForSector = function (aSector, aAltitude) {
+                    return this.winds.find(function (wnd) { return wnd.sector == aSector && wnd.altitude == aAltitude; });
                 };
                 WeatherService = __decorate([
                     core_1.Injectable(), 

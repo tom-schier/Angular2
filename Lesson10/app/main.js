@@ -1,7 +1,7 @@
-System.register(['angular2/platform/browser', './app.component', 'angular2/router', 'angular2/http', './aircraft/aircraft.service'], function(exports_1, context_1) {
+System.register(['angular2/platform/browser', './app.component', 'angular2/router', 'angular2/http', './aircraft/aircraft.service', './planning/weather.service', './planning/track.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var browser_1, app_component_1, router_1, http_1, aircraft_service_1;
+    var browser_1, app_component_1, router_1, http_1, aircraft_service_1, weather_service_1, track_service_1;
     return {
         setters:[
             function (browser_1_1) {
@@ -18,14 +18,20 @@ System.register(['angular2/platform/browser', './app.component', 'angular2/route
             },
             function (aircraft_service_1_1) {
                 aircraft_service_1 = aircraft_service_1_1;
+            },
+            function (weather_service_1_1) {
+                weather_service_1 = weather_service_1_1;
+            },
+            function (track_service_1_1) {
+                track_service_1 = track_service_1_1;
             }],
         execute: function() {
-            // Add these symbols to override the `LocationStrategy`
-            //import {LocationStrategy, PathLocationStrategy} from 'angular2/router';
             browser_1.bootstrap(app_component_1.AppComponent, [
                 router_1.ROUTER_PROVIDERS,
                 http_1.HTTP_PROVIDERS,
-                aircraft_service_1.AircraftService
+                aircraft_service_1.AircraftService,
+                weather_service_1.WeatherService,
+                track_service_1.TrackService
             ]);
         }
     }

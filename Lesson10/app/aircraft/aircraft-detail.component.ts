@@ -14,11 +14,11 @@ export class AircraftDetailsComponent implements OnInit{
     selectedAircraft: Aircraft;
 
     constructor(private _acService: AircraftService) {
-        console.log('creating Details Componenent');
+        console.log('creating Details Component');
     }
 
     ngOnInit() {
-        console.log('ngOnInit Details Componenent');
+        console.log('ngOnInit Details Component');
         this._acService.aircraftDetailsChange$.subscribe(
             acDetails => {
                 this.UpdateAircraft(acDetails);

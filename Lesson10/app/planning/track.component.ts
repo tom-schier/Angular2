@@ -1,25 +1,15 @@
 import {Component, OnInit} from 'angular2/core';
 import {WeatherService, WindDetails} from './weather.service';
+import {TrackComponent, TrackService} from './track.service';
 
-class TrackComponent {
-    idx: number;
-    windIdx: number;
-    distance: number;
-    headingTrue: number;
-    headingMag: number;
-    trackTrue: number;
-    trackMag: number;
-    tas: number;
-    gs: number;
-    ti: number;
-    isReadOnly: boolean;
-}
+
 
 @Component({
     selector: 'track-data',
     templateUrl: './trackData.html'
 })
 export class TrackData implements OnInit {
+
     aHeadingTrue: number;
     aDistance: number;
     aTas: number;
@@ -34,20 +24,24 @@ export class TrackData implements OnInit {
 
     tracks: TrackComponent[];
 
-    constructor(private _weatherService: WeatherService) {
+    constructor(private _weatherService: WeatherService, private _trackService: TrackService) {
         this.tracks = new Array();
     }
 
     ngOnInit() {
-        this.selTrackComp = new TrackComponent();
-        this._weatherService.windDetailsChange$.subscribe(
-            windDetails => {
-                this.UpdateFlightPlan(windDetails);
+        this._trackService.trackDetailsChange$.subscribe(
+            trackDetails => {
+                this.UpdateTracks(trackDetails);
             });
+        this.loadTracks();
     }
 
-    UpdateFlightPlan(theWinds: WindDetails[]) {
-       //find all the winds which are used for this plan and require an update
+    loadTracks() {
+        this.tracks = this._trackService.tracks;
+    }
+
+    UpdateTracks(theTracks: TrackComponent[]) {
+        this.tracks = theTracks;
     }
 
     onClick() {
@@ -56,16 +50,16 @@ export class TrackData implements OnInit {
         newTrack.distance = this.aDistance;
         newTrack.tas = this.aTas;
         newTrack.isReadOnly = true;
-        this.tracks.push(newTrack);
+        this._trackService.AddTrack(newTrack);
     }
 
-    onRemove(idx) {
-        this.tracks.splice(idx, 1);
+    onRemove(aTrack) {
+        this._trackService.RemoveTrack(aTrack);
     }
 
     onSelect(idx) {
-        this.selTrackComp = this.tracks[idx];
-        this.selIdx = idx;
+        //this.selWindComp = this.winds[idx];
+        //  this.selIdx = idx;
     }
 
     onEdit(idx) {

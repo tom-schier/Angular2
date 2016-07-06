@@ -6,13 +6,14 @@ import {AppComponent} from './app.component';
 import {ROUTER_PROVIDERS}  from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {AircraftService} from './aircraft/aircraft.service';
+import {WeatherService} from './planning/weather.service';
+import {TrackService} from './planning/track.service';
 
-// Add these symbols to override the `LocationStrategy`
-
-//import {LocationStrategy, PathLocationStrategy} from 'angular2/router';
 
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
-    AircraftService
+    AircraftService,
+    WeatherService,
+    TrackService
 ]);

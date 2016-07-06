@@ -12,10 +12,10 @@
             <li *ngFor="#tr of tracks; #i=index" (click)="onSelect(i)">
                 <div>
                     <span>
-                        <input class="idxTrackHdg" [(ngModel)]="td.headingTrue" [readonly]="tr.isReadOnly" type="text" value="{{tr.headingTrue}}" style="background-color :lightgray" />
+                        <input class="idxTrackHdg" [(ngModel)]="tr.headingTrue" [readonly]="tr.isReadOnly" type="text" value="{{tr.headingTrue}}" style="background-color :lightgray" />
                         <input class="idxTrackDist" [(ngModel)]="tr.distance" [readonly]="tr.isReadOnly" type="text" value="{{tr.distance}}" style="background-color :lightgray" />
                         <input class="idxTrackTas" [(ngModel)]="tr.tas" [readonly]="tr.isReadOnly" type="text" value="{{tr.tas}}" style="background-color :lightgray" />
-                        <button class="idRemoveBtn" (click)="onRemove(i)" style="width: 60px">Remove</button>
+                        <button class="idRemoveBtn" (click)="onRemove(tr)" style="width: 60px">Remove</button>
                         <button class="idEditBtn" (click)="onEdit(i)" style="width: 60px">Edit</button>
                     </span>
                 </div>

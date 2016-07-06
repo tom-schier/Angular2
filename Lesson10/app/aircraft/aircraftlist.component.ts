@@ -24,13 +24,18 @@ export class AircraftListComponent implements OnInit{
 
     ngOnInit() {
         console.log('ngOnInit List Component');
+        this._acService.aircraftDetailsChange$.subscribe(
+            acDetails => {
+                this.UpdateAircraft(acDetails);
+            });
         this._acList = this._acService.getBriefAircraftList();
-        if (this._acList.length > 0) {
-            this.selectedAircraft = this._acService.getAircraftForId(1);
-        }
     }
 
     onSelect(ac: AircraftBrief) {
         this._acService.setCurrentAircraft(ac.id);
+    }
+
+    UpdateAircraft(theAircraft: Aircraft) {
+        this.selectedAircraft = theAircraft;
     }
 };

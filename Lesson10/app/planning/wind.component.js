@@ -33,6 +33,10 @@ System.register(['angular2/core', './weather.service'], function(exports_1, cont
                     this._weatherService.windDetailsChange$.subscribe(function (windDetails) {
                         _this.UpdateWinds(windDetails);
                     });
+                    this.loadWinds();
+                };
+                WindData.prototype.loadWinds = function () {
+                    this.winds = this._weatherService.winds;
                 };
                 WindData.prototype.UpdateWinds = function (theWinds) {
                     this.winds = theWinds;

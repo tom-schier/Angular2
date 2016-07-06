@@ -51,16 +51,10 @@ System.register(['./wind.component', './weather.service', './track.component', '
                 FlightPlanningComponent.prototype.UpdateAircraft = function (theAircraft) {
                     this.selectedAircraft = theAircraft;
                 };
-                FlightPlanningComponent.prototype.onSubmit = function () {
-                    this.windDirection;
-                };
-                FlightPlanningComponent.prototype.onclick = function (evt) {
-                };
                 FlightPlanningComponent = __decorate([
                     core_1.Component({
                         templateUrl: './flightplan.html',
-                        directives: [wind_component_1.WindData, track_component_1.TrackData],
-                        providers: [weather_service_1.WeatherService]
+                        directives: [wind_component_1.WindData, track_component_1.TrackData]
                     }), 
                     __metadata('design:paramtypes', [router_1.RouteParams, aircraft_service_1.AircraftService, weather_service_1.WeatherService])
                 ], FlightPlanningComponent);

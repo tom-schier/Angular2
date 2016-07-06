@@ -30,11 +30,11 @@ System.register(['angular2/core', './aircraft-speeds.component', './aircraft-wei
             AircraftDetailsComponent = (function () {
                 function AircraftDetailsComponent(_acService) {
                     this._acService = _acService;
-                    console.log('creating Details Componenent');
+                    console.log('creating Details Component');
                 }
                 AircraftDetailsComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    console.log('ngOnInit Details Componenent');
+                    console.log('ngOnInit Details Component');
                     this._acService.aircraftDetailsChange$.subscribe(function (acDetails) {
                         _this.UpdateAircraft(acDetails);
                     });

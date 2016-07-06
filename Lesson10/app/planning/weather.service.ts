@@ -1,4 +1,4 @@
-import {Injectable, OnInit, Output, EventEmitter} from 'angular2/core';
+import {Injectable, Output, EventEmitter} from 'angular2/core';
 import {Subject} from 'rxjs/Subject';
 
 export class WindDetails {
@@ -6,6 +6,7 @@ export class WindDetails {
     direction: number;
     altitude: number;
     isReadOnly: boolean;
+    sector: number;
 }
 
 export class CloudDetails {
@@ -13,10 +14,11 @@ export class CloudDetails {
     coverage: number;
     altitude: number;
     isReadOnly: boolean;
+    sector: number;
 }
 
 @Injectable()
-export class WeatherService implements OnInit {
+export class WeatherService {
 
     public winds: WindDetails[];
     public clouds: CloudDetails[];
@@ -44,7 +46,7 @@ export class WeatherService implements OnInit {
 
     RemoveWind(aWind: WindDetails) {
         var idx = this.winds.indexOf(aWind);
-        this.winds.splice(idx);
+        this.winds.splice(idx, 1);
         this.obWindDetails.next(this.winds);
     }
 
@@ -66,9 +68,10 @@ export class WeatherService implements OnInit {
         console.error('There was an error: ' + err);
     }
 
-    ngOnInit() {
-        console.log('ngOnInit windDetails');
+    getWindForSector(aSector: number, aAltitude: number) {
+        return this.winds.find(wnd => wnd.sector == aSector && wnd.altitude == aAltitude);
     }
+
 }
 
 

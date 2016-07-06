@@ -1,6 +1,6 @@
 
 
-import {Injectable, OnInit, Output, EventEmitter} from 'angular2/core';
+import {Injectable,  Output, EventEmitter} from 'angular2/core';
 import {aircraftList} from '../data/mock-aircraft-data';
 import {Http, HTTP_PROVIDERS} from 'angular2/http';
 import {AircraftSpeed, AircraftWeight, Aircraft, AircraftBrief} from '../data/aircraft.types';
@@ -10,10 +10,9 @@ import {Subject} from 'rxjs/Subject';
 
 
 @Injectable()
-export class AircraftService implements  OnInit{
+export class AircraftService {
 
     currentAircraft: Aircraft;
-    public dumAss: string;
 
     // Observable string sources
     private obAircraftDetails = new Subject<Aircraft>();
@@ -22,7 +21,8 @@ export class AircraftService implements  OnInit{
     aircraftDetailsChange$ = this.obAircraftDetails.asObservable();
 
     constructor(private http: Http) {
-        console.log('creating Aircraft service');
+        console.log('Creating Aircraft service');
+        this.currentAircraft = aircraftList.filter(x => x.id == 1)[0];
     }
 
     getBriefAircraftList() {
@@ -33,6 +33,7 @@ export class AircraftService implements  OnInit{
         }
         return acList;
     }
+
     getSelectedAircraft() {
         return this.currentAircraft;
     }
@@ -43,11 +44,6 @@ export class AircraftService implements  OnInit{
 
     logError(err) {
         console.error('There was an error: ' + err);
-    }
-
-    ngOnInit() {
-        this.setCurrentAircraft(1);
-        console.log('ngOnInit Weights');
     }
 
     getAircraftForId(id: number) {

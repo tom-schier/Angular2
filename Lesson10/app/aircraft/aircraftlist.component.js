@@ -32,14 +32,18 @@ System.register(['angular2/core', './aircraft.service', 'angular2/router'], func
                 }
                 ;
                 AircraftListComponent.prototype.ngOnInit = function () {
+                    var _this = this;
                     console.log('ngOnInit List Component');
+                    this._acService.aircraftDetailsChange$.subscribe(function (acDetails) {
+                        _this.UpdateAircraft(acDetails);
+                    });
                     this._acList = this._acService.getBriefAircraftList();
-                    if (this._acList.length > 0) {
-                        this.selectedAircraft = this._acService.getAircraftForId(1);
-                    }
                 };
                 AircraftListComponent.prototype.onSelect = function (ac) {
                     this._acService.setCurrentAircraft(ac.id);
+                };
+                AircraftListComponent.prototype.UpdateAircraft = function (theAircraft) {
+                    this.selectedAircraft = theAircraft;
                 };
                 AircraftListComponent = __decorate([
                     core_1.Component({

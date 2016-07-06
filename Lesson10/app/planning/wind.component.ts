@@ -8,6 +8,7 @@ import {WeatherService, WindDetails} from './weather.service';
     templateUrl: './windData.html'
 })
 export class WindData implements OnInit {
+
     aWindspeed: number;
     aDirection: number;
     aAltitude: number;
@@ -15,13 +16,12 @@ export class WindData implements OnInit {
     selWindspeed: number;
     selDirection: number;
     selAltitude: number;
-   // selIdx: number;
 
     winds: WindDetails[];
 
     // WeatherService will be injected from the parent component. This is because it is not listed
     // as a provider in the @Component decorator
-    constructor(private _weatherService: WeatherService) {
+    constructor(public _weatherService: WeatherService) {
         this.winds = new Array();
     }
 
@@ -30,6 +30,11 @@ export class WindData implements OnInit {
             windDetails => {
                 this.UpdateWinds(windDetails);
             });
+        this.loadWinds();
+    }
+
+    loadWinds() {
+        this.winds = this._weatherService.winds;
     }
 
     UpdateWinds(theWinds: WindDetails[]) {

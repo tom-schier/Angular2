@@ -1,6 +1,6 @@
 
 //import {Component, OnInit, Input, Output, EventEmitter,  Inject}   from 'angular2/core';
-import { FlightPlanningService}   from './flightplanning.service';
+import { TrackService}   from './track.service';
 //import {RouteParams} from 'angular2/router';
 //import {AircraftService}  from '../aircraft/aircraft.service';
 //import {Aircraft}  from '../data/aircraft.types';
@@ -19,8 +19,7 @@ import {Aircraft, AircraftBrief} from '../data/aircraft.types';
 
 @Component({
     templateUrl: './flightplan.html',
-    directives: [WindData, TrackData],
-    providers: [WeatherService]
+    directives: [WindData, TrackData]
 })
 export class FlightPlanningComponent implements OnInit {
 
@@ -46,11 +45,11 @@ export class FlightPlanningComponent implements OnInit {
         this.selectedAircraft = theAircraft;
     }
 
-    onSubmit() {
-        this.windDirection
-    }
+    //onSubmit() {
+    //    this.windDirection
+    //}
 
-    onclick(evt) {
+    //onclick(evt) {
 
-    }
+    //}
 }

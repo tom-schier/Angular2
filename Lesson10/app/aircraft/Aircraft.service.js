@@ -37,7 +37,8 @@ System.register(['angular2/core', '../data/mock-aircraft-data', 'angular2/http',
                     this.obAircraftDetails = new Subject_1.Subject();
                     // Observable string streams
                     this.aircraftDetailsChange$ = this.obAircraftDetails.asObservable();
-                    console.log('creating Aircraft service');
+                    console.log('Creating Aircraft service');
+                    this.currentAircraft = mock_aircraft_data_1.aircraftList.filter(function (x) { return x.id == 1; })[0];
                 }
                 AircraftService.prototype.getBriefAircraftList = function () {
                     var acList = [];
@@ -58,10 +59,6 @@ System.register(['angular2/core', '../data/mock-aircraft-data', 'angular2/http',
                 AircraftService.prototype.logError = function (err) {
                     console.error('There was an error: ' + err);
                 };
-                AircraftService.prototype.ngOnInit = function () {
-                    this.setCurrentAircraft(1);
-                    console.log('ngOnInit Weights');
-                };
                 AircraftService.prototype.getAircraftForId = function (id) {
                     // this.selectedChange.next(aircraftList.filter(x => x.id == id)[0]);
                     return mock_aircraft_data_1.aircraftList.filter(function (x) { return x.id == id; })[0];
@@ -80,4 +77,4 @@ System.register(['angular2/core', '../data/mock-aircraft-data', 'angular2/http',
         }
     }
 });
-//# sourceMappingURL=Aircraft.service.js.map
+//# sourceMappingURL=aircraft.service.js.map
