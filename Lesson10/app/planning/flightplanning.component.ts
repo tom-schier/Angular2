@@ -1,17 +1,17 @@
 
 //import {Component, OnInit, Input, Output, EventEmitter,  Inject}   from 'angular2/core';
-import { TrackService}   from './track.service';
+import { TrackService}   from '../services/track.service';
 //import {RouteParams} from 'angular2/router';
 //import {AircraftService}  from '../aircraft/aircraft.service';
 //import {Aircraft}  from '../data/aircraft.types';
 import {WindData}  from './wind.component';
-import {WeatherService}  from './weather.service';
+import {WeatherService}  from '../services/weather.service';
 import {TrackData}  from './track.component';
 
 import {Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, Inject}  from 'angular2/core';
 //import {AircraftSpeedsComponent} from './aircraft-speeds.component';
 //import {AircraftWeightsComponent} from './aircraft-weights.component';
-import {AircraftService}  from '../aircraft/aircraft.service';
+import {AircraftService}  from '../services/aircraft.service';
 import {RouteParams, Router} from 'angular2/router';
 import {Aircraft, AircraftBrief} from '../data/aircraft.types';
 

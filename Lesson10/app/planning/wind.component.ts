@@ -1,5 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
-import {WeatherService, WindDetails} from './weather.service';
+import {WeatherService, WindDetails} from '../services/weather.service';
 
 
 

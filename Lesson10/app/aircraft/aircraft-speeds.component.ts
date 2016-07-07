@@ -1,5 +1,5 @@
 import {Component, OnInit, Input}  from 'angular2/core';
-import {AircraftService}   from './aircraft.service';
+import {AircraftService}   from '../services/aircraft.service';
 import {AircraftSpeed, Aircraft} from '../data/aircraft.types';
 import {AircraftDetailsComponent}   from './aircraft-detail.component';
 import {RouteParams, Router} from 'angular2/router';

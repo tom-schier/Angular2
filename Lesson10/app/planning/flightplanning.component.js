@@ -1,4 +1,4 @@
-System.register(['./wind.component', './weather.service', './track.component', 'angular2/core', '../aircraft/aircraft.service', 'angular2/router'], function(exports_1, context_1) {
+System.register(['./wind.component', '../services/weather.service', './track.component', 'angular2/core', '../services/aircraft.service', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

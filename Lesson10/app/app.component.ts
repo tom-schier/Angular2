@@ -3,7 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/rout
 import {AircraftListComponent}           from './aircraft/aircraftlist.component';
 import {FlightPlanningComponent}   from './planning/flightplanning.component';
 import {AircraftDetailsComponent} from './aircraft/aircraft-detail.component';
-import {AircraftService}           from './aircraft/aircraft.service';
+import {AircraftService}           from './services/aircraft.service';
 import {Aircraft}           from './data/aircraft.types';
 import {HTTP_PROVIDERS} from 'angular2/http';
 
