@@ -1,10 +1,9 @@
-﻿<h2>Track Information</h2>
+﻿<h2>Track Information {{selWindspeed}}</h2>
 <div>
     <span>Heading (T):<input type="text" [(ngModel)]="aHeadingTrue" /></span>
     <span>Distance [nm]:<input type="text" [(ngModel)]="aDistance" /></span>
     <span>Planned TAS:<input type="text" [(ngModel)]="aTas" /></span>
     <span><button (click)="onClick()" style="width: 60px">Add</button></span>
-    <span>TEST: <input type="text"  [(ngModel)]="myTest" value="{{myTest}}" /></span>
 </div>
 <div>
     <div>

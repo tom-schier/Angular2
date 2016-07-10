@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson10", "Lesson10", "{77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson10\acDetails.html = Lesson10\acDetails.html
+		Lesson10\acSpeeds.html = Lesson10\acSpeeds.html
+		Lesson10\acWeights.html = Lesson10\acWeights.html
+		Lesson10\aircraftList.html = Lesson10\aircraftList.html
+		Lesson10\app.html = Lesson10\app.html
+		Lesson10\flightplan.html = Lesson10\flightplan.html
+		Lesson10\Lesson10.html = Lesson10\Lesson10.html
+		Lesson10\trackData.html = Lesson10\trackData.html
+		Lesson10\windData.html = Lesson10\windData.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{69A5A29D-0454-4BC0-90FC-B235E67D3661}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson10\app\app.component.ts = Lesson10\app\app.component.ts
+		Lesson10\app\main.ts = Lesson10\app\main.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aircraft", "aircraft", "{09DAA059-61A1-414E-BAE2-24D403C940EA}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson10\app\aircraft\aircraft-detail.component.ts = Lesson10\app\aircraft\aircraft-detail.component.ts
+		Lesson10\app\aircraft\aircraft-speeds.component.ts = Lesson10\app\aircraft\aircraft-speeds.component.ts
+		Lesson10\app\aircraft\aircraft-weights.component.ts = Lesson10\app\aircraft\aircraft-weights.component.ts
+		Lesson10\app\aircraft\aircraft.interface.ts = Lesson10\app\aircraft\aircraft.interface.ts
+		Lesson10\app\aircraft\aircraftlist.component.ts = Lesson10\app\aircraft\aircraftlist.component.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "planning", "planning", "{7737BE58-4847-4776-912E-8162DB1C7A9A}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson10\app\planning\flightplanning.component.ts = Lesson10\app\planning\flightplanning.component.ts
+		Lesson10\app\planning\track.component.ts = Lesson10\app\planning\track.component.ts
+		Lesson10\app\planning\wind.component.ts = Lesson10\app\planning\wind.component.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{7E131BBB-B01F-4471-8CEE-D46B9D6A27AB}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson10\app\data\aircraft.types.ts = Lesson10\app\data\aircraft.types.ts
+		Lesson10\app\data\mock-aircraft-data.ts = Lesson10\app\data\mock-aircraft-data.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{4D8E11FE-3BCA-4326-8D7E-914D6E2BBF6A}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson10\app\services\aircraft.service.ts = Lesson10\app\services\aircraft.service.ts
+		Lesson10\app\services\track.service.ts = Lesson10\app\services\track.service.ts
+		Lesson10\app\services\weather.service.ts = Lesson10\app\services\weather.service.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{E45B9C3E-C119-4DD8-BC8D-1C8A88E2BBA3}"
+	ProjectSection(SolutionItems) = preProject
+		package.json = package.json
+		tsconfig.json = tsconfig.json
+		tslint.json = tslint.json
+		typings.json = typings.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69A5A29D-0454-4BC0-90FC-B235E67D3661} = {77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}
+		{09DAA059-61A1-414E-BAE2-24D403C940EA} = {69A5A29D-0454-4BC0-90FC-B235E67D3661}
+		{7737BE58-4847-4776-912E-8162DB1C7A9A} = {69A5A29D-0454-4BC0-90FC-B235E67D3661}
+		{7E131BBB-B01F-4471-8CEE-D46B9D6A27AB} = {69A5A29D-0454-4BC0-90FC-B235E67D3661}
+		{4D8E11FE-3BCA-4326-8D7E-914D6E2BBF6A} = {69A5A29D-0454-4BC0-90FC-B235E67D3661}
+	EndGlobalSection
+EndGlobal

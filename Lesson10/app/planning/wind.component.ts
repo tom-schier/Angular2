@@ -1,13 +1,15 @@
-import {Component, OnInit} from 'angular2/core';
-import {WeatherService, WindDetails} from '../services/weather.service';
+/// <reference path="../../../typings/jQuery/jQuery.d.ts" />
 
+import {Component, ElementRef, OnInit} from 'angular2/core';
+import {WeatherService, WindDetails} from '../services/weather.service';
+declare var $: JQueryStatic;
 
 
 @Component({
     selector: 'wind-data',
     templateUrl: './windData.html'
 })
-export class WindData implements OnInit {
+export class WindData implements OnInit{
 
     aWindspeed: number;
     aDirection: number;
@@ -17,12 +19,11 @@ export class WindData implements OnInit {
     selDirection: number;
     selAltitude: number;
 
-    winds: WindDetails[];
 
     // WeatherService will be injected from the parent component. This is because it is not listed
     // as a provider in the @Component decorator
-    constructor(public _weatherService: WeatherService) {
-        this.winds = new Array();
+    constructor(public _weatherService: WeatherService, private _elRef: ElementRef) {
+        //this.winds = new Array();
     }
 
     ngOnInit() {
@@ -30,15 +31,11 @@ export class WindData implements OnInit {
             windDetails => {
                 this.UpdateWinds(windDetails);
             });
-        this.loadWinds();
     }
 
-    loadWinds() {
-        this.winds = this._weatherService.winds;
-    }
 
     UpdateWinds(theWinds: WindDetails[]) {
-        this.winds = theWinds;
+       // this.winds = theWinds;
     }
 
     onClick() {
@@ -48,38 +45,36 @@ export class WindData implements OnInit {
         newWind.windspeed = this.aWindspeed;
         newWind.isReadOnly = true;
         this._weatherService.AddWind(newWind);
+        this.aWindspeed = null;
+        this.aAltitude = null;
+        this.aDirection = null;
+    }
+
+    onAdd(direction, speed, altitude) { 
+              
+        var newWind = new WindDetails();
+        newWind.altitude = altitude;
+        newWind.direction = direction;
+        newWind.windspeed = speed;
+        newWind.isReadOnly = true;
+        this._weatherService.AddWind(newWind);
     }
 
     onRemove(aWind) {
         this._weatherService.RemoveWind(aWind);
     }
 
-    onSelect(idx) {
-        //this.selWindComp = this.winds[idx];
-      //  this.selIdx = idx;
-    }
 
-    onEdit(idx) {
-        this.winds[idx].isReadOnly = !this.winds[idx].isReadOnly;
-        var currentCaption = document.getElementsByClassName("idEditBtn")[idx].innerHTML;
-        if (currentCaption == "Save") {
-            document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Edit";
-            let editWndDir = <HTMLElement>(document.getElementsByClassName("idxWndDir")[idx]);
-            editWndDir.style.backgroundColor = "lightgray";
-            let editWndSpeed = <HTMLElement>(document.getElementsByClassName("idxWndSpeed")[idx]);
-            editWndSpeed.style.backgroundColor = "lightgray";
-            let editWndAlt = <HTMLElement>(document.getElementsByClassName("idxWndAltitude")[idx]);
-            editWndAlt.style.backgroundColor = "lightgray";
-        }
-        else {
-            document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Save";
-            let editWndDir = <HTMLElement>(document.getElementsByClassName("idxWndDir")[idx]);
-            editWndDir.style.backgroundColor = "white";
-            let editWndSpeed = <HTMLElement>(document.getElementsByClassName("idxWndSpeed")[idx]);
-            editWndSpeed.style.backgroundColor = "white";
-            let editWndAlt = <HTMLElement>(document.getElementsByClassName("idxWndAltitude")[idx]);
-            editWndAlt.style.backgroundColor = "white";
-        }
+    onEdit(aWind, idx) {
+        var windTable = $(this._elRef.nativeElement).find("#windTable");
+        aWind.isReadOnly = !aWind.isReadOnly;
+        var theEditBtnElement = $(this._elRef.nativeElement).find("#btnEdit");   
+        var theDirection = $(this._elRef.nativeElement).find("#tdDirection");
+        theDirection   
+        var theSpeed = $(this._elRef.nativeElement).find("#tdSpeed");  
+        var theAltitude = $(this._elRef.nativeElement).find("#tdAltitude");  
+        //var theEditBtnElement = document.getElementById("btnEdit");
+        theEditBtnElement.toggleClass('btn btn-primary glyphicon glyphicon-ok').toggleClass('btn btn-primary glyphicon glyphicon-pencil');
     }
 
 }

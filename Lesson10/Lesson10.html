@@ -18,7 +18,9 @@
     <!-- Add the router library -->
     <script src="../node_modules/angular2/bundles/router.dev.js"></script>
     <script src="../node_modules/angular2/bundles/http.dev.js"></script>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+
+        <script>
       System.config({
         packages: {
           app: {
@@ -29,7 +31,7 @@
       });
       System.import('app/main')
             .then(null, console.error.bind(console));
-    </script>
+        </script>
 </head>
 <body>
     <my-app>loading...</my-app>

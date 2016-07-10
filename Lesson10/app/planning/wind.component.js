@@ -1,3 +1,4 @@
+/// <reference path="../../../typings/jQuery/jQuery.d.ts" />
 System.register(['angular2/core', '../services/weather.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
@@ -24,22 +25,19 @@ System.register(['angular2/core', '../services/weather.service'], function(expor
             WindData = (function () {
                 // WeatherService will be injected from the parent component. This is because it is not listed
                 // as a provider in the @Component decorator
-                function WindData(_weatherService) {
+                function WindData(_weatherService, _elRef) {
                     this._weatherService = _weatherService;
-                    this.winds = new Array();
+                    this._elRef = _elRef;
+                    //this.winds = new Array();
                 }
                 WindData.prototype.ngOnInit = function () {
                     var _this = this;
                     this._weatherService.windDetailsChange$.subscribe(function (windDetails) {
                         _this.UpdateWinds(windDetails);
                     });
-                    this.loadWinds();
-                };
-                WindData.prototype.loadWinds = function () {
-                    this.winds = this._weatherService.winds;
                 };
                 WindData.prototype.UpdateWinds = function (theWinds) {
-                    this.winds = theWinds;
+                    // this.winds = theWinds;
                 };
                 WindData.prototype.onClick = function () {
                     var newWind = new weather_service_1.WindDetails();
@@ -48,42 +46,38 @@ System.register(['angular2/core', '../services/weather.service'], function(expor
                     newWind.windspeed = this.aWindspeed;
                     newWind.isReadOnly = true;
                     this._weatherService.AddWind(newWind);
+                    this.aWindspeed = null;
+                    this.aAltitude = null;
+                    this.aDirection = null;
+                };
+                WindData.prototype.onAdd = function (direction, speed, altitude) {
+                    var newWind = new weather_service_1.WindDetails();
+                    newWind.altitude = altitude;
+                    newWind.direction = direction;
+                    newWind.windspeed = speed;
+                    newWind.isReadOnly = true;
+                    this._weatherService.AddWind(newWind);
                 };
                 WindData.prototype.onRemove = function (aWind) {
                     this._weatherService.RemoveWind(aWind);
                 };
-                WindData.prototype.onSelect = function (idx) {
-                    //this.selWindComp = this.winds[idx];
-                    //  this.selIdx = idx;
-                };
-                WindData.prototype.onEdit = function (idx) {
-                    this.winds[idx].isReadOnly = !this.winds[idx].isReadOnly;
-                    var currentCaption = document.getElementsByClassName("idEditBtn")[idx].innerHTML;
-                    if (currentCaption == "Save") {
-                        document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Edit";
-                        var editWndDir = (document.getElementsByClassName("idxWndDir")[idx]);
-                        editWndDir.style.backgroundColor = "lightgray";
-                        var editWndSpeed = (document.getElementsByClassName("idxWndSpeed")[idx]);
-                        editWndSpeed.style.backgroundColor = "lightgray";
-                        var editWndAlt = (document.getElementsByClassName("idxWndAltitude")[idx]);
-                        editWndAlt.style.backgroundColor = "lightgray";
-                    }
-                    else {
-                        document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Save";
-                        var editWndDir = (document.getElementsByClassName("idxWndDir")[idx]);
-                        editWndDir.style.backgroundColor = "white";
-                        var editWndSpeed = (document.getElementsByClassName("idxWndSpeed")[idx]);
-                        editWndSpeed.style.backgroundColor = "white";
-                        var editWndAlt = (document.getElementsByClassName("idxWndAltitude")[idx]);
-                        editWndAlt.style.backgroundColor = "white";
-                    }
+                WindData.prototype.onEdit = function (aWind, idx) {
+                    var windTable = $(this._elRef.nativeElement).find("#windTable");
+                    aWind.isReadOnly = !aWind.isReadOnly;
+                    var theEditBtnElement = $(this._elRef.nativeElement).find("#btnEdit");
+                    var theDirection = $(this._elRef.nativeElement).find("#tdDirection");
+                    theDirection;
+                    var theSpeed = $(this._elRef.nativeElement).find("#tdSpeed");
+                    var theAltitude = $(this._elRef.nativeElement).find("#tdAltitude");
+                    //var theEditBtnElement = document.getElementById("btnEdit");
+                    theEditBtnElement.toggleClass('btn btn-primary glyphicon glyphicon-ok').toggleClass('btn btn-primary glyphicon glyphicon-pencil');
                 };
                 WindData = __decorate([
                     core_1.Component({
                         selector: 'wind-data',
                         templateUrl: './windData.html'
                     }), 
-                    __metadata('design:paramtypes', [weather_service_1.WeatherService])
+                    __metadata('design:paramtypes', [weather_service_1.WeatherService, core_1.ElementRef])
                 ], WindData);
                 return WindData;
             }());

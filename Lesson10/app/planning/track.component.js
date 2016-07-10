@@ -35,6 +35,9 @@ System.register(['angular2/core', '../services/weather.service', '../services/tr
                     this._trackService.trackDetailsChange$.subscribe(function (trackDetails) {
                         _this.UpdateTracks(trackDetails);
                     });
+                    this._weatherService.windDetailsChange$.subscribe(function (windDetails) {
+                        _this.UpdateWeather(windDetails);
+                    });
                     this.loadTracks();
                 };
                 TrackData.prototype.loadTracks = function () {
@@ -42,6 +45,9 @@ System.register(['angular2/core', '../services/weather.service', '../services/tr
                 };
                 TrackData.prototype.UpdateTracks = function (theTracks) {
                     this.tracks = theTracks;
+                };
+                TrackData.prototype.UpdateWeather = function (theWinds) {
+                    this.selWindspeed = theWinds[0].windspeed;
                 };
                 TrackData.prototype.onClick = function () {
                     var newTrack = new track_service_1.TrackComponent();

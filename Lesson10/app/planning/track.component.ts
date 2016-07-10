@@ -33,6 +33,10 @@ export class TrackData implements OnInit {
             trackDetails => {
                 this.UpdateTracks(trackDetails);
             });
+        this._weatherService.windDetailsChange$.subscribe(
+            windDetails => {
+                this.UpdateWeather(windDetails);
+            });
         this.loadTracks();
     }
 
@@ -42,6 +46,10 @@ export class TrackData implements OnInit {
 
     UpdateTracks(theTracks: TrackComponent[]) {
         this.tracks = theTracks;
+    }
+
+    UpdateWeather(theWinds: WindDetails[]) {
+        this.selWindspeed = theWinds[0].windspeed;
     }
 
     onClick() {
