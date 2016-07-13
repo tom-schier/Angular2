@@ -28,27 +28,23 @@ System.register(['angular2/core', '../services/weather.service'], function(expor
                 function WindData(_weatherService, _elRef) {
                     this._weatherService = _weatherService;
                     this._elRef = _elRef;
-                    //this.winds = new Array();
+                    this.windRows = new Array();
+                    this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil";
+                    this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok";
+                    this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove";
                 }
                 WindData.prototype.ngOnInit = function () {
                     var _this = this;
-                    this._weatherService.windDetailsChange$.subscribe(function (windDetails) {
-                        _this.UpdateWinds(windDetails);
+                    this._weatherService.windDetailsChange$.subscribe(function (wnd) {
+                        _this.UpdateWinds(wnd);
                     });
+                    this.loadWinds();
+                };
+                WindData.prototype.loadWinds = function () {
+                    this.windRows = this._weatherService.winds;
                 };
                 WindData.prototype.UpdateWinds = function (theWinds) {
-                    // this.winds = theWinds;
-                };
-                WindData.prototype.onClick = function () {
-                    var newWind = new weather_service_1.WindDetails();
-                    newWind.altitude = this.aAltitude;
-                    newWind.direction = this.aDirection;
-                    newWind.windspeed = this.aWindspeed;
-                    newWind.isReadOnly = true;
-                    this._weatherService.AddWind(newWind);
-                    this.aWindspeed = null;
-                    this.aAltitude = null;
-                    this.aDirection = null;
+                    this.loadWinds();
                 };
                 WindData.prototype.onAdd = function (direction, speed, altitude) {
                     var newWind = new weather_service_1.WindDetails();
@@ -56,21 +52,31 @@ System.register(['angular2/core', '../services/weather.service'], function(expor
                     newWind.direction = direction;
                     newWind.windspeed = speed;
                     newWind.isReadOnly = true;
+                    newWind.btnEditClass = this.stBtnEditDefaultClass;
+                    newWind.btnRemoveClass = this.stBtnRemoveClass;
+                    // also add the wind to the service
                     this._weatherService.AddWind(newWind);
+                    // reset the initial values for the input box
+                    this.aAltitude = null;
+                    this.aDirection = null;
+                    this.aWindspeed = null;
                 };
                 WindData.prototype.onRemove = function (aWind) {
                     this._weatherService.RemoveWind(aWind);
                 };
-                WindData.prototype.onEdit = function (aWind, idx) {
-                    var windTable = $(this._elRef.nativeElement).find("#windTable");
-                    aWind.isReadOnly = !aWind.isReadOnly;
-                    var theEditBtnElement = $(this._elRef.nativeElement).find("#btnEdit");
-                    var theDirection = $(this._elRef.nativeElement).find("#tdDirection");
-                    theDirection;
-                    var theSpeed = $(this._elRef.nativeElement).find("#tdSpeed");
-                    var theAltitude = $(this._elRef.nativeElement).find("#tdAltitude");
-                    //var theEditBtnElement = document.getElementById("btnEdit");
-                    theEditBtnElement.toggleClass('btn btn-primary glyphicon glyphicon-ok').toggleClass('btn btn-primary glyphicon glyphicon-pencil');
+                WindData.prototype.onEdit = function (aWind) {
+                    aWind.btnEditClass = this.toggleClass(aWind.btnEditClass, "btn btn-primary glyphicon glyphicon-pencil", "btn btn-primary glyphicon glyphicon-ok");
+                    aWind.isReadOnly = (aWind.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil");
+                    if (aWind.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil")
+                        this._weatherService.UpdateWind(aWind);
+                };
+                WindData.prototype.toggleClass = function (c0, c1, c2) {
+                    if (c0 == c1)
+                        return c2;
+                    if (c0 == c2)
+                        return c1;
+                    else
+                        return c0;
                 };
                 WindData = __decorate([
                     core_1.Component({

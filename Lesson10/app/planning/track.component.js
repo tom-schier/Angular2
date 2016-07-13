@@ -29,6 +29,9 @@ System.register(['angular2/core', '../services/weather.service', '../services/tr
                     this._weatherService = _weatherService;
                     this._trackService = _trackService;
                     this.tracks = new Array();
+                    this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil";
+                    this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok";
+                    this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove";
                 }
                 TrackData.prototype.ngOnInit = function () {
                     var _this = this;
@@ -49,42 +52,37 @@ System.register(['angular2/core', '../services/weather.service', '../services/tr
                 TrackData.prototype.UpdateWeather = function (theWinds) {
                     this.selWindspeed = theWinds[0].windspeed;
                 };
-                TrackData.prototype.onClick = function () {
+                TrackData.prototype.onAdd = function (heading, distance, tas) {
                     var newTrack = new track_service_1.TrackComponent();
-                    newTrack.headingTrue = this.aHeadingTrue;
-                    newTrack.distance = this.aDistance;
-                    newTrack.tas = this.aTas;
+                    newTrack.headingTrue = heading;
+                    newTrack.distance = distance;
+                    newTrack.tas = tas;
                     newTrack.isReadOnly = true;
+                    newTrack.btnEditClass = this.stBtnEditDefaultClass;
+                    newTrack.btnRemoveClass = this.stBtnRemoveClass;
+                    // also add the wind to the service
                     this._trackService.AddTrack(newTrack);
+                    // reset the initial values for the input box
+                    this.aHeading = null;
+                    this.aDistance = null;
+                    this.aTas = null;
                 };
                 TrackData.prototype.onRemove = function (aTrack) {
                     this._trackService.RemoveTrack(aTrack);
                 };
-                TrackData.prototype.onSelect = function (idx) {
-                    //this.selWindComp = this.winds[idx];
-                    //  this.selIdx = idx;
+                TrackData.prototype.onEdit = function (aTrack) {
+                    aTrack.btnEditClass = this.toggleClass(aTrack.btnEditClass, "btn btn-primary glyphicon glyphicon-pencil", "btn btn-primary glyphicon glyphicon-ok");
+                    aTrack.isReadOnly = (aTrack.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil");
+                    if (aTrack.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil")
+                        this._trackService.UpdateTrack(aTrack);
                 };
-                TrackData.prototype.onEdit = function (idx) {
-                    this.tracks[idx].isReadOnly = !this.tracks[idx].isReadOnly;
-                    var currentCaption = document.getElementsByClassName("idEditBtn")[idx].innerHTML;
-                    if (currentCaption == "Save") {
-                        document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Edit";
-                        var editWndDir = (document.getElementsByClassName("idxTrackHdg")[idx]);
-                        editWndDir.style.backgroundColor = "lightgray";
-                        var editWndSpeed = (document.getElementsByClassName("idxTrackDist")[idx]);
-                        editWndSpeed.style.backgroundColor = "lightgray";
-                        var editWndAlt = (document.getElementsByClassName("idxTrackTas")[idx]);
-                        editWndAlt.style.backgroundColor = "lightgray";
-                    }
-                    else {
-                        document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Save";
-                        var editWndDir = (document.getElementsByClassName("idxTrackHdg")[idx]);
-                        editWndDir.style.backgroundColor = "white";
-                        var editWndSpeed = (document.getElementsByClassName("idxTrackDist")[idx]);
-                        editWndSpeed.style.backgroundColor = "white";
-                        var editWndAlt = (document.getElementsByClassName("idxTrackTas")[idx]);
-                        editWndAlt.style.backgroundColor = "white";
-                    }
+                TrackData.prototype.toggleClass = function (c0, c1, c2) {
+                    if (c0 == c1)
+                        return c2;
+                    if (c0 == c2)
+                        return c1;
+                    else
+                        return c0;
                 };
                 TrackData = __decorate([
                     core_1.Component({

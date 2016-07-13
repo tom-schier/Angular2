@@ -3,34 +3,7 @@
 
 </head>
 <div id="wndEntryHeader" class="container-fluid">
-    <!--<form role="form">
-        <div class="row">
-            <div class="col-lg-3">
-                <span class="form-group">
-                    <label for="speed">Speed:</label>
-                    <input id="speed"  type="text" class="form-control" >
-                </span>
-            </div>
 
-            <div class="col-lg-3">
-                <span class="form-group">
-                    <label for="dir">Direction:</label>
-                    <input id="dir" [(ngModel)] ="aDirection" type="text" class="form-control" >
-                </span>
-            </div>
-            <div class="col-lg-3">
-                <span class="form-group">
-                    <label for="alt">Altitude:</label>
-                    <input id="alt" [(ngModel)] ="aAltitude" type="text" class="form-control" >
-                </span>
-            </div>
-            <div class="col-lg-3">
-                <span class="form-group">
-                    <button class="btn btn-primary btn-sm" (click)="onClick()">Add</button>
-                </span>
-            </div>
-        </div>
-    </form>-->
 </div>
 <div id="wndEntryDetails" class="container-fluid">
     <table id="windTable" class="table table-condensed table-striped table-hover">
@@ -41,7 +14,7 @@
                 <th>Altitude</th>
             </tr>
         </thead>
-        <tbody *ngFor="#wnd of _weatherService.winds; #i=index" (click)="onSelect(i)">
+        <tbody *ngFor="#wnd of windRows; #i=index" >
             
                 <tr>
                     <td id="tdDirection">
@@ -51,24 +24,37 @@
                         <input class="form-control" [(ngModel)]="wnd.windspeed" [readonly]="wnd.isReadOnly" type="text" value="{{wnd.windspeed}}" />
                     </td>
                     <td id="tdAltitude">
-                        <input  class="form-control" [(ngModel)]="wnd.altitude" [readonly]="wnd.isReadOnly" type="text" value="{{wnd.altitude}}" />
+                        <!--<input  class="form-control" [(ngModel)]="wnd.altitude" [(readonly)]="wnd.isReadOnly" type="text" value="{{wnd.altitude}}" />-->
+                        <select  class="form-control" [(ngModel)]="wnd.altitude" value="{{wnd.altitude}}" [disabled]="wnd.isReadOnly">
+                            <option>A020</option>
+                            <option>A030</option>
+                            <option>A040</option>
+                            <option>A050</option>
+                            <option>A060</option>
+                            <option>A070</option>
+                            <option>A080</option>
+                            <option>A090</option>
+                            <option>FL010</option>
+                            <option>FL011</option>
+                            <option>FL012</option>
+                        </select>
                     </td>
                     <td>
-                        <a id="btnRemove" class="btn btn-primary glyphicon glyphicon-remove" (click)="onRemove(wnd)"></a>
+                        <a id="btnRemove" [(class)]="wnd.btnRemoveClass" (click)="onRemove(wnd)"></a>
                     </td>
-                    <td id="btnEdit">
-                        <a id="btnEdit" class="btn btn-primary glyphicon glyphicon-pencil" (click)="onEdit(wnd, i)"></a>
+                    <td>
+                        <a id="btnEdit" [(class)]="wnd.btnEditClass" (click)="onEdit(wnd)"></a>
                     </td>
                 </tr>
         </tbody>
         <tfoot>
             <tr>
                 <td>
-                    <input class="form-control" [(ngModel)]="aDirection" type="text" value="{{aDirection}}" required placeholder="Enter wind direction (T)" />
+                    <input class="form-control" [(ngModel)]="aDirection" type="text" value="{{aDirection}}" placeholder="Enter wind direction (T)" />
                 </td>
                 <td>
                     <div class="form-group">
-                        <input class="form-control" [(ngModel)]="aWindspeed" type="text" value="{{aWindspeed}}" ngModel pattern="[A-Za-z]{5}" placeholder="Enter wind speed [kts]" />
+                        <input class="form-control" [(ngModel)]="aWindspeed" type="text" value="{{aWindspeed}}" placeholder="Enter wind speed [kts]" />
                     </div>
                 </td>
                 <td>
@@ -90,7 +76,7 @@
                     </div>
                 </td>
                 <td>
-                    <button class="btn btn-primary glyphicon glyphicon-plus" (click)="onClick()"></button>
+                    <button class="btn btn-primary glyphicon glyphicon-plus" (click)="onAdd(aDirection, aWindspeed, aAltitude)"></button>
                 </td>
             </tr>
         </tfoot>

@@ -38,19 +38,25 @@ System.register(['angular2/core', 'rxjs/Subject'], function(exports_1, context_1
                 }
                 // Service message commands
                 TrackService.prototype.AddTrack = function (aTrack) {
-                    var newTrack = new TrackComponent();
-                    newTrack.headingTrue = aTrack.headingTrue;
-                    newTrack.distance = aTrack.distance;
-                    newTrack.tas = aTrack.tas;
-                    newTrack.variation = -11.5;
-                    newTrack.headingMag;
-                    newTrack.isReadOnly = true;
-                    newTrack.sector = 1;
-                    this.tracks.push(newTrack);
+                    //var newTrack = new TrackComponent();
+                    //newTrack.headingTrue = aTrack.headingTrue;
+                    //newTrack.distance = aTrack.distance;
+                    //newTrack.tas = aTrack.tas;
+                    aTrack.variation = -11.5;
+                    aTrack.headingMag;
+                    aTrack.isReadOnly = true;
+                    aTrack.sector = 1;
+                    this.tracks.push(aTrack);
+                    this.obTrackDetails.next(this.tracks);
                 };
                 TrackService.prototype.RemoveTrack = function (aTrack) {
                     var idx = this.tracks.indexOf(aTrack);
                     this.tracks.splice(idx, 1);
+                    this.obTrackDetails.next(this.tracks);
+                };
+                TrackService.prototype.UpdateTrack = function (aTrack) {
+                    var idx = this.tracks.indexOf(aTrack);
+                    this.tracks[idx] = aTrack;
                     this.obTrackDetails.next(this.tracks);
                 };
                 TrackService.prototype.logError = function (err) {

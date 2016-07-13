@@ -1,24 +1,53 @@
-﻿<h2>Track Information {{selWindspeed}}</h2>
-<div>
-    <span>Heading (T):<input type="text" [(ngModel)]="aHeadingTrue" /></span>
-    <span>Distance [nm]:<input type="text" [(ngModel)]="aDistance" /></span>
-    <span>Planned TAS:<input type="text" [(ngModel)]="aTas" /></span>
-    <span><button (click)="onClick()" style="width: 60px">Add</button></span>
-</div>
-<div>
-    <div>
-        <ul id="trackData">
-            <li *ngFor="#tr of tracks; #i=index" (click)="onSelect(i)">
-                <div>
-                    <span>
-                        <input class="idxTrackHdg" [(ngModel)]="tr.headingTrue" [readonly]="tr.isReadOnly" type="text" value="{{tr.headingTrue}}" style="background-color :lightgray" />
-                        <input class="idxTrackDist" [(ngModel)]="tr.distance" [readonly]="tr.isReadOnly" type="text" value="{{tr.distance}}" style="background-color :lightgray" />
-                        <input class="idxTrackTas" [(ngModel)]="tr.tas" [readonly]="tr.isReadOnly" type="text" value="{{tr.tas}}" style="background-color :lightgray" />
-                        <button class="idRemoveBtn" (click)="onRemove(tr)" style="width: 60px">Remove</button>
-                        <button class="idEditBtn" (click)="onEdit(i)" style="width: 60px">Edit</button>
-                    </span>
-                </div>
-            </li>
-        </ul>
-    </div>
+﻿<head>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<div id="trEntryDetails" class="container-fluid">
+    <table id="trackTable" class="table table-condensed table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Heading (T)</th>
+                <th>Distance[nm]</th>
+                <th>TAS [kts]</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="#tr of tracks; #i=index">
+
+            <tr>
+                <td id="tdHeading">
+                    <input class="form-control" [(ngModel)]="tr.headingTrue" [readonly]="tr.isReadOnly" type="text" value="{{tr.headingTrue}}" />
+                </td>
+                <td id="tdDistance">
+                    <input class="form-control" [(ngModel)]="tr.distance" [readonly]="tr.isReadOnly" type="text" value="{{tr.distance}}" />
+                </td>
+                <td id="tdTas">
+                    <input  class="form-control" [(ngModel)]="tr.tas" [(readonly)]="tr.isReadOnly" type="text" value="{{tr.tas}}" />
+                </td>
+                <td>
+                    <a id="btnRemove" [(class)]="tr.btnRemoveClass" (click)="onRemove(tr)"></a>
+                </td>
+                <td>
+                    <a id="btnEdit" [(class)]="tr.btnEditClass" (click)="onEdit(tr)"></a>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    <input class="form-control" [(ngModel)]="aHeading" type="text" value="{{aHeading}}" placeholder="Enter wind direction (T)" />
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input class="form-control" [(ngModel)]="aDistance" type="text" value="{{aDistance}}" placeholder="Enter wind speed [kts]" />
+                    </div>
+                </td>
+                <td>
+                    <input class="idxWndAltitude" [(ngModel)]="aTas"  type="text" value="{{aTas}}" placeholder="Enter TAS [kts]"/>
+                </td>
+                <td>
+                    <button class="btn btn-primary glyphicon glyphicon-plus" (click)="onAdd(aHeading, aDistance, aTas)"></button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 </div>

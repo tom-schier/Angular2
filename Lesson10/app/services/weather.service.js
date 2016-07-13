@@ -58,6 +58,12 @@ System.register(['angular2/core', 'rxjs/Subject'], function(exports_1, context_1
                     this.winds.splice(idx, 1);
                     this.obWindDetails.next(this.winds);
                 };
+                WeatherService.prototype.UpdateWind = function (aWind) {
+                    var idx = this.winds.indexOf(aWind);
+                    var theWind = this.winds.find(function (x) { return x.id == aWind.id; });
+                    this.winds[idx] = aWind;
+                    this.obWindDetails.next(this.winds);
+                };
                 // Service message commands
                 WeatherService.prototype.AddCloud = function (aCloud) {
                     var newCloud = new CloudDetails();
@@ -70,10 +76,10 @@ System.register(['angular2/core', 'rxjs/Subject'], function(exports_1, context_1
                     this.clouds.splice(idx);
                     this.obCloudDetails.next(this.clouds);
                 };
-                WeatherService.prototype.UpdateWind = function (aWind) {
-                    var idx = this.winds.indexOf(aWind);
-                    var theWind = this.winds.find(function (x) { return x == aWind; });
-                    this.obWindDetails.next(this.winds);
+                WeatherService.prototype.UpdateCloud = function (aCloud) {
+                    var idx = this.clouds.indexOf(aCloud);
+                    var theCloud = this.clouds.find(function (x) { return x == aCloud; });
+                    this.obCloudDetails.next(this.clouds);
                 };
                 WeatherService.prototype.logError = function (err) {
                     console.error('There was an error: ' + err);

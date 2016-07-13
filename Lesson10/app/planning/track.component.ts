@@ -10,7 +10,7 @@ import {TrackComponent, TrackService} from '../services/track.service';
 })
 export class TrackData implements OnInit {
 
-    aHeadingTrue: number;
+    aHeading: number;
     aDistance: number;
     aTas: number;
 
@@ -20,12 +20,17 @@ export class TrackData implements OnInit {
     selIdx: number;
     selTrackComp: TrackComponent;
 
-    myTest: string;
-
     tracks: TrackComponent[];
+
+    private stBtnEditDefaultClass: string;
+    private stBtnEditSaveClass: string;
+    private stBtnRemoveClass: string;
 
     constructor(private _weatherService: WeatherService, private _trackService: TrackService) {
         this.tracks = new Array();
+        this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil";
+        this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok";
+        this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove";
     }
 
     ngOnInit() {
@@ -52,45 +57,42 @@ export class TrackData implements OnInit {
         this.selWindspeed = theWinds[0].windspeed;
     }
 
-    onClick() {
+    onAdd(heading, distance, tas) {
+
         var newTrack = new TrackComponent();
-        newTrack.headingTrue = this.aHeadingTrue;
-        newTrack.distance = this.aDistance;
-        newTrack.tas = this.aTas;
+        newTrack.headingTrue = heading;
+        newTrack.distance = distance;
+        newTrack.tas = tas;
         newTrack.isReadOnly = true;
+        
+        newTrack.btnEditClass = this.stBtnEditDefaultClass;
+        newTrack.btnRemoveClass = this.stBtnRemoveClass;
+        // also add the wind to the service
         this._trackService.AddTrack(newTrack);
+        // reset the initial values for the input box
+        this.aHeading = null;
+        this.aDistance = null;
+        this.aTas = null;
     }
 
     onRemove(aTrack) {
         this._trackService.RemoveTrack(aTrack);
     }
 
-    onSelect(idx) {
-        //this.selWindComp = this.winds[idx];
-        //  this.selIdx = idx;
+    onEdit(aTrack) {
+        aTrack.btnEditClass = this.toggleClass(aTrack.btnEditClass, "btn btn-primary glyphicon glyphicon-pencil", "btn btn-primary glyphicon glyphicon-ok");
+        aTrack.isReadOnly = (aTrack.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil");
+        if (aTrack.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil")
+            this._trackService.UpdateTrack(aTrack);
     }
 
-    onEdit(idx) {
-        this.tracks[idx].isReadOnly = !this.tracks[idx].isReadOnly;
-        var currentCaption = document.getElementsByClassName("idEditBtn")[idx].innerHTML;
-        if (currentCaption == "Save") {
-            document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Edit";
-            let editWndDir = <HTMLElement>(document.getElementsByClassName("idxTrackHdg")[idx]);
-            editWndDir.style.backgroundColor = "lightgray";
-            let editWndSpeed = <HTMLElement>(document.getElementsByClassName("idxTrackDist")[idx]);
-            editWndSpeed.style.backgroundColor = "lightgray";
-            let editWndAlt = <HTMLElement>(document.getElementsByClassName("idxTrackTas")[idx]);
-            editWndAlt.style.backgroundColor = "lightgray";
-        }
-        else {
-            document.getElementsByClassName("idEditBtn")[idx].innerHTML = "Save";
-            let editWndDir = <HTMLElement>(document.getElementsByClassName("idxTrackHdg")[idx]);
-            editWndDir.style.backgroundColor = "white";
-            let editWndSpeed = <HTMLElement>(document.getElementsByClassName("idxTrackDist")[idx]);
-            editWndSpeed.style.backgroundColor = "white";
-            let editWndAlt = <HTMLElement>(document.getElementsByClassName("idxTrackTas")[idx]);
-            editWndAlt.style.backgroundColor = "white";
-        }
+    toggleClass(c0: string, c1: string, c2: string) {
+        if (c0 == c1)
+            return c2;
+        if (c0 == c2)
+            return c1;
+        else
+            return c0;
     }
 
 }

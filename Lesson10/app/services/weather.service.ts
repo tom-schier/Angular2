@@ -10,6 +10,8 @@ export class WindDetails {
     altitude: number;
     isReadOnly: boolean;
     sector: number;
+    btnEditClass: string;
+    btnRemoveClass: string;
 }
 
 export class CloudDetails {
@@ -55,6 +57,13 @@ export class WeatherService  {
         this.obWindDetails.next(this.winds);
     }
 
+    UpdateWind(aWind: WindDetails) {
+        var idx = this.winds.indexOf(aWind);
+        var theWind = this.winds.find(x => x.id == aWind.id);
+        this.winds[idx] = aWind;
+        this.obWindDetails.next(this.winds);
+    }
+
     // Service message commands
     AddCloud(aCloud: CloudDetails) {
         var newCloud = new CloudDetails();
@@ -69,11 +78,11 @@ export class WeatherService  {
         this.obCloudDetails.next(this.clouds);
     }
 
-    UpdateWind(aWind: WindDetails) {
-        var idx = this.winds.indexOf(aWind);
-        var theWind = this.winds.find(x => x == aWind);
-        
-        this.obWindDetails.next(this.winds);
+    UpdateCloud(aCloud: CloudDetails) {
+        var idx = this.clouds.indexOf(aCloud);
+        var theCloud = this.clouds.find(x => x == aCloud);
+
+        this.obCloudDetails.next(this.clouds);
     }
 
     logError(err) {

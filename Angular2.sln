@@ -59,6 +59,49 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{E45B9C
 		typings.json = typings.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson04", "Lesson04", "{2A6898E5-4C05-4098-B8D5-EB8A78E2FE76}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson04\favicon.ico = Lesson04\favicon.ico
+		Lesson04\lesson04.html = Lesson04\lesson04.html
+		Lesson04\ReadMe.txt = Lesson04\ReadMe.txt
+		Lesson04\styles.css = Lesson04\styles.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{5B113164-2531-4578-ABAE-03A06F1206FA}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson04\app\lesson04.component.ts = Lesson04\app\lesson04.component.ts
+		Lesson04\app\main.ts = Lesson04\app\main.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{BD0A7700-BEEA-42E1-B93B-302AE972B81F}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson04\views\templates.html = Lesson04\views\templates.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson06", "Lesson06", "{AA36830E-A916-442F-8D2E-329C9086D704}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson06\favicon.ico = Lesson06\favicon.ico
+		Lesson06\lesson06.html = Lesson06\lesson06.html
+		Lesson06\ReadMe.txt = Lesson06\ReadMe.txt
+		Lesson06\styles.css = Lesson06\styles.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{38A0E7C5-3B16-48A6-B8FB-0F8B94F73B84}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson06\app\lesson06.component.ts = Lesson06\app\lesson06.component.ts
+		Lesson06\app\main.ts = Lesson06\app\main.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{8D194FE4-132E-4940-87B3-24A300BBFCF6}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson06\views\extendclass.html = Lesson06\views\extendclass.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65CCC39C-D4A6-482E-B923-76ECD192512A}"
+	ProjectSection(SolutionItems) = preProject
+		Index.html = Index.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +112,9 @@ Global
 		{7737BE58-4847-4776-912E-8162DB1C7A9A} = {69A5A29D-0454-4BC0-90FC-B235E67D3661}
 		{7E131BBB-B01F-4471-8CEE-D46B9D6A27AB} = {69A5A29D-0454-4BC0-90FC-B235E67D3661}
 		{4D8E11FE-3BCA-4326-8D7E-914D6E2BBF6A} = {69A5A29D-0454-4BC0-90FC-B235E67D3661}
+		{5B113164-2531-4578-ABAE-03A06F1206FA} = {2A6898E5-4C05-4098-B8D5-EB8A78E2FE76}
+		{BD0A7700-BEEA-42E1-B93B-302AE972B81F} = {2A6898E5-4C05-4098-B8D5-EB8A78E2FE76}
+		{38A0E7C5-3B16-48A6-B8FB-0F8B94F73B84} = {AA36830E-A916-442F-8D2E-329C9086D704}
+		{8D194FE4-132E-4940-87B3-24A300BBFCF6} = {AA36830E-A916-442F-8D2E-329C9086D704}
 	EndGlobalSection
 EndGlobal
