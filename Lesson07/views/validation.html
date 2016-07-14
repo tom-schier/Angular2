@@ -1,0 +1,21 @@
+﻿<div class="container">
+    <h1>Validation Form</h1>
+    <form>
+        <div class="form-group" >
+            <label for="spdControl">Windspeed</label>
+            <input type="text" class="form-control" required>
+        </div>
+        <div class="form-group" >
+            <label for="dirControl" >Direction</label>
+            <input type="text" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="altControl" >Altitude</label>
+            <input type="text" class="form-control" required>
+            <!--<select class="form-control" required>
+                <option *ngFor="let p of altList" [value]="p">{{p}}</option>
+            </select>-->
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
