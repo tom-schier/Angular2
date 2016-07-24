@@ -34,6 +34,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "planning", "planning", "{7737BE58-4847-4776-912E-8162DB1C7A9A}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson10\app\planning\flightplanning.component.ts = Lesson10\app\planning\flightplanning.component.ts
+		Lesson10\app\planning\flightplanning.validators.ts = Lesson10\app\planning\flightplanning.validators.ts
 		Lesson10\app\planning\track.component.ts = Lesson10\app\planning\track.component.ts
 		Lesson10\app\planning\wind.component.ts = Lesson10\app\planning\wind.component.ts
 	EndProjectSection
@@ -121,6 +122,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{90F888A5
 		Lesson07\views\validation.html = Lesson07\views\validation.html
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "styles", "styles", "{084E60E1-A666-49E0-A9B7-4021B1379EF5}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson10\styles\lesson10.styles.css = Lesson10\styles\lesson10.styles.css
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,5 +143,6 @@ Global
 		{8D194FE4-132E-4940-87B3-24A300BBFCF6} = {AA36830E-A916-442F-8D2E-329C9086D704}
 		{844E8D44-9613-4D23-855D-17827B7B2285} = {336CA1C0-7D24-4A70-B2E5-55D59253D833}
 		{90F888A5-F5C3-4B7F-8854-C62470950F2A} = {336CA1C0-7D24-4A70-B2E5-55D59253D833}
+		{084E60E1-A666-49E0-A9B7-4021B1379EF5} = {77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}
 	EndGlobalSection
 EndGlobal
