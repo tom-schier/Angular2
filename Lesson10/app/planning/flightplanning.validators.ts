@@ -7,20 +7,20 @@ interface ValidationResult {
 export class SpeedValidator {
 
     static validSpeed(control: Control): ValidationResult {
+        if (control.value && control.value.length != 4)
+            return { 'validSpeed': false };
+
         if (control.value && control.value.length > 0) {
-            if (!isNaN(control.value[0]))
-                return { 'validSpeed': true };
+            if (control.value[0] != 'N')
+                return { 'validSpeed': false };
         }
         if (control.value && control.value.length == 4) {
             var numComp = control.value.slice(1, 3);
             if (isNaN(numComp)) {
-                return { 'validSpeed': true };
+                return { 'validSpeed': false };
             }
-            return { 'validSpeed': true };
+            
         }
-
-
-
         return null;
     }
 

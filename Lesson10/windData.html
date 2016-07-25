@@ -11,17 +11,26 @@
                 <th>Altitude</th>
             </tr>
         </thead>
-        <tbody *ngFor="#wnd of windRows; #i=index" >
+        <tbody *ngFor="#wind of windRows; #i=index" >
             
                 <tr >
-                    <td id="tdDirection">
+                    <!--<td id="tdDirection">
                         <input type="text" class="form-control input-sm" style="width:130px" [(ngModel)]="wnd.direction" [readonly]="wnd.isReadOnly" value="{{wnd.direction}}" />
                     </td>
                     <td id="tdSpeed">
                         <input type="text" class="form-control input-sm" style="width:130px"  [(ngModel)]="wnd.windspeed" [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />
+                    </td>-->
+                    <td id="tdDirection" [(contenteditable)]="wind.isReadOnly" class="input-sm">{{wind.direction}}
+                        <!--<input type="text" class="form-control input-sm" style="width:130px" [readonly]="wnd.isReadOnly" value="{{wnd.direction}}" />-->
                     </td>
-                    <td id="tdAltitude">
-                        <!--<input  class="form-control" [(ngModel)]="wnd.altitude" [(readonly)]="wnd.isReadOnly" type="text" value="{{wnd.altitude}}" />-->
+                    <td id="tdSpeed" contenteditable="true" class="input-sm">{{wind.windspeed}}
+                        <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
+                    </td>
+                    <td id="tdAltitude" contenteditable="true" class="input-sm">
+                        {{wind.altitude}}
+                        <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
+                    </td>
+                    <!--<td id="tdAltitude">
                         <select  class="form-control input-sm" style="width:130px" [(ngModel)]="wnd.altitude" value="{{wnd.altitude}}" [disabled]="wnd.isReadOnly">
                             <option>A020</option>
                             <option>A030</option>
@@ -35,12 +44,12 @@
                             <option>FL011</option>
                             <option>FL012</option>
                         </select>
+                    </td>-->
+                    <td>
+                        <a id="btnRemove" [(class)]="wind.btnRemoveClass" (click)="onRemove(wind)"></a>
                     </td>
                     <td>
-                        <a id="btnRemove" [(class)]="wnd.btnRemoveClass" (click)="onRemove(wnd)"></a>
-                    </td>
-                    <td>
-                        <a id="btnEdit" [(class)]="wnd.btnEditClass" (click)="onEdit(wnd)"></a>
+                        <a id="btnEdit" [(class)]="wind.btnEditClass" (click)="onEdit(wind)"></a>
                     </td>
                 </tr>
         </tbody>
@@ -49,17 +58,17 @@
         <div>
             <div class="form-group">
                 <div >
-                    <input type="text" ngControl="windDirection" class="form-control input-sm" style="width:130px;margin-left:inherit"  required [(ngModel)]="wnd.direction" value="{{aDirection}}" placeholder="Enter direction (T)" />
+                    <input type="text" ngControl="windDirection" class="form-control input-sm" style="width:130px;margin-left:inherit" [(ngModel)]="wnd.direction" placeholder="Enter direction (T)" />
                 </div>
             </div>
             <div class="form-group">
                 <div >
-                    <input type="text" ngControl="windSpeed"  class="form-control input-sm" style="width:130px" required [(ngModel)]="wnd.windspeed" value="{{aWindspeed}}" placeholder="Enter speed [kts]" />
+                    <input type="text" ngControl="windSpeed"  class="form-control input-sm" style="width:130px" [(ngModel)]="wnd.windspeed" placeholder="Enter speed [kts]" />
                 </div>
             </div>
             <div class="form-group">
             <div>
-                <select class="form-control input-sm" style="width:130px" ngControl="windAltitude" [(ngModel)]="wnd.altitude" value="{{aAltitude}}" placeholder="Select altitude [ft]">
+                <select class="form-control input-sm" style="width:130px" ngControl="windAltitude" [(ngModel)]="wnd.altitude" placeholder="Select altitude [ft]">
                     <option>A020</option>
                     <option>A030</option>
                     <option>A040</option>

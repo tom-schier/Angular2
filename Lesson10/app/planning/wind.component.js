@@ -69,6 +69,9 @@ System.register(['angular2/core', '../services/weather.service', './flightplanni
                         newWind.btnRemoveClass = this.stBtnRemoveClass;
                         // also add the wind to the service
                         this._weatherService.AddWind(newWind);
+                        this.wnd.altitude = null;
+                        this.wnd.windspeed = null;
+                        this.wnd.direction = null;
                     }
                     else {
                         alert('form is not valid!');

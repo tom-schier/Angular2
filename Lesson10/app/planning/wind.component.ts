@@ -14,16 +14,7 @@ import {Subject} from 'rxjs/Subject';
 })
 export class WindData implements OnInit{
 
-    //aWindspeed: NgControl;
-    //aDirection: NgControl;
-    //aAltitude: NgControl;
-
-    selWindspeed: number;
-    selDirection: number;
-    selAltitude: number;
-
     windRows: WindDetails[];
-    //windRows: WindRowDetails[];
 
     private stBtnEditDefaultClass : string;
     private stBtnEditSaveClass: string;
@@ -76,6 +67,10 @@ export class WindData implements OnInit{
             newWind.btnRemoveClass = this.stBtnRemoveClass;
             // also add the wind to the service
             this._weatherService.AddWind(newWind);
+
+            this.wnd.altitude = null;
+            this.wnd.windspeed = null;
+            this.wnd.direction = null;
         }
         else {
             alert('form is not valid!');
