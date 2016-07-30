@@ -28,9 +28,9 @@ export class WindData implements OnInit{
         fb: FormBuilder) {
         this.wnd = new WindDetails();
         this.windRows = new Array();
-        this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil";
-        this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok";
-        this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove";
+        this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
+        this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
+        this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
 
         this.windForm = fb.group({
             "windSpeed": new Control(this.wnd.windspeed, Validators.compose([Validators.required, SpeedValidator.validSpeed])),
@@ -75,14 +75,6 @@ export class WindData implements OnInit{
         else {
             alert('form is not valid!');
         }
-        //if (this.aWindspeed.valid == false)
-        //    alert("What is it");
-
-
-        // reset the initial values for the input box
-        //this.aAltitude = null;
-        //this.aDirection = null;
-        //this.aWindspeed = null;
     }
 
     onRemove(aWind) {

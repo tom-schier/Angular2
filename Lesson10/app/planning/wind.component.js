@@ -36,9 +36,9 @@ System.register(['angular2/core', '../services/weather.service', './flightplanni
                     this._elRef = _elRef;
                     this.wnd = new weather_service_1.WindDetails();
                     this.windRows = new Array();
-                    this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil";
-                    this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok";
-                    this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove";
+                    this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
+                    this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
+                    this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
                     this.windForm = fb.group({
                         "windSpeed": new common_1.Control(this.wnd.windspeed, common_1.Validators.compose([common_1.Validators.required, flightplanning_validators_1.SpeedValidator.validSpeed])),
                         "windDirection": new common_1.Control(this.wnd.direction, common_1.Validators.required),
@@ -76,12 +76,6 @@ System.register(['angular2/core', '../services/weather.service', './flightplanni
                     else {
                         alert('form is not valid!');
                     }
-                    //if (this.aWindspeed.valid == false)
-                    //    alert("What is it");
-                    // reset the initial values for the input box
-                    //this.aAltitude = null;
-                    //this.aDirection = null;
-                    //this.aWindspeed = null;
                 };
                 WindData.prototype.onRemove = function (aWind) {
                     this._weatherService.RemoveWind(aWind);

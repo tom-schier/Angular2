@@ -1,9 +1,11 @@
 ﻿<head>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="./styles/lesson10.styles.css" />
+    <link rel="stylesheet" href="/lib/font-awesome-4.6.3/css/font-awesome.css" />
 </head>
 <!--<div id="wndEntryDetails" class="container-fluid">-->
-    <table id="windTable" class="table table-condensed table-striped table-hover" style="padding:0px">
+<div>
+    <table id="windTable" class="table table-striped table-condensed ">
         <thead>
             <tr>
                 <th>Direction</th>
@@ -11,64 +13,44 @@
                 <th>Altitude</th>
             </tr>
         </thead>
-        <tbody *ngFor="#wind of windRows; #i=index" >
-            
-                <tr >
-                    <!--<td id="tdDirection">
-                        <input type="text" class="form-control input-sm" style="width:130px" [(ngModel)]="wnd.direction" [readonly]="wnd.isReadOnly" value="{{wnd.direction}}" />
-                    </td>
-                    <td id="tdSpeed">
-                        <input type="text" class="form-control input-sm" style="width:130px"  [(ngModel)]="wnd.windspeed" [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />
-                    </td>-->
-                    <td id="tdDirection" [(contenteditable)]="wind.isReadOnly" class="input-sm">{{wind.direction}}
-                        <!--<input type="text" class="form-control input-sm" style="width:130px" [readonly]="wnd.isReadOnly" value="{{wnd.direction}}" />-->
-                    </td>
-                    <td id="tdSpeed" contenteditable="true" class="input-sm">{{wind.windspeed}}
-                        <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
-                    </td>
-                    <td id="tdAltitude" contenteditable="true" class="input-sm">
-                        {{wind.altitude}}
-                        <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
-                    </td>
-                    <!--<td id="tdAltitude">
-                        <select  class="form-control input-sm" style="width:130px" [(ngModel)]="wnd.altitude" value="{{wnd.altitude}}" [disabled]="wnd.isReadOnly">
-                            <option>A020</option>
-                            <option>A030</option>
-                            <option>A040</option>
-                            <option>A050</option>
-                            <option>A060</option>
-                            <option>A070</option>
-                            <option>A080</option>
-                            <option>A090</option>
-                            <option>FL010</option>
-                            <option>FL011</option>
-                            <option>FL012</option>
-                        </select>
-                    </td>-->
-                    <td>
-                        <a id="btnRemove" [(class)]="wind.btnRemoveClass" (click)="onRemove(wind)"></a>
-                    </td>
-                    <td>
-                        <a id="btnEdit" [(class)]="wind.btnEditClass" (click)="onEdit(wind)"></a>
-                    </td>
-                </tr>
+        <tbody *ngFor="#wind of windRows; #i=index" class="xp-font-md" >
+
+            <tr class="xp-font-md">
+                <td id="tdDirection">
+                    {{wind.direction}}
+                    <!--<input type="text" class="form-control input-sm" style="width:130px" [readonly]="wnd.isReadOnly" value="{{wnd.direction}}" />-->
+                </td>
+                <td id="tdSpeed">
+                    {{wind.windspeed}}
+                    <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
+                </td>
+                <td id="tdAltitude">
+                    {{wind.altitude}}
+                    <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
+                </td>
+
+                <td>
+                    <i class="fa fa-trash xp-form-button" (click)="onRemove(wind)"></i>
+                </td>
+            </tr>
         </tbody>
     </table>
+</div>
+<div>
     <form [ngFormModel]="windForm" class="form-inline">
         <div>
             <div class="form-group">
                 <div >
-                    <input type="text" ngControl="windDirection" class="form-control input-sm" style="width:130px;margin-left:inherit" [(ngModel)]="wnd.direction" placeholder="Enter direction (T)" />
+                    <input type="text" data-toggle="tooltip" title="Use 3 digit format, eg 270 " ngControl="windDirection" class="form-control xp-form-input" [(ngModel)]="wnd.direction" placeholder="Enter direction (T)" />                    
                 </div>
             </div>
             <div class="form-group">
                 <div >
-                    <input type="text" ngControl="windSpeed"  class="form-control input-sm" style="width:130px" [(ngModel)]="wnd.windspeed" placeholder="Enter speed [kts]" />
+                    <input type="text" data-toggle="tooltip" title="Use format Nxxx, eg N120"  ngControl="windSpeed"  class="form-control xp-form-input"  [(ngModel)]="wnd.windspeed" placeholder="Enter speed [kts]" />
                 </div>
             </div>
             <div class="form-group">
-            <div>
-                <select class="form-control input-sm" style="width:130px" ngControl="windAltitude" [(ngModel)]="wnd.altitude" placeholder="Select altitude [ft]">
+                <select  ngControl="windAltitude" class="form-control xp-form-input" [(ngModel)]="wnd.altitude" placeholder="Select altitude [ft]">
                     <option>A020</option>
                     <option>A030</option>
                     <option>A040</option>
@@ -82,12 +64,12 @@
                     <option>FL012</option>
                 </select>
             </div>
-        </div>
             <div class="form-group">
-                <div>
-                    <button type="submit" class="btn btn-primary glyphicon glyphicon-plus" (click)="onAdd(wnd)"></button>
-                </div>
+                <!--<button type="submit" class="btn btn-success xp-form-button" (click)="onAdd(wnd)">-->
+                    <i class="fa fa-plus-square xp-form-button" (click)="onAdd(wnd)"></i>
+                <!--</button>-->
             </div>
         </div>
+
     </form>
-<!--</div>-->
+</div>
