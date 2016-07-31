@@ -101,6 +101,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65CCC39C-D4A6-482E-B923-76ECD192512A}"
 	ProjectSection(SolutionItems) = preProject
 		Index.html = Index.html
+		package.json = package.json
+		tsconfig.json = tsconfig.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson07", "Lesson07", "{336CA1C0-7D24-4A70-B2E5-55D59253D833}"
@@ -127,6 +129,76 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "styles", "styles", "{084E60
 		Lesson10\styles\lesson10.styles.css = Lesson10\styles\lesson10.styles.css
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson08", "Lesson08", "{9656DE7F-AACF-4B37-9AF4-3F072F50DC59}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson08\favicon.ico = Lesson08\favicon.ico
+		Lesson08\lesson08.html = Lesson08\lesson08.html
+		Lesson08\ReadMe.txt = Lesson08\ReadMe.txt
+		Lesson08\styles.css = Lesson08\styles.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{A372D65B-49F0-470E-9C4A-B24B1E212CAB}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson08\app\lesson08.component.ts = Lesson08\app\lesson08.component.ts
+		Lesson08\app\main.ts = Lesson08\app\main.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson01", "Lesson01", "{DBE6A28D-F3C4-4B7D-9C6A-68C67B45B522}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson01\favicon.ico = Lesson01\favicon.ico
+		Lesson01\lesson01.html = Lesson01\lesson01.html
+		Lesson01\ReadMe.txt = Lesson01\ReadMe.txt
+		Lesson01\styles.css = Lesson01\styles.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson02", "Lesson02", "{58B64CEE-94B1-4107-9920-CCD464C899EE}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson02\favicon.ico = Lesson02\favicon.ico
+		Lesson02\index.html = Lesson02\index.html
+		Lesson02\lesson02.html = Lesson02\lesson02.html
+		Lesson02\ReadMe.txt = Lesson02\ReadMe.txt
+		Lesson02\styles.css = Lesson02\styles.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson03", "Lesson03", "{681DA6AC-8002-47DA-A92F-450226A9DD5A}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson03\favicon.ico = Lesson03\favicon.ico
+		Lesson03\lesson03.html = Lesson03\lesson03.html
+		Lesson03\ReadMe.txt = Lesson03\ReadMe.txt
+		Lesson03\styles.css = Lesson03\styles.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{92F76AF8-AA5D-4017-BE73-C68D3C3E7045}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson01\app\lesson01.component.ts = Lesson01\app\lesson01.component.ts
+		Lesson01\app\main.ts = Lesson01\app\main.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{9EDCEE1A-3F9A-4759-AF73-2E2F4CD7671F}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson02\app\child.component.ts = Lesson02\app\child.component.ts
+		Lesson02\app\grandchild.component.ts = Lesson02\app\grandchild.component.ts
+		Lesson02\app\lesson02.component.ts = Lesson02\app\lesson02.component.ts
+		Lesson02\app\main.ts = Lesson02\app\main.ts
+		Lesson02\app\parent.component.ts = Lesson02\app\parent.component.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{E8862D3E-8674-4AE3-ABBB-E195D3AD6FF5}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson02\views\parent.html = Lesson02\views\parent.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{8002D48A-776E-43DE-A840-F2EDA8F7F5BC}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson03\app\lesson03.component.ts = Lesson03\app\lesson03.component.ts
+		Lesson03\app\main.ts = Lesson03\app\main.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{D004DF79-7BA9-4EBF-817A-D59BBE984A21}"
+	ProjectSection(SolutionItems) = preProject
+		Lesson03\views\iodemo.html = Lesson03\views\iodemo.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,5 +216,11 @@ Global
 		{844E8D44-9613-4D23-855D-17827B7B2285} = {336CA1C0-7D24-4A70-B2E5-55D59253D833}
 		{90F888A5-F5C3-4B7F-8854-C62470950F2A} = {336CA1C0-7D24-4A70-B2E5-55D59253D833}
 		{084E60E1-A666-49E0-A9B7-4021B1379EF5} = {77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}
+		{A372D65B-49F0-470E-9C4A-B24B1E212CAB} = {9656DE7F-AACF-4B37-9AF4-3F072F50DC59}
+		{92F76AF8-AA5D-4017-BE73-C68D3C3E7045} = {DBE6A28D-F3C4-4B7D-9C6A-68C67B45B522}
+		{9EDCEE1A-3F9A-4759-AF73-2E2F4CD7671F} = {58B64CEE-94B1-4107-9920-CCD464C899EE}
+		{E8862D3E-8674-4AE3-ABBB-E195D3AD6FF5} = {58B64CEE-94B1-4107-9920-CCD464C899EE}
+		{8002D48A-776E-43DE-A840-F2EDA8F7F5BC} = {681DA6AC-8002-47DA-A92F-450226A9DD5A}
+		{D004DF79-7BA9-4EBF-817A-D59BBE984A21} = {681DA6AC-8002-47DA-A92F-450226A9DD5A}
 	EndGlobalSection
 EndGlobal
