@@ -2,8 +2,6 @@
 import { NgForm }    from 'angular2/common';
 import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/router';
 import { TestService }    from './test.service';
-//import {CompB} from './compB';
-//import {CompA} from './compA';
 import {ListB} from './ListB';
 import {ListA} from './ListA';
 
