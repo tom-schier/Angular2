@@ -1,6 +1,4 @@
-/// <reference path="../../../typings/tsd.d.ts" />
-
-import {Injectable, Output, EventEmitter} from 'angular2/core';
+import {Injectable, Output, EventEmitter} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 
 export class WindDetails {

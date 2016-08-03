@@ -1,18 +1,6 @@
-System.register(['angular2/platform/browser', './lesson08.component'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
-    var browser_1, lesson08_component_1;
-    return {
-        setters:[
-            function (browser_1_1) {
-                browser_1 = browser_1_1;
-            },
-            function (lesson08_component_1_1) {
-                lesson08_component_1 = lesson08_component_1_1;
-            }],
-        execute: function() {
-            browser_1.bootstrap(lesson08_component_1.Lesson08);
-        }
-    }
-});
+"use strict";
+var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
+var lesson08_component_1 = require('./lesson08.component');
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
+platform_browser_dynamic_1.bootstrap(lesson08_component_1.Lesson08, [ng2_bootstrap_1.BS_VIEW_PROVIDERS]);
 //# sourceMappingURL=main.js.map

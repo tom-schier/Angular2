@@ -1,4 +1,4 @@
-﻿import {Component, Output, Input, EventEmitter} from 'angular2/core';
+import {Component, Output, Input, EventEmitter} from '@angular/core';
 
 @Component({
     selector: 'grand-child',
@@ -8,7 +8,7 @@
 })
 export class GrandChild {
 
-    @Output() msgPassthrough: EventEmitter<string> = new EventEmitter();
+    @Output() msgPassthrough: EventEmitter<string> = new EventEmitter<string>();
     @Input() msgFromParent: string;
     msg: string;
 

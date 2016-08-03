@@ -1,4 +1,4 @@
-This example illustrates the use of @Input and @Output directives
+This example illustrates the use of the Angular2 router
 
 To run:
 
@@ -7,4 +7,5 @@ To run:
 - in the browser use http://localhost:3000/Lesson05
 
 This example illustrates the use of the router in combination with a injectable service component.
-Each component created by the router will have a service injected (constructor injection). Since this service is listed as a provider at the root level of the applciation, each component will receive the same route object.
+Each component created by the router will have a service injected (constructor injection).
+Since this service is listed as a provider at the root level of the applciation, each component will receive the same route object.

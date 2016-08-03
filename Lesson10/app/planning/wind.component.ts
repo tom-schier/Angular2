@@ -1,9 +1,7 @@
-/// <reference path="../../../typings/jQuery/jQuery.d.ts" />
-
-import {Component, ElementRef, OnInit} from 'angular2/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {WeatherService, WindDetails} from '../services/weather.service';
 import {SpeedValidator} from './flightplanning.validators';
-import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, FormBuilder, ControlGroup, Validators} from 'angular2/common';
+import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, FormBuilder, ControlGroup, Validators} from '@angular/common';
 import {Subject} from 'rxjs/Subject';
 
 

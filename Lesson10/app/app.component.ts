@@ -1,22 +1,18 @@
-import {Component, Input, OnInit, EventEmitter, Output, ViewEncapsulation}   from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/router';
+import {Component, Input, OnInit, EventEmitter, Output, ViewEncapsulation}   from '@angular/core';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {AircraftListComponent}           from './aircraft/aircraftlist.component';
 import {FlightPlanningComponent}   from './planning/flightplanning.component';
 import {AircraftDetailsComponent} from './aircraft/aircraft-detail.component';
 import {AircraftService}           from './services/aircraft.service';
 import {Aircraft}           from './data/aircraft.types';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 @Component({
-    selector: 'my-app',
+    selector: 'lesson-10',
     templateUrl: 'app.html',
     directives: [ROUTER_DIRECTIVES, FlightPlanningComponent, AircraftDetailsComponent, AircraftListComponent],
     providers: [AircraftService]
 })
-@RouteConfig([
-        { path: '/planning', name: 'FlightPlanning', component: FlightPlanningComponent},
-        { path: '/aircraft', name: 'AircraftDetails', component: AircraftDetailsComponent}
-])
 export class AppComponent implements OnInit{
 
     id: number;
@@ -30,7 +26,7 @@ export class AppComponent implements OnInit{
         this._acService.aircraftDetailsChange$.subscribe(
             msg => {
                 this.updateMessage(msg);
-            });   
+            });  
     }
 
     updateMessage(msg: Aircraft) {

@@ -1,4 +1,4 @@
-﻿import {Component,Input, Output, EventEmitter} from 'angular2/core';
+import {Component,Input, Output, EventEmitter} from '@angular/core';
 import {Child} from './child.component';
 
 @Component({

@@ -1,5 +1,5 @@
-﻿import {Component, Input} from 'angular2/core';
-import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup} from 'angular2/common';
+﻿import {Component, Input} from '@angular/core';
+import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup} from '@angular/common';
 
 export class Wind {
     constructor(
@@ -13,7 +13,7 @@ export class Wind {
 
 
 @Component({
-    selector: 'lesson07',
+    selector: 'lesson-07',
     templateUrl: './views/validation.html',
     directives: [FORM_DIRECTIVES]
 })

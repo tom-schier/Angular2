@@ -1,7 +1,7 @@
-import {Component, OnInit, Input}   from 'angular2/core';
+import {Component, OnInit, Input}   from '@angular/core';
 import {AircraftWeight, Aircraft}   from '../data/aircraft.types';
 import {AircraftService}   from '../services/aircraft.service';
-import {RouteParams, Router} from 'angular2/router';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'ac-weights',

@@ -1,6 +1,6 @@
-﻿import { Component, OnInit } from 'angular2/core';
-import { NgForm }    from 'angular2/common';
-import {RouteConfig, ROUTER_DIRECTIVES, Router, RouteParams} from 'angular2/router';
+﻿import { Component, OnInit } from '@angular/core';
+import { NgForm }    from '@angular/common';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import { TestService }    from './test.service';
 import {ListB} from './ListB';
 import {ListA} from './ListA';
@@ -10,10 +10,6 @@ import {ListA} from './ListA';
     templateUrl: './views/testservice.html',
     directives: [ROUTER_DIRECTIVES, ListA, ListB]
 })
-@RouteConfig([
-    { path: '/ListA', name: 'ListA', component: ListA },
-    { path: '/ListB', name: 'ListB', component: ListB }
-])
 export class Lesson05 implements OnInit {
 
     modelMsg: string;

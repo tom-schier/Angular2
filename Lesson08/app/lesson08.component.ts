@@ -1,17 +1,33 @@
-﻿import {Component, Input, ViewContainerRef} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
-import {MODAL_DIRECTIVES, BS_VIEW_PROVIDERS} from 'ng2-bootstrap/ng2-bootstrap';
+﻿import {Component } from '@angular/core';
+import {CORE_DIRECTIVES} from '@angular/common';
+import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 
+// webpack html imports
+//let template = require('./alert-demo.html');
 
 @Component({
-    selector: 'lesson08',
-    templateUrl: './views/boot-modal.html',
-    directives: [MODAL_DIRECTIVES, CORE_DIRECTIVES],
-    viewProviders: [BS_VIEW_PROVIDERS],
+    selector: 'alert-demo',
+    templateUrl: './views/boot-modal.htm',
+    directives: [AlertComponent, CORE_DIRECTIVES]
 })
 export class Lesson08 {
+    public alerts: Array<Object> = [
+        {
+            type: 'danger',
+            msg: 'Oh snap! Change a few things up and try submitting again.'
+        },
+        {
+            type: 'success',
+            msg: 'Well done! You successfully read this important alert message.',
+            closable: true
+        }
+    ];
 
-    constructor(public viewContainerRef: ViewContainerRef) {
-        this.viewContainerRef = viewContainerRef;
+    public closeAlert(i: number): void {
+        this.alerts.splice(i, 1);
+    }
+
+    public addAlert(): void {
+        this.alerts.push({ msg: 'Another alert!', type: 'warning', closable: true });
     }
 }

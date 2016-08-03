@@ -3,9 +3,9 @@ import {TrackService, TrackComponent}   from '../services/track.service';
 import {WindData}  from './wind.component';
 import {WeatherService, WindDetails}  from '../services/weather.service';
 import {TrackData}  from './track.component';
-import {Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, Inject}  from 'angular2/core';
+import {Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, Inject}  from '@angular/core';
 import {AircraftService}  from '../services/aircraft.service';
-import {RouteParams, Router} from 'angular2/router';
+import { Router} from '@angular/router';
 import {Aircraft, AircraftBrief} from '../data/aircraft.types';
 
 
@@ -21,7 +21,7 @@ export class FlightPlanningComponent implements OnInit {
     windSpeed: number;
     calcTrack: TrackComponent[];
 
-    constructor(private _routeParams: RouteParams, private _acService: AircraftService,
+    constructor(private _acService: AircraftService,
                 public _weatherService: WeatherService, public _trackService: TrackService) {
         console.log('Creating Flight Planning Component');
     }

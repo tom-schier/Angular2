@@ -1,18 +1,5 @@
-System.register(['angular2/platform/browser', './lesson04.component'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
-    var browser_1, lesson04_component_1;
-    return {
-        setters:[
-            function (browser_1_1) {
-                browser_1 = browser_1_1;
-            },
-            function (lesson04_component_1_1) {
-                lesson04_component_1 = lesson04_component_1_1;
-            }],
-        execute: function() {
-            browser_1.bootstrap(lesson04_component_1.Lesson04);
-        }
-    }
-});
+"use strict";
+var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
+var lesson04_component_1 = require('./lesson04.component');
+platform_browser_dynamic_1.bootstrap(lesson04_component_1.Lesson04);
 //# sourceMappingURL=main.js.map

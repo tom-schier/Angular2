@@ -1,8 +1,8 @@
 
 
-import {Injectable,  Output, EventEmitter} from 'angular2/core';
+import {Injectable,  Output, EventEmitter} from '@angular/core';
 import {aircraftList} from '../data/mock-aircraft-data';
-import {Http, HTTP_PROVIDERS} from 'angular2/http';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
 import {AircraftSpeed, AircraftWeight, Aircraft, AircraftBrief} from '../data/aircraft.types';
 import {iAircraftService} from '../aircraft/aircraft.interface';
 import {Subject} from 'rxjs/Subject';

@@ -1,4 +1,4 @@
-﻿import {Component,Input, Output, EventEmitter} from 'angular2/core';
+import {Component,Input, Output, EventEmitter} from '@angular/core';
 import {GrandChild} from './grandchild.component';
 
 @Component({
@@ -11,7 +11,7 @@ import {GrandChild} from './grandchild.component';
 export class Child {
 
     @Input() msgFromParent: string;
-    @Output() msgFromGrandchild: EventEmitter<string> = new EventEmitter();
+    @Output() msgFromGrandchild: EventEmitter<string> = new EventEmitter<string>();
 
     handleMyEvent(evt) {
         this.msgFromGrandchild.next(evt);

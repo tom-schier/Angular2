@@ -1,5 +1,5 @@
-﻿import { Component, OnInit } from 'angular2/core';
-import { Injectable } from 'angular2/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 
 

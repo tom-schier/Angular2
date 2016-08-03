@@ -1,11 +1,10 @@
-This example illustrates the use of @Input and @Output directives
+This example illustrates the use of structural directives in Angular2.
 
 To run:
 
-- in a cmd window navigate to the root directory Lesson01
+- in a cmd window navigate to the root directory Lesson03
 - run "npm start". This will open browser
-- in the browser use http://localhost:3000/Lesson02
+- in the browser use http://localhost:3000/Lesson03
 
-Click anywhere on the grand child and a message will be passed through the child, back to the parent.
-Click on the parent which will pass a message don to the child.
+Rows can be added and removed and the DOM will be updated accordingly.
 

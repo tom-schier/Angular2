@@ -1,11 +1,7 @@
-﻿import {Component, Input} from 'angular2/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'lesson01',
-    template: `
-                    <h2>First Lesson</h2>
-                    <div>Hello World!</div>
-    `
+    selector: 'lesson-01',
+    template: '<h1>Hello World! Lets do Angular2</h1>'
 })
-export class Lesson01 {
-}
+export class Lesson01 { }

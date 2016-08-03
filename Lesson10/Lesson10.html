@@ -1,39 +1,24 @@
 ﻿<html>
 <head>
-    <!-- Set the base href -->
-    <base href="/Lesson10/">
-    <title>Router Sample</title>
+    <base href="/Lesson10/" />
+    <title>Lesson 10</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" href="styles.css">-->
-    <!-- 1. Load libraries -->
-    <!-- IE required polyfills, in this exact order -->
-    <script src="../node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="../node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../node_modules/core-js/client/shim.min.js"></script>
 
-    <script src="../node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="../node_modules/zone.js/dist/zone.js"></script>
+    <script src="../node_modules/reflect-metadata/Reflect.js"></script>
     <script src="../node_modules/systemjs/dist/system.src.js"></script>
-    <script src="../node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
-
-    <!-- Add the router library -->
-    <script src="../node_modules/angular2/bundles/router.dev.js"></script>
-    <script src="../node_modules/angular2/bundles/http.dev.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
-
-        <script>
-      System.config({
-        packages: {
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
-        }
-      });
-      System.import('app/main')
-            .then(null, console.error.bind(console));
-        </script>
 </head>
+
 <body>
-    <my-app>loading...</my-app>
+    <script src="../systemjs.config.js"></script>
+    <script>
+              System.import('app').catch(function(err){ console.error(err); });
+    </script>
+    <lesson-10>Loading...</lesson-10>
+    <br /><br /><br /><br />
+    <h4><a href="../Index.html">Back to Main</a></h4>
 </body>
 </html>

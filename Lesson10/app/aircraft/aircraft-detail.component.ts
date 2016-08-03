@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, Inject}  from 'angular2/core';
+import {Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, Inject}  from '@angular/core';
 import {AircraftSpeedsComponent} from './aircraft-speeds.component';
 import {AircraftWeightsComponent} from './aircraft-weights.component';
 import {AircraftService}  from '../services/aircraft.service';

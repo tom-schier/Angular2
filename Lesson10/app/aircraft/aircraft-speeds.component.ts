@@ -1,8 +1,8 @@
-import {Component, OnInit, Input}  from 'angular2/core';
+import {Component, OnInit, Input}  from '@angular/core';
 import {AircraftService}   from '../services/aircraft.service';
 import {AircraftSpeed, Aircraft} from '../data/aircraft.types';
 import {AircraftDetailsComponent}   from './aircraft-detail.component';
-import {RouteParams, Router} from 'angular2/router';
+import { Router} from '@angular/router';
 
 @Component({
     selector: 'ac-speeds',

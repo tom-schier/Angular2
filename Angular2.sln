@@ -42,6 +42,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{7E131BBB-B01F-4471-8CEE-D46B9D6A27AB}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson10\app\data\aircraft.types.ts = Lesson10\app\data\aircraft.types.ts
+		Lesson10\app\data\app.routes.ts = Lesson10\app\data\app.routes.ts
 		Lesson10\app\data\mock-aircraft-data.ts = Lesson10\app\data\mock-aircraft-data.ts
 	EndProjectSection
 EndProject
@@ -95,7 +96,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{38A0E7C5-3B1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{8D194FE4-132E-4940-87B3-24A300BBFCF6}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson06\views\extendclass.html = Lesson06\views\extendclass.html
+		Lesson06\views\googlemaps.html = Lesson06\views\googlemaps.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65CCC39C-D4A6-482E-B923-76ECD192512A}"
@@ -215,6 +216,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson05", "Lesson05", "{B7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{CF8A106D-E95D-48A8-A9E5-90B4952083CD}"
 	ProjectSection(SolutionItems) = preProject
+		Lesson05\app\app.routes.ts = Lesson05\app\app.routes.ts
 		Lesson05\app\lesson05.component.ts = Lesson05\app\lesson05.component.ts
 		Lesson05\app\ListA.ts = Lesson05\app\ListA.ts
 		Lesson05\app\ListB.ts = Lesson05\app\ListB.ts
