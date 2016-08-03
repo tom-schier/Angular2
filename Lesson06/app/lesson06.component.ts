@@ -1,25 +1,27 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { NgForm }    from '@angular/common';
+﻿import {Component} from '@angular/core';
+import {bootstrap} from '@angular/platform-browser-dynamic';
 
-
+import {
+    GOOGLE_MAPS_DIRECTIVES,
+    GOOGLE_MAPS_PROVIDERS
+} from 'angular2-google-maps/core';
 
 @Component({
     selector: 'lesson-06',
-    templateUrl: './views/googlemaps.html'
+    directives: [GOOGLE_MAPS_DIRECTIVES],
+	template: `
+		<sebm-google-map [latitude]="lat" [longitude]="lng">
+		</sebm-google-map>
+	`
 })
-export class Lesson06 implements OnInit {
+export class Lesson06 {
+    lat: number = 44.3;
+    lng: number = 33.2;
 
-    myTextClass: string;
-    myIconClass: string;
-    myButtonClass: string;
-
-    constructor() {
-        console.log('Creating Lesson06');
-    }
-
-    ngOnInit() {
-        console.log('Initialising Lesson06'); 
+    initMap() {
     }
 }
+
+
 
 

@@ -9,17 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var core_2 = require('angular2-google-maps/core');
 var Lesson06 = (function () {
     function Lesson06() {
-        console.log('Creating Lesson06');
+        this.lat = 44.3;
+        this.lng = 33.2;
     }
-    Lesson06.prototype.ngOnInit = function () {
-        console.log('Initialising Lesson06');
+    Lesson06.prototype.initMap = function () {
     };
     Lesson06 = __decorate([
         core_1.Component({
             selector: 'lesson-06',
-            templateUrl: './views/googlemaps.html'
+            directives: [core_2.GOOGLE_MAPS_DIRECTIVES],
+            template: "\n\t\t<sebm-google-map [latitude]=\"lat\" [longitude]=\"lng\">\n\t\t</sebm-google-map>\n\t"
         }), 
         __metadata('design:paramtypes', [])
     ], Lesson06);
