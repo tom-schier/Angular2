@@ -9,7 +9,9 @@
     'app':                        'app', // 'dist',
 
     '@angular':                   '../node_modules/@angular',
-    'angular2-google-maps':       '../node_modules/angular2-google-maps',
+    'angular2-google-maps': '../node_modules/angular2-google-maps',
+    'angular2-google-maps/ts/core': '../node_modules/angular2-google-maps/ts/core',
+    //'google-maps-api-loader':     '../node_modules/google-maps-api-loader',
     'angular2-in-memory-web-api': '../node_modules/angular2-in-memory-web-api',
     'rxjs':                       '../node_modules/rxjs'
   };
@@ -19,7 +21,9 @@
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
-    'angular2-google-maps/core':  {main: 'index.js', defaultExtension: 'js'}
+    'angular2-google-maps/core': { main: 'index.js', defaultExtension: 'js' },
+    'angular2-google-maps/ts/core': { main: 'index.js', defaultExtension: 'js' }
+    //'google-maps-api-loader':     { main: 'index.js', defaultExtension: 'js' }
   };
 
   var ngPackageNames = [
