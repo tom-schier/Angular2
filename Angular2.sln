@@ -84,19 +84,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson06", "Lesson06", "{AA
 	ProjectSection(SolutionItems) = preProject
 		Lesson06\favicon.ico = Lesson06\favicon.ico
 		Lesson06\lesson06.html = Lesson06\lesson06.html
+		Lesson06\lesson06A.html = Lesson06\lesson06A.html
 		Lesson06\ReadMe.txt = Lesson06\ReadMe.txt
 		Lesson06\styles.css = Lesson06\styles.css
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{38A0E7C5-3B16-48A6-B8FB-0F8B94F73B84}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson06\app\lesson06.component.ts = Lesson06\app\lesson06.component.ts
 		Lesson06\app\main.ts = Lesson06\app\main.ts
+		Lesson06\app\xpGoogleMap.component.ts = Lesson06\app\xpGoogleMap.component.ts
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{8D194FE4-132E-4940-87B3-24A300BBFCF6}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson06\views\googlemaps.html = Lesson06\views\googlemaps.html
+		Lesson06\views\xpGoogleMap.html = Lesson06\views\xpGoogleMap.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65CCC39C-D4A6-482E-B923-76ECD192512A}"
