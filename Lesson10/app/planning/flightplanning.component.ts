@@ -1,4 +1,3 @@
-
 import {TrackService, TrackComponent}   from '../services/track.service';
 import {WindData}  from './wind.component';
 import {WeatherService, WindDetails}  from '../services/weather.service';
@@ -7,7 +6,6 @@ import {Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, Injec
 import {AircraftService}  from '../services/aircraft.service';
 import { Router} from '@angular/router';
 import {Aircraft, AircraftBrief} from '../data/aircraft.types';
-
 
 
 @Component({

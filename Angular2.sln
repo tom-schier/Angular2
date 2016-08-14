@@ -5,38 +5,44 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson10", "Lesson10", "{77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson10\acDetails.html = Lesson10\acDetails.html
-		Lesson10\acSpeeds.html = Lesson10\acSpeeds.html
-		Lesson10\acWeights.html = Lesson10\acWeights.html
-		Lesson10\aircraftList.html = Lesson10\aircraftList.html
 		Lesson10\app.html = Lesson10\app.html
-		Lesson10\flightplan.html = Lesson10\flightplan.html
 		Lesson10\Lesson10.html = Lesson10\Lesson10.html
-		Lesson10\trackData.html = Lesson10\trackData.html
-		Lesson10\windData.html = Lesson10\windData.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{69A5A29D-0454-4BC0-90FC-B235E67D3661}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson10\app\app.component.ts = Lesson10\app\app.component.ts
+		Lesson10\flightplan.html = Lesson10\flightplan.html
 		Lesson10\app\main.ts = Lesson10\app\main.ts
+		Lesson10\app\planning\mapcontainer.html = Lesson10\app\planning\mapcontainer.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aircraft", "aircraft", "{09DAA059-61A1-414E-BAE2-24D403C940EA}"
 	ProjectSection(SolutionItems) = preProject
+		Lesson10\acDetails.html = Lesson10\acDetails.html
+		Lesson10\acSpeeds.html = Lesson10\acSpeeds.html
+		Lesson10\acWeights.html = Lesson10\acWeights.html
 		Lesson10\app\aircraft\aircraft-detail.component.ts = Lesson10\app\aircraft\aircraft-detail.component.ts
 		Lesson10\app\aircraft\aircraft-speeds.component.ts = Lesson10\app\aircraft\aircraft-speeds.component.ts
 		Lesson10\app\aircraft\aircraft-weights.component.ts = Lesson10\app\aircraft\aircraft-weights.component.ts
 		Lesson10\app\aircraft\aircraft.interface.ts = Lesson10\app\aircraft\aircraft.interface.ts
 		Lesson10\app\aircraft\aircraftlist.component.ts = Lesson10\app\aircraft\aircraftlist.component.ts
+		Lesson10\aircraftList.html = Lesson10\aircraftList.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "planning", "planning", "{7737BE58-4847-4776-912E-8162DB1C7A9A}"
 	ProjectSection(SolutionItems) = preProject
+		Lesson10\flightplan.html = Lesson10\flightplan.html
 		Lesson10\app\planning\flightplanning.component.ts = Lesson10\app\planning\flightplanning.component.ts
 		Lesson10\app\planning\flightplanning.validators.ts = Lesson10\app\planning\flightplanning.validators.ts
+		Lesson10\app\planning\googlemap.html = Lesson10\app\planning\googlemap.html
+		map.component.ts = map.component.ts
+		Lesson10\app\planning\mapcontainer.component.ts = Lesson10\app\planning\mapcontainer.component.ts
+		Lesson10\app\planning\mapcontainer.html = Lesson10\app\planning\mapcontainer.html
 		Lesson10\app\planning\track.component.ts = Lesson10\app\planning\track.component.ts
+		Lesson10\trackData.html = Lesson10\trackData.html
 		Lesson10\app\planning\wind.component.ts = Lesson10\app\planning\wind.component.ts
+		Lesson10\windData.html = Lesson10\windData.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{7E131BBB-B01F-4471-8CEE-D46B9D6A27AB}"

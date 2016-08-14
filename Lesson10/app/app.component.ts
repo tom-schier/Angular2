@@ -2,6 +2,7 @@ import {Component, Input, OnInit, EventEmitter, Output, ViewEncapsulation}   fro
 import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {AircraftListComponent}           from './aircraft/aircraftlist.component';
 import {FlightPlanningComponent}   from './planning/flightplanning.component';
+import {MapContainer}   from './planning/mapcontainer.component';
 import {AircraftDetailsComponent} from './aircraft/aircraft-detail.component';
 import {AircraftService}           from './services/aircraft.service';
 import {Aircraft}           from './data/aircraft.types';
@@ -10,7 +11,7 @@ import {HTTP_PROVIDERS} from '@angular/http';
 @Component({
     selector: 'lesson-10',
     templateUrl: 'app.html',
-    directives: [ROUTER_DIRECTIVES, FlightPlanningComponent, AircraftDetailsComponent, AircraftListComponent],
+    directives: [ROUTER_DIRECTIVES, FlightPlanningComponent, AircraftDetailsComponent, AircraftListComponent, MapContainer],
     providers: [AircraftService]
 })
 export class AppComponent implements OnInit{

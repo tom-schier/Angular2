@@ -9,10 +9,9 @@ declare var google: any;
     selector: 'lesson-06',
     templateUrl: './views/googlemaps.html',
     styleUrls: ['./styles.css']
-    }
+}
 )
-export class GoogleMaps implements OnInit
-{
+export class GoogleMaps implements OnInit {
     address: string;
     // the markers array will contain a list of Google marker objects
     markers: Array<google.maps.Marker>;
@@ -28,7 +27,7 @@ export class GoogleMaps implements OnInit
     }
 
     ngOnInit() {
-        
+
         this.initMap();
     }
 
@@ -65,7 +64,7 @@ export class GoogleMaps implements OnInit
             map: this.map
         });
         this.markers.push(marker);
-        this.lat = location.lat();      
+        this.lat = location.lat();
         this.lng = location.lng();
     }
 
