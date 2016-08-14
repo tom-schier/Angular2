@@ -1,5 +1,5 @@
 "use strict";
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
-var xpGoogleMap_component_1 = require('./xpGoogleMap.component');
-platform_browser_dynamic_1.bootstrap(xpGoogleMap_component_1.xpGoogleMap, []);
+var googlemaps_component_1 = require('./googlemaps.component');
+platform_browser_dynamic_1.bootstrap(googlemaps_component_1.GoogleMaps, []);
 //# sourceMappingURL=main.js.map

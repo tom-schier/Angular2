@@ -1,6 +1,6 @@
 import {bootstrap}    from '@angular/platform-browser-dynamic';
-import {xpGoogleMap} from './xpGoogleMap.component';
+import {GoogleMaps} from './googlemaps.component';
 import {provide} from '@angular/core';
 
 
-bootstrap(xpGoogleMap, []);
+bootstrap(GoogleMaps, []);

@@ -9,98 +9,79 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var EventMarker = (function () {
-    function EventMarker(_lat, _lng, _label, _draggable) {
-        this.lat = _lat;
-        this.lng = _lng;
-        this.label = _label;
-        this.draggable = _draggable;
-    }
-    return EventMarker;
-}());
 var Lesson06 = (function () {
+    //google: any;
     function Lesson06() {
-        this.isShowMarker = false;
-        this.isReadOnly = false;
-        this.lat = 51.528308;
-        this.lng = -0.3817765;
-        this.zoom = 15;
-        this.markers = [
-            {
-                lat: this.lat,
-                lng: this.lng,
-                label: 'A',
-                draggable: false
+        var _this = this;
+        this.lat = -33.8688;
+        this.lng = 151.2093;
+        this.initialZoom = 9;
+        // note the syntax how this function is declared. This will ensure the event listener for geocode will work
+        // see above the call to this.setMarker can be resolved using this syntax below
+        // good information regarding this can be fount here https://github.com/Microsoft/TypeScript/wiki/ 
+        this.setMarker = function (results, status) {
+            if (status === 'OK') {
+                _this.clearMarkers();
+                _this.map.setCenter(results[0].geometry.location);
+                _this.addMarker(results[0].geometry.location);
             }
-        ];
+            else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        };
+        this.markers = new Array();
+        this.address = "Sydney, NSW";
     }
     Lesson06.prototype.ngOnInit = function () {
-        this.mapProp = {
-            center: new google.maps.LatLng(51.508742, -0.120850),
-            zoom: 5,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        this.map = google.maps;
-        this.geocoder = new this.map.Geocoder;
-        //this.gMap.Map(document.getElementById("googleMap"), this.mapProp);
-        this.gMap = new google.maps.Map(document.getElementById("googleMap"), this.mapProp);
+        this.initMap();
     };
-    Lesson06.prototype.getNext = function ($event) {
-        //this.map = google.maps;
-        // this.geocoder = this.map.Geocoder;
-        var infowindow = this.map.InfoWindow;
-        var marker;
-        var newMarker;
-        var markerList = this.markers;
-        var address = "27 Croft Rd, Eleebana, NSW, Australia";
-        //this.geocoder.geocode({ 'address': address }, this.getIt(this.results, status).then(() => this.getIt());
-        this.geocoder.geocode({ 'address': address }, function (results, status) {
-            if (status === 'OK') {
-                if (results[0]) {
-                    var map = google.maps;
-                    marker = new google.maps.Marker({
-                        position: results[0].geometry.location,
-                        map: map
-                    });
-                    newMarker = new EventMarker(results[0].geometry.location.lat(), results[0].geometry.location.lng(), "My Home", true);
-                    markerList.push(newMarker);
-                    map.Map(document.getElementById("googleMap")).panTo(marker.getPosition());
-                }
-                else {
-                    window.alert('No results found');
-                }
-            }
-            else {
-                window.alert('Geocoder failed due to: ' + status);
-            }
+    Lesson06.prototype.initMap = function () {
+        this.geocoder = new google.maps.Geocoder();
+        this.map = new google.maps.Map(document.getElementById('map'), {
+            zoom: this.initialZoom,
+            center: { lat: this.lat, lng: this.lng }
         });
-        //this.map.setMap(markerList[0].lat, markerList[0].lng);
     };
-    ;
-    Lesson06.prototype.getIt = function (results, status) {
-        if (status === 'OK') {
-            if (results[0]) {
-                this.map.Marker({
-                    position: results[0].geometry.location,
-                    setMap: document.querySelector("#googleMap"),
-                });
-                var newMarker = new EventMarker(results[0].geometry.location.lat(), results[0].geometry.location.lng(), "My Home", true);
-                this.markers.push(newMarker);
-            }
-            else {
-                window.alert('No results found');
-            }
-        }
-        else {
-            window.alert('Geocoder failed due to: ' + status);
-        }
-        this.map.set(this.markers[0].lat, this.markers[0].lng);
+    Lesson06.prototype.setMarkerForAddress = function () {
+        // calls the geocode method in the Google API, specifies setMarker as the event handler
+        this.geocoder.geocode({ 'address': this.address }, this.setMarker);
     };
-    ;
+    // Adds a marker to the map and push to the array. The parameter is expected to be a 
+    Lesson06.prototype.addMarker = function (location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: this.map
+        });
+        this.markers.push(marker);
+        this.lat = location.lat();
+        this.lng = location.lng();
+        this.monkey = "monkey was here";
+    };
+    // Sets the map on all markers in the array.
+    Lesson06.prototype.setMapOnAll = function (map) {
+        for (var i = 0; i < this.markers.length; i++) {
+            // by calling the setMap function on the Google marker object the marker will be placed on the map
+            // if map == null the marker will be removed if it exists on the map
+            this.markers[i].setMap(map);
+        }
+    };
+    // Removes the markers from the map, but keeps them in the array.
+    Lesson06.prototype.clearMarkers = function () {
+        this.setMapOnAll(null);
+    };
+    // Shows any markers currently in the array.
+    Lesson06.prototype.showMarkers = function () {
+        this.setMapOnAll(map);
+    };
+    // Deletes all markers in the array by removing references to them.
+    Lesson06.prototype.deleteMarkers = function () {
+        this.clearMarkers();
+        this.markers = [];
+    };
     Lesson06 = __decorate([
         core_1.Component({
             selector: 'lesson-06',
-            templateUrl: './views/googlemaps.html',
+            templateUrl: './views/lesson06.html',
             styleUrls: ['./styles.css']
         }), 
         __metadata('design:paramtypes', [])

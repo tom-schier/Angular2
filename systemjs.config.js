@@ -11,7 +11,6 @@
     '@angular':                   '../node_modules/@angular',
     'angular2-google-maps': '../node_modules/angular2-google-maps',
     'angular2-google-maps/ts/core': '../node_modules/angular2-google-maps/ts/core',
-    //'google-maps-api-loader':     '../node_modules/google-maps-api-loader',
     'angular2-in-memory-web-api': '../node_modules/angular2-in-memory-web-api',
     'rxjs':                       '../node_modules/rxjs'
   };
@@ -23,7 +22,6 @@
     'angular2-in-memory-web-api': { main: 'index.js', defaultExtension: 'js' },
     'angular2-google-maps/core': { main: 'index.js', defaultExtension: 'js' },
     'angular2-google-maps/ts/core': { main: 'index.js', defaultExtension: 'js' }
-    //'google-maps-api-loader':     { main: 'index.js', defaultExtension: 'js' }
   };
 
   var ngPackageNames = [
@@ -42,7 +40,6 @@
   // Individual files (~300 requests):
   function packIndex(pkgName) {
       packages['@angular/' + pkgName] = { main: 'index.js', defaultExtension: 'js' };
-      packages['angular2-google-maps/' + pkgName] = { main: 'index.js', defaultExtension: 'js' };
   }
 
   // Bundled (~40 requests):
