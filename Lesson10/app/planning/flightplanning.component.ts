@@ -17,7 +17,7 @@ export class FlightPlanningComponent implements OnInit {
     selectedAircraft: Aircraft;
     windDirection: number;
     windSpeed: number;
-    calcTrack: TrackComponent[];
+   // calcTrack: TrackComponent[];
 
     constructor(private _acService: AircraftService,
                 public _weatherService: WeatherService, public _trackService: TrackService) {

@@ -15,6 +15,7 @@ var track_component_1 = require('./track.component');
 var core_1 = require('@angular/core');
 var aircraft_service_1 = require('../services/aircraft.service');
 var FlightPlanningComponent = (function () {
+    // calcTrack: TrackComponent[];
     function FlightPlanningComponent(_acService, _weatherService, _trackService) {
         this._acService = _acService;
         this._weatherService = _weatherService;

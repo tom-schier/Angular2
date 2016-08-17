@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson10", "Lesson10", "{77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson10\app.html = Lesson10\app.html
+		Lesson10\googlemap.html = Lesson10\googlemap.html
 		Lesson10\Lesson10.html = Lesson10\Lesson10.html
 	EndProjectSection
 EndProject
@@ -14,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{69A5A29D-045
 		Lesson10\app\app.component.ts = Lesson10\app\app.component.ts
 		Lesson10\flightplan.html = Lesson10\flightplan.html
 		Lesson10\app\main.ts = Lesson10\app\main.ts
-		Lesson10\app\planning\mapcontainer.html = Lesson10\app\planning\mapcontainer.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aircraft", "aircraft", "{09DAA059-61A1-414E-BAE2-24D403C940EA}"
@@ -35,10 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "planning", "planning", "{77
 		Lesson10\flightplan.html = Lesson10\flightplan.html
 		Lesson10\app\planning\flightplanning.component.ts = Lesson10\app\planning\flightplanning.component.ts
 		Lesson10\app\planning\flightplanning.validators.ts = Lesson10\app\planning\flightplanning.validators.ts
-		Lesson10\app\planning\googlemap.html = Lesson10\app\planning\googlemap.html
 		map.component.ts = map.component.ts
 		Lesson10\app\planning\mapcontainer.component.ts = Lesson10\app\planning\mapcontainer.component.ts
-		Lesson10\app\planning\mapcontainer.html = Lesson10\app\planning\mapcontainer.html
 		Lesson10\app\planning\track.component.ts = Lesson10\app\planning\track.component.ts
 		Lesson10\trackData.html = Lesson10\trackData.html
 		Lesson10\app\planning\wind.component.ts = Lesson10\app\planning\wind.component.ts

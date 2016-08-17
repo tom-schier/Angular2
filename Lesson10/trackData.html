@@ -1,53 +1,70 @@
 ﻿<head>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
-
+    <link rel="stylesheet" href="./styles/lesson10.styles.css" />
+    <link rel="stylesheet" href="/lib/font-awesome-4.6.3/css/font-awesome.css" />
 </head>
-<div id="trEntryDetails" class="container-fluid">
+<div id="trEntryDetails">
+    <h4>Track Segments</h4>
     <table id="trackTable" class="table table-condensed table-striped table-hover">
         <thead>
             <tr>
-                <th>Heading (T)</th>
-                <th>Distance[nm]</th>
+                <th>Waypoint</th>
                 <th>TAS [kts]</th>
+                <th>Altitude</th>
             </tr>
         </thead>
-        <tbody *ngFor="#tr of tracks; #i=index">
-
-            <tr>
-                <td id="tdHeading">
-                    <input class="form-control" [(ngModel)]="tr.headingTrue" [readonly]="tr.isReadOnly" type="text" value="{{tr.headingTrue}}" />
-                </td>
-                <td id="tdDistance">
-                    <input class="form-control" [(ngModel)]="tr.distance" [readonly]="tr.isReadOnly" type="text" value="{{tr.distance}}" />
+        <tbody *ngFor="#tr of tracks; #i=index" class="xp-font-md" >
+            <tr class="xp-font-md">
+                <td id="tdWaypoint">
+                    {{tr.fromLocation}}
                 </td>
                 <td id="tdTas">
-                    <input  class="form-control" [(ngModel)]="tr.tas" [(readonly)]="tr.isReadOnly" type="text" value="{{tr.tas}}" />
+                    {{tr.tas}}
+                </td>
+                <td id="tdAltitude">
+                    {{tr.altitude}}
                 </td>
                 <td>
-                    <a id="btnRemove" [(class)]="tr.btnRemoveClass" (click)="onRemove(tr)"></a>
-                </td>
-                <td>
-                    <a id="btnEdit" [(class)]="tr.btnEditClass" (click)="onEdit(tr)"></a>
+                    <i class="fa fa-trash xp-form-button" (click)="onRemove(tr)"></i>
                 </td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <td>
-                    <input class="form-control" [(ngModel)]="aHeading" type="text" value="{{aHeading}}" placeholder="Enter wind direction (T)" />
-                </td>
-                <td>
+        </table>
+        <div>
+            <form [ngFormModel]="trackForm" class="form-inline">
+                <div>
                     <div class="form-group">
-                        <input class="form-control" [(ngModel)]="aDistance" type="text" value="{{aDistance}}" placeholder="Enter wind speed [kts]" />
+                        <div>
+                            <input type="text" data-toggle="tooltip" title="Use 3 digit format, eg 270 " ngControl="trackWaypoint" class="form-control xp-form-input" [(ngModel)]="tr.fromLocation" placeholder="Enter direction (T)" />
+                        </div>
                     </div>
-                </td>
-                <td>
-                    <input class="idxWndAltitude" [(ngModel)]="aTas"  type="text" value="{{aTas}}" placeholder="Enter TAS [kts]"/>
-                </td>
-                <td>
-                    <button class="btn btn-primary glyphicon glyphicon-plus" (click)="onAdd(aHeading, aDistance, aTas)"></button>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+                    <div class="form-group">
+                        <div>
+                            <input type="text" data-toggle="tooltip" title="Use format Nxxx, eg N120" ngControl="trackSpeed" class="form-control xp-form-input" [(ngModel)]="tr.tas" placeholder="Enter speed [kts]" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <select ngControl="trackAltitude" class="form-control xp-form-input" [(ngModel)]="tr.altitude" placeholder="Select altitude [ft]">
+                            <option>A020</option>
+                            <option>A030</option>
+                            <option>A040</option>
+                            <option>A050</option>
+                            <option>A060</option>
+                            <option>A070</option>
+                            <option>A080</option>
+                            <option>A090</option>
+                            <option>FL010</option>
+                            <option>FL011</option>
+                            <option>FL012</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <!--<button type="submit" class="btn btn-success xp-form-button" (click)="onAdd(wnd)">-->
+                        <i class="fa fa-plus-square xp-form-button" (click)="onAdd(tr)"></i>
+                        <!--</button>-->
+                    </div>
+                </div>
+
+            </form>
+        </div>
 </div>

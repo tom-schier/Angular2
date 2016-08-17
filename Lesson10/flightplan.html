@@ -1,7 +1,7 @@
 ﻿
 <div class="container-fluid">
     <div class="row">
-        <h4 >Flight Plan for {{selectedAircraft.name}}</h4>
+        <h3 >Flight Plan for {{selectedAircraft.name}}</h3>
     </div>
     
     <div class="row">
@@ -11,6 +11,43 @@
         <track-data class="col-sm-6">
 
         </track-data>
+    </div>
+    <hr>
+    <div class="row">
+        <table id="trackTable" class="table table-condensed table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Waypoint</th>
+                    <th>TAS [kts]</th>
+                    <th>Altitude</th>
+                    <th>GS [kts]</th>
+                    <th>ETI [min]</th>
+                    <th>Hdg</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="#tr of _trackService.tracks; #i=index" class="xp-font-md">
+                <tr class="xp-font-md">
+                    <td id="tdWaypoint">
+                        {{tr.fromLocation}}
+                    </td>
+                    <td id="tdTas">
+                        {{acFlightPlanSpeed}}
+                    </td>
+                    <td id="tdAltitude">
+                        {{tr.altitude}}
+                    </td>
+                    <td id="tdGS">
+                        {{tr.gs}}
+                    </td>
+                    <td id="tdETI">
+                        {{tr.ti}}
+                    </td>
+                    <td id="tdHdg">
+                        {{tr.headingMag}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

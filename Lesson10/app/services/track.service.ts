@@ -5,6 +5,9 @@ import {WindDetails} from './weather.service'
 export class TrackComponent {
     idx: number;
     windIdx: number;
+    altitude: string;
+    fromLocation: string;
+    toLocation: string;
     distance: number;
     headingTrue: number;
     headingMag: number;
