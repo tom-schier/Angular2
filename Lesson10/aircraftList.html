@@ -7,7 +7,7 @@
                 <li class="sidebar-brand">
                     <a>Available Types:</a>
                 </li>           
-                <li *ngFor="#ac of _acList" (click)="onSelect(ac)">
+                <li *ngFor="let ac of _acList" (click)="onSelect(ac)">
                     <a>{{ac.name}}</a>
                 </li>             
             </ul>

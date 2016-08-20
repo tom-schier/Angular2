@@ -9,15 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
 var aircraftlist_component_1 = require('./aircraft/aircraftlist.component');
 var flightplanning_component_1 = require('./planning/flightplanning.component');
 var mapcontainer_component_1 = require('./planning/mapcontainer.component');
 var aircraft_detail_component_1 = require('./aircraft/aircraft-detail.component');
 var aircraft_service_1 = require('./services/aircraft.service');
 var AppComponent = (function () {
-    function AppComponent(_router, _acService) {
-        this._router = _router;
+    function AppComponent(_acService) {
         this._acService = _acService;
         console.log('creating AppComponent');
     }
@@ -37,10 +35,10 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'lesson-10',
             templateUrl: 'app.html',
-            directives: [router_1.ROUTER_DIRECTIVES, flightplanning_component_1.FlightPlanningComponent, aircraft_detail_component_1.AircraftDetailsComponent, aircraftlist_component_1.AircraftListComponent, mapcontainer_component_1.MapContainer],
+            directives: [flightplanning_component_1.FlightPlanningComponent, aircraft_detail_component_1.AircraftDetailsComponent, aircraftlist_component_1.AircraftListComponent, mapcontainer_component_1.MapContainer],
             providers: [aircraft_service_1.AircraftService]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, aircraft_service_1.AircraftService])
+        __metadata('design:paramtypes', [aircraft_service_1.AircraftService])
     ], AppComponent);
     return AppComponent;
 }());

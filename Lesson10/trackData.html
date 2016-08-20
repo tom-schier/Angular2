@@ -13,7 +13,7 @@
                 <th>Altitude</th>
             </tr>
         </thead>
-        <tbody *ngFor="#tr of tracks; #i=index" class="xp-font-md" >
+        <tbody *ngFor="let tr of tracks; let i=index" class="xp-font-md" >
             <tr class="xp-font-md">
                 <td id="tdWaypoint">
                     {{tr.fromLocation}}
@@ -31,7 +31,7 @@
         </tbody>
         </table>
         <div>
-            <form [ngFormModel]="trackForm" class="form-inline">
+            <form [ngFormModel]="trackForm" class="form-inline" name="trackForm">
                 <div>
                     <div class="form-group">
                         <div>

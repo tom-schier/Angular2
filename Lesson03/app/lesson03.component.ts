@@ -11,7 +11,7 @@ class windComponent {
 
 @Component({
     selector: 'lesson-03',
-    templateUrl: './views/iodemo.html'
+    templateUrl: './views/lesson03.html'
 })
 export class Lesson03 implements OnInit {
     aWindspeed: number;

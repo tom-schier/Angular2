@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
+import { routing, appRoutingProviders } from './app.routes';
 
 
 @Injectable()

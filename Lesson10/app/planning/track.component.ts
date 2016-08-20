@@ -1,6 +1,8 @@
 import {Component, OnInit, ElementRef} from '@angular/core';
 import {WeatherService, WindDetails} from '../services/weather.service';
-import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, FormBuilder, ControlGroup, Validators} from '@angular/common';
+import {AircraftService} from '../services/aircraft.service';
+import {AircraftSpeed, AircraftWeight, Aircraft} from '../data/aircraft.types';
+import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 import {TrackComponent, TrackService} from '../services/track.service';
 import {SpeedValidator} from './flightplanning.validators';
 
@@ -8,7 +10,8 @@ import {SpeedValidator} from './flightplanning.validators';
 
 @Component({
     selector: 'track-data',
-    templateUrl: './trackData.html'
+    templateUrl: './trackData.html',
+    providers: [FormBuilder]
 })
 export class TrackData implements OnInit {
 
@@ -21,7 +24,7 @@ export class TrackData implements OnInit {
     selAltitude: number;
     selIdx: number;
     selTrackComp: TrackComponent;
-
+    currAircraft: Aircraft;
     tracks: TrackComponent[];
     tr: TrackComponent;
 
@@ -31,7 +34,7 @@ export class TrackData implements OnInit {
     trackForm: ControlGroup;
 
     constructor(private _trackService: TrackService, private _weatherService: WeatherService, private _elRef: ElementRef,
-        fb: FormBuilder)
+         private _acService: AircraftService, private fb: FormBuilder)
         {
             this.tr = new TrackComponent();
             this.tracks = new Array();
@@ -55,6 +58,10 @@ export class TrackData implements OnInit {
             windDetails => {
                 this.UpdateWeather(windDetails);
             });
+        this._acService.aircraftDetailsChange$.subscribe(
+            acDetails => {
+                this.UpdateAircraft(acDetails);
+            });
         this.loadTracks();
     }
 
@@ -64,6 +71,10 @@ export class TrackData implements OnInit {
 
     UpdateTracks(theTracks: TrackComponent[]) {
         this.tracks = theTracks;
+    }
+
+    UpdateAircraft(theAircraft: Aircraft) {
+        this.currAircraft = theAircraft;
     }
 
     UpdateWeather(theWinds: WindDetails[]) {
@@ -85,7 +96,6 @@ export class TrackData implements OnInit {
         // reset the initial values for the input box
         this.aHeading = null;
         this.aDistance = null;
-        this.aTas = null;
     }
 
     onRemove(aTrack) {

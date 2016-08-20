@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var validator_1 = require('./validator');
 var common_1 = require('@angular/common');
 var Wind = (function () {
     function Wind(id, speed, altitude, direction) {
@@ -21,7 +22,8 @@ var Wind = (function () {
 }());
 exports.Wind = Wind;
 var Lesson07 = (function () {
-    function Lesson07() {
+    function Lesson07(fb, _elRef) {
+        this._elRef = _elRef;
         this.model = new Wind(1, 120, 'A050', 270);
         this.submitted = false;
         this.altList = new Array();
@@ -32,6 +34,11 @@ var Lesson07 = (function () {
         this.altList.push('A060');
         this.altList.push('A070');
         this.altList.push('A080');
+        this.windForm = fb.group({
+            "windSpeed": new common_1.Control(this.wnd.speed, common_1.Validators.compose([common_1.Validators.required, validator_1.SpeedValidator.validSpeed])),
+            "windDirection": new common_1.Control(this.wnd.direction, common_1.Validators.required),
+            "windAltitude": new common_1.Control(this.wnd.altitude, common_1.Validators.required)
+        });
     }
     Lesson07.prototype.onSubmit = function () {
         if (this.altControl.valid == false)
@@ -49,7 +56,7 @@ var Lesson07 = (function () {
             templateUrl: './views/validation.html',
             directives: [common_1.FORM_DIRECTIVES]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [common_1.FormBuilder, core_1.ElementRef])
     ], Lesson07);
     return Lesson07;
 }());

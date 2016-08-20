@@ -1,5 +1,7 @@
-﻿import {Component, Input} from '@angular/core';
-import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup} from '@angular/common';
+﻿import {Component,ElementRef, Input} from '@angular/core';
+import {SpeedValidator} from './validator';
+import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, FormBuilder, ControlGroup, Validators} from '@angular/common';
+
 
 export class Wind {
     constructor(
@@ -9,8 +11,6 @@ export class Wind {
         public direction: number
     ) { }
 }
-
-
 
 @Component({
     selector: 'lesson-07',
@@ -25,7 +25,10 @@ export class Lesson07 {
     dirControl: NgControl;
     spdControl: NgControl;
 
-    constructor() {
+    windForm: ControlGroup;
+    wnd: Wind;
+
+    constructor(fb: FormBuilder, private _elRef: ElementRef) {
 
         this.altList = new Array();
         this.altList.push('A020');
@@ -35,6 +38,12 @@ export class Lesson07 {
         this.altList.push('A060');
         this.altList.push('A070');
         this.altList.push('A080'); 
+
+        this.windForm = fb.group({
+            "windSpeed": new Control(this.wnd.speed, Validators.compose([Validators.required, SpeedValidator.validSpeed])),
+            "windDirection": new Control(this.wnd.direction, Validators.required),
+            "windAltitude": new Control(this.wnd.altitude, Validators.required)
+        });
     }
 
     onSubmit() {

@@ -1,27 +1,41 @@
-﻿<html>
-<head>
+﻿<head>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
     <base href="/Lesson10/" />
-    <title>Lesson 10</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../styles.css">
-    <script src="../node_modules/core-js/client/shim.min.js"></script>
-
-    <script src="../node_modules/zone.js/dist/zone.js"></script>
-    <script src="../node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="../node_modules/systemjs/dist/system.src.js"></script>
 </head>
-
 <body>
-    <script src="../systemjs.config.js"></script>
-    <script>
-              System.import('app').catch(function(err){ console.error(err); });
-    </script>
-    <lesson-10>Loading...</lesson-10>
-    <br /><br /><br /><br />
-    <h4><a href="../Index.html">Back to Main</a></h4>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6uNJRZKDeKJEypk4raRB67kcqACphlp0">
-    </script>
+    <div id="wrapper">
+        <div id="navbarwrapper">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Back To Main</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a routerLink="/FlightPlanning" routerLinkActive="active">Flight Planning</a></li>
+                    <li><a routerLink="/AircraftDetails" routerLinkActive="active">Aircraft Details</a></li>
+                    <li><a routerLink="/MapContainer" routerLinkActive="active">Map Details</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div id="ac-list" class="sidebar-nav">
+                <ac-list>
+                </ac-list>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
 </body>
-</html>
+
+

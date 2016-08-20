@@ -35,9 +35,11 @@ var FlightPlanningComponent = (function () {
         this._trackService.trackDetailsChange$.subscribe(function (tr) {
             _this.CalculateTrackChanges(tr);
         });
+        this.acFlightPlanSpeed = this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
     };
     FlightPlanningComponent.prototype.UpdateAircraft = function (theAircraft) {
         this.selectedAircraft = theAircraft;
+        this.acFlightPlanSpeed = theAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
     };
     FlightPlanningComponent.prototype.CalculateWindEffect = function (winds) {
         // update the calcTrack array

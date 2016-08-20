@@ -5,7 +5,7 @@ import { NgForm }    from '@angular/common';
 
 @Component({
     selector: 'lesson-04',
-    templateUrl: './views/templates.html'
+    templateUrl: './views/lesson04.html'
 })
 export class Lesson04 implements OnInit {
 

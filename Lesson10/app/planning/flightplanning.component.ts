@@ -2,7 +2,7 @@ import {TrackService, TrackComponent}   from '../services/track.service';
 import {WindData}  from './wind.component';
 import {WeatherService, WindDetails}  from '../services/weather.service';
 import {TrackData}  from './track.component';
-import {Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation, Inject}  from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter}  from '@angular/core';
 import {AircraftService}  from '../services/aircraft.service';
 import { Router} from '@angular/router';
 import {Aircraft, AircraftBrief} from '../data/aircraft.types';
@@ -15,6 +15,7 @@ import {Aircraft, AircraftBrief} from '../data/aircraft.types';
 export class FlightPlanningComponent implements OnInit {
 
     selectedAircraft: Aircraft;
+    acFlightPlanSpeed: number;
     windDirection: number;
     windSpeed: number;
    // calcTrack: TrackComponent[];
@@ -41,10 +42,12 @@ export class FlightPlanningComponent implements OnInit {
             tr => {
                 this.CalculateTrackChanges(tr);
             });
+        this.acFlightPlanSpeed = this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
     }
 
     UpdateAircraft(theAircraft: Aircraft) {
         this.selectedAircraft = theAircraft;
+        this.acFlightPlanSpeed = theAircraft.acSpeeds.find(x => x.name == "TAS").val;
     }
 
     CalculateWindEffect(winds: WindDetails[]) {

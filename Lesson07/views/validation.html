@@ -3,21 +3,18 @@
     <div>This example demonstrates the use of form-group and form-control in Angular2</div>
     <div>All fields are required. Try and click Submit with an empty input field</div>
     <br /><br />
-    <form class="form">
+    <form [ngFormModel]="windForm" class="form-inline">
         <div class="form-group" >
             <label for="spdControl">Windspeed</label>
-            <input type="text" class="form-control" required>
-        </div>
-        <div class="form-group" >
-            <label for="dirControl" >Direction</label>
-            <input type="text" class="form-control" required>
+            <input type="text" class="form-control" ngControl="windSpeed" required>
         </div>
         <div class="form-group">
+            <label for="dirControl" >Direction</label>
+            <input type="text" class="form-control"  ngControl="windDirection" required>
+        </div>
+        <div class="form-group" >
             <label for="altControl" >Altitude</label>
-            <input type="text" class="form-control" required>
-            <!--<select class="form-control" required>
-                <option *ngFor="let p of altList" [value]="p">{{p}}</option>
-            </select>-->
+            <input type="text" class="form-control" ngControl="windAltitude" required>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>

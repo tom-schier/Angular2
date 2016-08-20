@@ -7,7 +7,7 @@ import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     selector: 'alert-demo',
-    templateUrl: './views/boot-modal.htm',
+    templateUrl: './views/lesson08.htm',
     directives: [AlertComponent, CORE_DIRECTIVES]
 })
 export class Lesson08 {

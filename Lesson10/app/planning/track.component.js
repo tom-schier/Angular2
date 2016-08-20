@@ -10,14 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var weather_service_1 = require('../services/weather.service');
+var aircraft_service_1 = require('../services/aircraft.service');
 var common_1 = require('@angular/common');
 var track_service_1 = require('../services/track.service');
 var flightplanning_validators_1 = require('./flightplanning.validators');
 var TrackData = (function () {
-    function TrackData(_trackService, _weatherService, _elRef, fb) {
+    function TrackData(_trackService, _weatherService, _elRef, _acService, fb) {
         this._trackService = _trackService;
         this._weatherService = _weatherService;
         this._elRef = _elRef;
+        this._acService = _acService;
+        this.fb = fb;
         this.tr = new track_service_1.TrackComponent();
         this.tracks = new Array();
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
@@ -37,6 +40,9 @@ var TrackData = (function () {
         this._weatherService.windDetailsChange$.subscribe(function (windDetails) {
             _this.UpdateWeather(windDetails);
         });
+        this._acService.aircraftDetailsChange$.subscribe(function (acDetails) {
+            _this.UpdateAircraft(acDetails);
+        });
         this.loadTracks();
     };
     TrackData.prototype.loadTracks = function () {
@@ -44,6 +50,9 @@ var TrackData = (function () {
     };
     TrackData.prototype.UpdateTracks = function (theTracks) {
         this.tracks = theTracks;
+    };
+    TrackData.prototype.UpdateAircraft = function (theAircraft) {
+        this.currAircraft = theAircraft;
     };
     TrackData.prototype.UpdateWeather = function (theWinds) {
         this.selWindspeed = theWinds[0].windspeed;
@@ -61,7 +70,6 @@ var TrackData = (function () {
         // reset the initial values for the input box
         this.aHeading = null;
         this.aDistance = null;
-        this.aTas = null;
     };
     TrackData.prototype.onRemove = function (aTrack) {
         this._trackService.RemoveTrack(aTrack);
@@ -83,9 +91,10 @@ var TrackData = (function () {
     TrackData = __decorate([
         core_1.Component({
             selector: 'track-data',
-            templateUrl: './trackData.html'
+            templateUrl: './trackData.html',
+            providers: [common_1.FormBuilder]
         }), 
-        __metadata('design:paramtypes', [track_service_1.TrackService, weather_service_1.WeatherService, core_1.ElementRef, common_1.FormBuilder])
+        __metadata('design:paramtypes', [track_service_1.TrackService, weather_service_1.WeatherService, core_1.ElementRef, aircraft_service_1.AircraftService, common_1.FormBuilder])
     ], TrackData);
     return TrackData;
 }());

@@ -9,13 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
 var test_service_1 = require('./test.service');
 var ListB_1 = require('./ListB');
 var ListA_1 = require('./ListA');
 var Lesson05 = (function () {
-    function Lesson05(_router, _svc) {
-        this._router = _router;
+    function Lesson05(_svc) {
         this._svc = _svc;
         console.log('Creating Lesson05');
     }
@@ -37,10 +35,10 @@ var Lesson05 = (function () {
     Lesson05 = __decorate([
         core_1.Component({
             selector: 'lesson-05',
-            templateUrl: './views/testservice.html',
-            directives: [router_1.ROUTER_DIRECTIVES, ListA_1.ListA, ListB_1.ListB]
+            templateUrl: './views/lesson05.html',
+            directives: [ListA_1.ListA, ListB_1.ListB]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, test_service_1.TestService])
+        __metadata('design:paramtypes', [test_service_1.TestService])
     ], Lesson05);
     return Lesson05;
 }());

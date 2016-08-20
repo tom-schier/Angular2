@@ -18,6 +18,7 @@ var WindData = (function () {
     function WindData(_weatherService, _elRef, fb) {
         this._weatherService = _weatherService;
         this._elRef = _elRef;
+        this.fb = fb;
         this.wnd = new weather_service_1.WindDetails();
         this.windRows = new Array();
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
@@ -107,7 +108,8 @@ var WindData = (function () {
         core_1.Component({
             selector: 'wind-data',
             templateUrl: './windData.html',
-            directives: [common_1.FORM_DIRECTIVES]
+            directives: [common_1.FORM_DIRECTIVES],
+            providers: [common_1.FormBuilder]
         }), 
         __metadata('design:paramtypes', [weather_service_1.WeatherService, core_1.ElementRef, common_1.FormBuilder])
     ], WindData);

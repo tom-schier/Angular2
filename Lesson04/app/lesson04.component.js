@@ -39,7 +39,7 @@ var Lesson04 = (function () {
     Lesson04 = __decorate([
         core_1.Component({
             selector: 'lesson-04',
-            templateUrl: './views/templates.html'
+            templateUrl: './views/lesson04.html'
         }), 
         __metadata('design:paramtypes', [])
     ], Lesson04);

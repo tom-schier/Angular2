@@ -36,7 +36,7 @@ var Lesson08 = (function () {
     Lesson08 = __decorate([
         core_1.Component({
             selector: 'alert-demo',
-            templateUrl: './views/boot-modal.htm',
+            templateUrl: './views/lesson08.htm',
             directives: [ng2_bootstrap_1.AlertComponent, common_1.CORE_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])

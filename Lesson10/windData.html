@@ -14,7 +14,7 @@
                 <th>Altitude</th>
             </tr>
         </thead>
-        <tbody *ngFor="#wind of windRows; #i=index" class="xp-font-md" >
+        <tbody *ngFor="let wind of windRows; let i=index" class="xp-font-md" >
 
             <tr class="xp-font-md">
                 <td id="tdDirection">
@@ -38,7 +38,7 @@
     </table>
 </div>
 <div>
-    <form [ngFormModel]="windForm" class="form-inline">
+    <form [ngFormModel]="windForm" class="form-inline" name="windForm">
         <div>
             <div class="form-group">
                 <div >

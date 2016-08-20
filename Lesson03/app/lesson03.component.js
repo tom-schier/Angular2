@@ -61,7 +61,7 @@ var Lesson03 = (function () {
     Lesson03 = __decorate([
         core_1.Component({
             selector: 'lesson-03',
-            templateUrl: './views/iodemo.html'
+            templateUrl: './views/lesson03.html'
         }), 
         __metadata('design:paramtypes', [])
     ], Lesson03);

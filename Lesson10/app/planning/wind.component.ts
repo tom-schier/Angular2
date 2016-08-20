@@ -1,14 +1,15 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {WeatherService, WindDetails} from '../services/weather.service';
 import {SpeedValidator} from './flightplanning.validators';
-import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, FormBuilder, ControlGroup, Validators} from '@angular/common';
+import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 import {Subject} from 'rxjs/Subject';
 
 
 @Component({
     selector: 'wind-data',
     templateUrl: './windData.html',
-    directives: [FORM_DIRECTIVES]
+    directives: [FORM_DIRECTIVES],
+    providers: [FormBuilder]
 })
 export class WindData implements OnInit{
 
@@ -22,8 +23,7 @@ export class WindData implements OnInit{
     wnd: WindDetails;
     // WeatherService will be injected from the parent component. This is because it is not listed
     // as a provider in the @Component decorator
-    constructor(public _weatherService: WeatherService, private _elRef: ElementRef,
-        fb: FormBuilder) {
+    constructor(public _weatherService: WeatherService, private _elRef: ElementRef, private fb: FormBuilder) {
         this.wnd = new WindDetails();
         this.windRows = new Array();
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";

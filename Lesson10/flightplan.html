@@ -25,7 +25,7 @@
                     <th>Hdg</th>
                 </tr>
             </thead>
-            <tbody *ngFor="#tr of _trackService.tracks; #i=index" class="xp-font-md">
+            <tbody *ngFor="let tr of _trackService.tracks; let i=index" class="xp-font-md">
                 <tr class="xp-font-md">
                     <td id="tdWaypoint">
                         {{tr.fromLocation}}

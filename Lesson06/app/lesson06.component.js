@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Lesson06 = (function () {
-    //google: any;
     function Lesson06() {
         var _this = this;
         this.lat = -33.8688;
@@ -21,16 +20,23 @@ var Lesson06 = (function () {
         // good information regarding this can be fount here https://github.com/Microsoft/TypeScript/wiki/ 
         this.setMarker = function (results, status) {
             if (status === 'OK') {
+                _this.lat = results[0].geometry.location.lat();
                 _this.clearMarkers();
                 _this.map.setCenter(results[0].geometry.location);
                 _this.addMarker(results[0].geometry.location);
             }
-            else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
+        };
+        // Adds a marker to the map and push to the array. The parameter is expected to be a 
+        this.addMarker = function (location) {
+            var marker = new google.maps.Marker({
+                position: location,
+                map: _this.map
+            });
+            _this.markers.push(marker);
+            _this.lat = location.lat();
+            _this.lng = location.lng();
         };
         this.markers = new Array();
-        this.address = "Sydney, NSW";
     }
     Lesson06.prototype.ngOnInit = function () {
         this.initMap();
@@ -45,17 +51,6 @@ var Lesson06 = (function () {
     Lesson06.prototype.setMarkerForAddress = function () {
         // calls the geocode method in the Google API, specifies setMarker as the event handler
         this.geocoder.geocode({ 'address': this.address }, this.setMarker);
-    };
-    // Adds a marker to the map and push to the array. The parameter is expected to be a 
-    Lesson06.prototype.addMarker = function (location) {
-        var marker = new google.maps.Marker({
-            position: location,
-            map: this.map
-        });
-        this.markers.push(marker);
-        this.lat = location.lat();
-        this.lng = location.lng();
-        this.monkey = "monkey was here";
     };
     // Sets the map on all markers in the array.
     Lesson06.prototype.setMapOnAll = function (map) {

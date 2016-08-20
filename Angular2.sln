@@ -5,15 +5,16 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson10", "Lesson10", "{77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson10\app.html = Lesson10\app.html
 		Lesson10\googlemap.html = Lesson10\googlemap.html
-		Lesson10\Lesson10.html = Lesson10\Lesson10.html
+		Lesson10\lesson10.html = Lesson10\lesson10.html
+		Lesson10\main.html = Lesson10\main.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{69A5A29D-0454-4BC0-90FC-B235E67D3661}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson10\app\app.component.ts = Lesson10\app\app.component.ts
+		Lesson10\app\app.module.ts = Lesson10\app\app.module.ts
 		Lesson10\flightplan.html = Lesson10\flightplan.html
+		Lesson10\app\lesson10.component.ts = Lesson10\app\lesson10.component.ts
 		Lesson10\app\main.ts = Lesson10\app\main.ts
 	EndProjectSection
 EndProject
@@ -68,7 +69,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson04", "Lesson04", "{2A6898E5-4C05-4098-B8D5-EB8A78E2FE76}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson04\favicon.ico = Lesson04\favicon.ico
-		Lesson04\lesson04.html = Lesson04\lesson04.html
+		Lesson04\main.html = Lesson04\main.html
 		Lesson04\ReadMe.txt = Lesson04\ReadMe.txt
 		Lesson04\styles.css = Lesson04\styles.css
 	EndProjectSection
@@ -81,27 +82,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{5B113164-253
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{BD0A7700-BEEA-42E1-B93B-302AE972B81F}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson04\views\templates.html = Lesson04\views\templates.html
+		Lesson04\views\lesson04.html = Lesson04\views\lesson04.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson06", "Lesson06", "{AA36830E-A916-442F-8D2E-329C9086D704}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson06\favicon.ico = Lesson06\favicon.ico
-		Lesson06\lesson06.html = Lesson06\lesson06.html
 		Lesson06\lesson06B.html = Lesson06\lesson06B.html
+		Lesson06\main.html = Lesson06\main.html
 		Lesson06\ReadMe.txt = Lesson06\ReadMe.txt
 		Lesson06\styles.css = Lesson06\styles.css
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{38A0E7C5-3B16-48A6-B8FB-0F8B94F73B84}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson06\app\googlemaps.component.ts = Lesson06\app\googlemaps.component.ts
+		Lesson06\app\lesson06.component.ts = Lesson06\app\lesson06.component.ts
 		Lesson06\app\main.ts = Lesson06\app\main.ts
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{8D194FE4-132E-4940-87B3-24A300BBFCF6}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson06\views\googlemaps.html = Lesson06\views\googlemaps.html
+		Lesson06\views\lesson06.html = Lesson06\views\lesson06.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{65CCC39C-D4A6-482E-B923-76ECD192512A}"
@@ -116,7 +117,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson07", "Lesson07", "{336CA1C0-7D24-4A70-B2E5-55D59253D833}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson07\favicon.ico = Lesson07\favicon.ico
-		Lesson07\lesson07.html = Lesson07\lesson07.html
+		Lesson07\main.html = Lesson07\main.html
 		Lesson07\ReadMe.txt = Lesson07\ReadMe.txt
 		Lesson07\styles.css = Lesson07\styles.css
 	EndProjectSection
@@ -125,6 +126,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{844E8D44-961
 	ProjectSection(SolutionItems) = preProject
 		Lesson07\app\lesson07.component.ts = Lesson07\app\lesson07.component.ts
 		Lesson07\app\main.ts = Lesson07\app\main.ts
+		Lesson07\app\validator.ts = Lesson07\app\validator.ts
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{90F888A5-F5C3-4B7F-8854-C62470950F2A}"
@@ -140,7 +142,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson08", "Lesson08", "{9656DE7F-AACF-4B37-9AF4-3F072F50DC59}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson08\favicon.ico = Lesson08\favicon.ico
-		Lesson08\lesson08.html = Lesson08\lesson08.html
+		Lesson08\app\lesson08.component.ts = Lesson08\app\lesson08.component.ts
+		Lesson08\main.html = Lesson08\main.html
 		Lesson08\ReadMe.txt = Lesson08\ReadMe.txt
 		Lesson08\styles.css = Lesson08\styles.css
 	EndProjectSection
@@ -154,7 +157,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson01", "Lesson01", "{DBE6A28D-F3C4-4B7D-9C6A-68C67B45B522}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson01\favicon.ico = Lesson01\favicon.ico
-		Lesson01\lesson01.html = Lesson01\lesson01.html
+		Lesson01\main.html = Lesson01\main.html
 		Lesson01\ReadMe.txt = Lesson01\ReadMe.txt
 		Lesson01\styles.css = Lesson01\styles.css
 	EndProjectSection
@@ -162,8 +165,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson02", "Lesson02", "{58B64CEE-94B1-4107-9920-CCD464C899EE}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson02\favicon.ico = Lesson02\favicon.ico
-		Lesson02\index.html = Lesson02\index.html
-		Lesson02\lesson02.html = Lesson02\lesson02.html
+		Lesson02\main.html = Lesson02\main.html
 		Lesson02\ReadMe.txt = Lesson02\ReadMe.txt
 		Lesson02\styles.css = Lesson02\styles.css
 	EndProjectSection
@@ -171,7 +173,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson03", "Lesson03", "{681DA6AC-8002-47DA-A92F-450226A9DD5A}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson03\favicon.ico = Lesson03\favicon.ico
-		Lesson03\lesson03.html = Lesson03\lesson03.html
+		Lesson03\main.html = Lesson03\main.html
 		Lesson03\ReadMe.txt = Lesson03\ReadMe.txt
 		Lesson03\styles.css = Lesson03\styles.css
 	EndProjectSection
@@ -199,18 +201,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{8002D48A-776
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{D004DF79-7BA9-4EBF-817A-D59BBE984A21}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson03\views\iodemo.html = Lesson03\views\iodemo.html
+		Lesson03\views\lesson03.html = Lesson03\views\lesson03.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{7203C86D-2155-448D-937E-1C3DB2F2FBA7}"
 	ProjectSection(SolutionItems) = preProject
-		Lesson08\views\boot-modal.html = Lesson08\views\boot-modal.html
+		Lesson08\views\lesson08.html = Lesson08\views\lesson08.html
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson05", "Lesson05", "{B7953D77-5FAD-4E04-8F4A-AF910CFE7137}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson05\favicon.ico = Lesson05\favicon.ico
-		Lesson05\lesson05.html = Lesson05\lesson05.html
+		Lesson05\main.html = Lesson05\main.html
 		Lesson05\ReadMe.txt = Lesson05\ReadMe.txt
 		Lesson05\styles.css = Lesson05\styles.css
 	EndProjectSection
@@ -227,9 +229,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{CF8A106D-E95
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{ADAAF626-27E9-49A1-8594-0FB42005AAA7}"
 	ProjectSection(SolutionItems) = preProject
+		Lesson05\views\lesson05.html = Lesson05\views\lesson05.html
 		Lesson05\views\ListA.html = Lesson05\views\ListA.html
 		Lesson05\views\ListB.html = Lesson05\views\ListB.html
-		Lesson05\views\testservice.html = Lesson05\views\testservice.html
 	EndProjectSection
 EndProject
 Global
