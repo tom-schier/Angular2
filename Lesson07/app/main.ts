@@ -1,19 +1,4 @@
-import {bootstrap}    from '@angular/platform-browser-dynamic';
-import {Lesson07} from './lesson07.component';
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Lesson07Module }              from './app.module';
 
-@NgModule({
-    imports: [
-        BrowserModule,
-        FormsModule
-    ],
-    declarations: [
-        Lesson07
-    ],
-    bootstrap: [Lesson07]
-})
-export class AppModule { }
-
-//bootstrap(Lesson07);
+platformBrowserDynamic().bootstrapModule(Lesson07Module);

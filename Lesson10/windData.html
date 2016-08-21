@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/lib/font-awesome-4.6.3/css/font-awesome.css" />
 </head>
 <!--<div id="wndEntryDetails" class="container-fluid">-->
-<div>
+<div class="container-fluid row">
     <h4>Wind Data</h4>
     <table id="windTable" class="table table-striped table-condensed ">
         <thead>
@@ -14,22 +14,21 @@
                 <th>Altitude</th>
             </tr>
         </thead>
-        <tbody *ngFor="let wind of windRows; let i=index" class="xp-font-md" >
+        <tbody *ngFor="let wind of windRows; let i=index">
 
-            <tr class="xp-font-md">
-                <td id="tdDirection">
+            <tr>
+                <td id="tdDirection" class="col-md-3">
                     {{wind.direction}}
                     <!--<input type="text" class="form-control input-sm" style="width:130px" [readonly]="wnd.isReadOnly" value="{{wnd.direction}}" />-->
                 </td>
-                <td id="tdSpeed">
+                <td id="tdSpeed" class="col-md-3">
                     {{wind.windspeed}}
                     <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
                 </td>
-                <td id="tdAltitude">
+                <td id="tdAltitude" class="col-md-3">
                     {{wind.altitude}}
                     <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
                 </td>
-
                 <td>
                     <i class="fa fa-trash xp-form-button" (click)="onRemove(wind)"></i>
                 </td>
@@ -37,8 +36,83 @@
         </tbody>
     </table>
 </div>
-<div>
-    <form [ngFormModel]="windForm" class="form-inline" name="windForm">
+<div class="container-fluid row">
+    <form *ngIf="active" (ngSubmit)="onAdd()" #windForm="ngForm" class="form-inline">
+        <div class="form-group">
+            <!--<label for="waypoint">Direction</label>-->
+            <div>
+                <input type="text" class="form-control" id="direction" placeholder="Enter direction [0-360]"                                      
+                       required
+                       data-toggle="tooltip"
+                       data-placement="bootom"
+                       title="Wind direction in degrees. Must be between 0 and 360"
+                       [(ngModel)]="model.direction" name="direction"
+                       style="width:170px"
+                       #direction="ngModel">
+                <!--<div [hidden]="direction.valid || direction.pristine"
+             class="alert alert-danger">
+            Wind direction is required
+        </div>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <!--<label for="speed">Speed</label>-->
+            <div>
+                <input type="text" class="form-control" id="windspeed" placeholder="Enter wind speed [kts]"
+                       required
+                       data-toggle="tooltip"
+                       data-placement="bootom"
+                       style="width:170px"
+                       title="Wind speed in knots. Must be between 0 and 300"
+                       [(ngModel)]="model.windspeed" name="speed"
+                       #speed="ngModel">
+                <!--<div [hidden]="speed.valid || speed.pristine"
+             class="alert alert-danger">
+            Wind speed is required
+        </div>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <!--<label for="altitude">Altitude</label>-->
+            <div>
+                <select class="form-control" id="altitude"
+                        required
+                        data-toggle="tooltip"
+                        data-placement="bootom"
+                        title="Wind altitude in feet. Select from standard met altitudes"
+                        [(ngModel)]="model.altitude" name="altitude"
+                        #altitude="ngModel">
+                    <option *ngFor="let p of altList" [value]="p">{{p}}</option>
+                </select>
+                <!--<div [hidden]="altitude.valid || altitude.pristine" class="alert alert-danger">
+            Altitude is required
+        </div>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-plus-square xp-form-button"></i>
+            </button>
+        </div>
+        <!--<div [hidden]="direction.valid || direction.pristine"
+             class="alert alert-danger">
+            Wind direction is required
+        </div>
+        <div [hidden]="speed.valid || speed.pristine"
+             class="alert alert-danger">
+            Wind speed is required
+        </div>
+        <div [hidden]="altitude.valid || altitude.pristine" class="alert alert-danger">
+            Altitude is required
+        </div>-->
+    </form>
+
+
+
+
+
+
+    <!--<form [ngFormModel]="windForm" class="form-inline" name="windForm">
         <div>
             <div class="form-group">
                 <div >
@@ -66,11 +140,10 @@
                 </select>
             </div>
             <div class="form-group">
-                <!--<button type="submit" class="btn btn-success xp-form-button" (click)="onAdd(wnd)">-->
+                <button type="submit" class="btn btn-success xp-form-button" (click)="onAdd(wnd)">
                     <i class="fa fa-plus-square xp-form-button" (click)="onAdd(wnd)"></i>
-                <!--</button>-->
+                </button>
             </div>
         </div>
-
-    </form>
+    </form>-->
 </div>

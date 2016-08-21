@@ -1,0 +1,60 @@
+﻿<div class="container">
+    <h1>Validation Form</h1>
+    <div>This example demonstrates the use of form-group and form-control in Angular2</div>
+    <div>All fields are required. Try and click Submit with an empty input field</div>
+    <br /><br />
+    <div [hidden]="submitted">
+        <h1>Wind Form</h1>
+        <!-- The windForm variable is declared here as a ngForm. This will be used below for validation-->
+        <form *ngIf="active" (ngSubmit)="onSubmit()" #windForm="ngForm">
+            <div class="form-group">
+                <label for="speed">Windspeed</label>
+                <input type="text" class="form-control" id="speed"
+                       required
+                       [(ngModel)]="model.speed" name="speed"
+                       #speed="ngModel">
+                <div [hidden]="speed.valid || speed.pristine"
+                     class="alert alert-danger">
+                    Speed is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="alterEgo">Wind direction</label>
+                <input type="text" class="form-control" id="direction"
+                       [(ngModel)]="model.direction" name="alterEgo" #direction="ngModel">
+            </div>
+            <div class="form-group">
+                <label for="altitude">Altitude</label>
+                <select class="form-control" id="altitude"
+                        required
+                        [(ngModel)]="model.altitude" name="altitude"
+                        #altitude="ngModel">
+                    <option *ngFor="let p of altList" [value]="p">{{p}}</option>
+                </select>
+                <div [hidden]="altitude.valid || altitude.pristine" class="alert alert-danger">
+                    Altitude is required
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default" [disabled]="!windForm.form.valid">Submit</button>
+            <button type="button" class="btn btn-default" (click)="newWind()">New Wind</button>
+        </form>
+    </div>
+    <div [hidden]="!submitted">
+        <h2>You submitted the following:</h2>
+        <div class="row">
+            <div class="col-xs-3">Windspeed</div>
+            <div class="col-xs-9  pull-left">{{ model.speed }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Direction</div>
+            <div class="col-xs-9 pull-left">{{ model.direction }}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">Altitude</div>
+            <div class="col-xs-9 pull-left">{{ model.altitude }}</div>
+        </div>
+        <br>
+        <button class="btn btn-default" (click)="submitted=false">Edit</button>
+    </div>
+</div>
+

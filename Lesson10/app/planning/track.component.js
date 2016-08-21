@@ -11,26 +11,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var weather_service_1 = require('../services/weather.service');
 var aircraft_service_1 = require('../services/aircraft.service');
-var common_1 = require('@angular/common');
+//import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 var track_service_1 = require('../services/track.service');
-var flightplanning_validators_1 = require('./flightplanning.validators');
 var TrackData = (function () {
-    function TrackData(_trackService, _weatherService, _elRef, _acService, fb) {
+    function TrackData(_trackService, _weatherService, _elRef, _acService) {
         this._trackService = _trackService;
         this._weatherService = _weatherService;
         this._elRef = _elRef;
         this._acService = _acService;
-        this.fb = fb;
+        this.submitted = false;
+        this.active = true;
         this.tr = new track_service_1.TrackComponent();
+        this.model = new track_service_1.TrackComponent();
+        //this.model.altitude = "A020";
+        //this.model.fromLocation = "Monkey shit";
         this.tracks = new Array();
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
         this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
         this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
-        this.trackForm = fb.group({
-            "trackSpeed": new common_1.Control(this.tr.tas, common_1.Validators.compose([common_1.Validators.required, flightplanning_validators_1.SpeedValidator.validSpeed])),
-            "trackWaypoint": new common_1.Control(this.tr.fromLocation, common_1.Validators.required),
-            "trackAltitude": new common_1.Control(this.tr.altitude, common_1.Validators.required)
-        });
+        this.altList = new Array();
+        this.altList.push('A020');
+        this.altList.push('A030');
+        this.altList.push('A040');
+        this.altList.push('A050');
+        this.altList.push('A060');
+        this.altList.push('A070');
+        this.altList.push('A080');
     }
     TrackData.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,6 +50,7 @@ var TrackData = (function () {
             _this.UpdateAircraft(acDetails);
         });
         this.loadTracks();
+        this.currAircraft = this._acService.currentAircraft;
     };
     TrackData.prototype.loadTracks = function () {
         this.tracks = this._trackService.tracks;
@@ -57,19 +64,22 @@ var TrackData = (function () {
     TrackData.prototype.UpdateWeather = function (theWinds) {
         this.selWindspeed = theWinds[0].windspeed;
     };
-    TrackData.prototype.onAdd = function (aTrack) {
-        //var newTrack = new TrackComponent();
-        //newTrack.headingTrue = heading;
-        //newTrack.distance = distance;
-        //newTrack.tas = tas;
+    TrackData.prototype.onSubmit = function () {
+        this.submitted = true;
+    };
+    TrackData.prototype.onAdd = function () {
+        var newTrack = new track_service_1.TrackComponent();
+        newTrack.fromLocation = this.model.fromLocation;
+        newTrack.altitude = this.model.altitude;
+        newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
         //newTrack.isReadOnly = true;
         //aTrack.btnEditClass = this.stBtnEditDefaultClass;
         //aTrack.btnRemoveClass = this.stBtnRemoveClass;
         // also add the wind to the service
-        this._trackService.AddTrack(aTrack);
+        this._trackService.AddTrack(newTrack);
         // reset the initial values for the input box
-        this.aHeading = null;
-        this.aDistance = null;
+        //this.aHeading = null;
+        //this.aDistance = null;
     };
     TrackData.prototype.onRemove = function (aTrack) {
         this._trackService.RemoveTrack(aTrack);
@@ -91,10 +101,9 @@ var TrackData = (function () {
     TrackData = __decorate([
         core_1.Component({
             selector: 'track-data',
-            templateUrl: './trackData.html',
-            providers: [common_1.FormBuilder]
+            templateUrl: './trackData.html'
         }), 
-        __metadata('design:paramtypes', [track_service_1.TrackService, weather_service_1.WeatherService, core_1.ElementRef, aircraft_service_1.AircraftService, common_1.FormBuilder])
+        __metadata('design:paramtypes', [track_service_1.TrackService, weather_service_1.WeatherService, core_1.ElementRef, aircraft_service_1.AircraftService])
     ], TrackData);
     return TrackData;
 }());

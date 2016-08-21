@@ -9,8 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var validator_1 = require('./validator');
-var common_1 = require('@angular/common');
 var Wind = (function () {
     function Wind(id, speed, altitude, direction) {
         this.id = id;
@@ -21,11 +19,15 @@ var Wind = (function () {
     return Wind;
 }());
 exports.Wind = Wind;
+;
 var Lesson07 = (function () {
-    function Lesson07(fb, _elRef) {
-        this._elRef = _elRef;
-        this.model = new Wind(1, 120, 'A050', 270);
+    function Lesson07() {
         this.submitted = false;
+        // Reset the form with a new hero AND restore 'pristine' class state
+        // by toggling 'active' flag which causes the form
+        // to be removed/re-added in a tick via NgIf
+        // TODO: Workaround until NgForm has a reset method (#6822)
+        this.active = true;
         this.altList = new Array();
         this.altList.push('A020');
         this.altList.push('A030');
@@ -34,29 +36,25 @@ var Lesson07 = (function () {
         this.altList.push('A060');
         this.altList.push('A070');
         this.altList.push('A080');
-        this.windForm = fb.group({
-            "windSpeed": new common_1.Control(this.wnd.speed, common_1.Validators.compose([common_1.Validators.required, validator_1.SpeedValidator.validSpeed])),
-            "windDirection": new common_1.Control(this.wnd.direction, common_1.Validators.required),
-            "windAltitude": new common_1.Control(this.wnd.altitude, common_1.Validators.required)
-        });
     }
+    Lesson07.prototype.ngOnInit = function () {
+        this.model = new Wind(0, 0, this.altList[0], 0);
+    };
     Lesson07.prototype.onSubmit = function () {
-        if (this.altControl.valid == false)
-            alert("OOBA");
         this.submitted = true;
     };
-    Object.defineProperty(Lesson07.prototype, "diagnostic", {
-        get: function () { return JSON.stringify(this.model); },
-        enumerable: true,
-        configurable: true
-    });
+    Lesson07.prototype.newWind = function () {
+        var _this = this;
+        this.model = new Wind(0, 0, this.altList[0], 0);
+        this.active = false;
+        setTimeout(function () { return _this.active = true; }, 0);
+    };
     Lesson07 = __decorate([
         core_1.Component({
             selector: 'lesson-07',
-            templateUrl: './views/validation.html',
-            directives: [common_1.FORM_DIRECTIVES]
+            templateUrl: './views/lesson07.html'
         }), 
-        __metadata('design:paramtypes', [common_1.FormBuilder, core_1.ElementRef])
+        __metadata('design:paramtypes', [])
     ], Lesson07);
     return Lesson07;
 }());

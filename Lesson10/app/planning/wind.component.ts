@@ -1,43 +1,49 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {WeatherService, WindDetails} from '../services/weather.service';
 import {SpeedValidator} from './flightplanning.validators';
-import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
+//import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 import {Subject} from 'rxjs/Subject';
 
 
 @Component({
     selector: 'wind-data',
-    templateUrl: './windData.html',
-    directives: [FORM_DIRECTIVES],
-    providers: [FormBuilder]
+    templateUrl: './windData.html'
 })
 export class WindData implements OnInit{
 
     windRows: WindDetails[];
-
+    altList: string[];
+    model: WindDetails;
     private stBtnEditDefaultClass : string;
     private stBtnEditSaveClass: string;
     private stBtnRemoveClass: string;
 
-    windForm: ControlGroup;
+    active = true;
+
+    //windForm: ControlGroup;
     wnd: WindDetails;
     // WeatherService will be injected from the parent component. This is because it is not listed
     // as a provider in the @Component decorator
-    constructor(public _weatherService: WeatherService, private _elRef: ElementRef, private fb: FormBuilder) {
+    constructor(public _weatherService: WeatherService, private _elRef: ElementRef) {
         this.wnd = new WindDetails();
         this.windRows = new Array();
+        this.altList = new Array();
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
         this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
         this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
+        this.altList = new Array();
+        this.altList.push('A020');
+        this.altList.push('A030');
+        this.altList.push('A040');
+        this.altList.push('A050');
+        this.altList.push('A060');
+        this.altList.push('A070');
+        this.altList.push('A080');
 
-        this.windForm = fb.group({
-            "windSpeed": new Control(this.wnd.windspeed, Validators.compose([Validators.required, SpeedValidator.validSpeed])),
-            "windDirection": new Control(this.wnd.direction, Validators.required),
-            "windAltitude": new Control(this.wnd.altitude, Validators.required)
-        });
     }
 
     ngOnInit() {
+        this.model = new WindDetails();
         this._weatherService.windDetailsChange$.subscribe(
             wnd => {
                 this.UpdateWinds(wnd);
@@ -53,13 +59,13 @@ export class WindData implements OnInit{
         this.loadWinds();
     }
 
-    onAdd(wnd: WindDetails) { 
+    onAdd() { 
 
-        if (this.windForm.valid) {
+      //  if (this.windForm.valid) {
             var newWind = new WindDetails();
-            newWind.altitude = wnd.altitude;
-            newWind.direction = wnd.direction;
-            newWind.windspeed = wnd.windspeed;
+            newWind.altitude = this.model.altitude;
+            newWind.direction = this.model.direction;
+            newWind.windspeed = this.model.windspeed;
             newWind.isReadOnly = true;
             newWind.btnEditClass = this.stBtnEditDefaultClass;
             newWind.btnRemoveClass = this.stBtnRemoveClass;
@@ -69,10 +75,10 @@ export class WindData implements OnInit{
             this.wnd.altitude = null;
             this.wnd.windspeed = null;
             this.wnd.direction = null;
-        }
-        else {
-            alert('form is not valid!');
-        }
+        //}
+        //else {
+        //    alert('form is not valid!');
+        //}
     }
 
     onRemove(aWind) {

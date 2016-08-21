@@ -2,7 +2,7 @@ import {Component, OnInit, ElementRef} from '@angular/core';
 import {WeatherService, WindDetails} from '../services/weather.service';
 import {AircraftService} from '../services/aircraft.service';
 import {AircraftSpeed, AircraftWeight, Aircraft} from '../data/aircraft.types';
-import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
+//import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 import {TrackComponent, TrackService} from '../services/track.service';
 import {SpeedValidator} from './flightplanning.validators';
 
@@ -10,15 +10,14 @@ import {SpeedValidator} from './flightplanning.validators';
 
 @Component({
     selector: 'track-data',
-    templateUrl: './trackData.html',
-    providers: [FormBuilder]
+    templateUrl: './trackData.html'
 })
 export class TrackData implements OnInit {
 
     aHeading: number;
     aDistance: number;
     aTas: number;
-
+    model: TrackComponent;
     selWindspeed: number;
     selDirection: number;
     selAltitude: number;
@@ -27,29 +26,40 @@ export class TrackData implements OnInit {
     currAircraft: Aircraft;
     tracks: TrackComponent[];
     tr: TrackComponent;
+    altList: string[];
+    submitted = false;
 
     private stBtnEditDefaultClass: string;
     private stBtnEditSaveClass: string;
     private stBtnRemoveClass: string;
-    trackForm: ControlGroup;
+
+    
 
     constructor(private _trackService: TrackService, private _weatherService: WeatherService, private _elRef: ElementRef,
-         private _acService: AircraftService, private fb: FormBuilder)
+         private _acService: AircraftService)
         {
-            this.tr = new TrackComponent();
+            this.tr = new TrackComponent();            
+            this.model = new TrackComponent();
+            //this.model.altitude = "A020";
+            //this.model.fromLocation = "Monkey shit";
             this.tracks = new Array();
             this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
             this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
             this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
 
-            this.trackForm = fb.group({
-                "trackSpeed": new Control(this.tr.tas, Validators.compose([Validators.required, SpeedValidator.validSpeed])),
-                "trackWaypoint": new Control(this.tr.fromLocation, Validators.required),
-                "trackAltitude": new Control(this.tr.altitude, Validators.required)
-            });
+            this.altList = new Array();
+            this.altList.push('A020');
+            this.altList.push('A030');
+            this.altList.push('A040');
+            this.altList.push('A050');
+            this.altList.push('A060');
+            this.altList.push('A070');
+            this.altList.push('A080');
+
     }
 
     ngOnInit() {
+        
         this._trackService.trackDetailsChange$.subscribe(
             trackDetails => {
                 this.UpdateTracks(trackDetails);
@@ -63,6 +73,7 @@ export class TrackData implements OnInit {
                 this.UpdateAircraft(acDetails);
             });
         this.loadTracks();
+        this.currAircraft = this._acService.currentAircraft;
     }
 
     loadTracks() {
@@ -81,21 +92,27 @@ export class TrackData implements OnInit {
         this.selWindspeed = theWinds[0].windspeed;
     }
 
-    onAdd(aTrack: TrackComponent) {
 
-        //var newTrack = new TrackComponent();
-        //newTrack.headingTrue = heading;
-        //newTrack.distance = distance;
-        //newTrack.tas = tas;
+    onSubmit() {
+        this.submitted = true;
+    }
+    active = true;
+
+    onAdd() {
+
+        var newTrack = new TrackComponent();
+        newTrack.fromLocation = this.model.fromLocation;
+        newTrack.altitude = this.model.altitude;
+        newTrack.tas = this.currAircraft.acSpeeds.find(x => x.name == "TAS").val;
         //newTrack.isReadOnly = true;
         
         //aTrack.btnEditClass = this.stBtnEditDefaultClass;
         //aTrack.btnRemoveClass = this.stBtnRemoveClass;
         // also add the wind to the service
-        this._trackService.AddTrack(aTrack);
+        this._trackService.AddTrack(newTrack);
         // reset the initial values for the input box
-        this.aHeading = null;
-        this.aDistance = null;
+        //this.aHeading = null;
+        //this.aDistance = null;
     }
 
     onRemove(aTrack) {

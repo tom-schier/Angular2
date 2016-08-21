@@ -1,6 +1,6 @@
 ﻿<head>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
-    <base href="/Lesson10/" />
+    
 </head>
 <body>
     <div id="wrapper">
@@ -10,9 +10,9 @@
                     <a class="navbar-brand" href="#">Back To Main</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a routerLink="/FlightPlanning" routerLinkActive="active">Flight Planning</a></li>
-                    <li><a routerLink="/AircraftDetails" routerLinkActive="active">Aircraft Details</a></li>
-                    <li><a routerLink="/MapContainer" routerLinkActive="active">Map Details</a></li>
+                    <li><a [routerLink]="['FlightPlanning']" routerLinkActive="active">Flight Planning</a></li>
+                    <li><a [routerLink]="['AircraftDetails']" routerLinkActive="active">Aircraft Details</a></li>
+                    <li><a [routerLink]="['MapContainer']" routerLinkActive="active">Map Details</a></li>
                 </ul>
             </div>
         </div>
