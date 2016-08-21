@@ -7,11 +7,11 @@
             <div id="map"></div>
         </div>
         <div class="container col-md-4">
-            <h2>Event Details</h2>
-            <button (click)="setMarkerForAddress()">Get Next Event</button>
-            <input type="text" [(ngModel)]="address" value="{{address}}"/><br />
-            <input type="text" [(ngModel)]="lat" value="{{lat}}"/>
-            <input type="text" [(ngModel)]="lng" value="{{lng}}"/>
+            <h2>Location Details</h2>            
+            <button (click)="setMarkerForAddress()">Get Location</button><br>
+            <span>Enter location name: <input type="text" [(ngModel)]="address" value="{{address}}" /><br /></span>
+            <span>Latitude: <input type="text" [(ngModel)]="lat" value="{{lat}}" readonly /></span>
+            <span>Longitude: <input type="text" [(ngModel)]="lng" value="{{lng}}" readonly /></span>
         </div>
     </div>
 </body>

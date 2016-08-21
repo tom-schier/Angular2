@@ -3,7 +3,6 @@
     <link rel="stylesheet" href="./styles/lesson10.styles.css" />
     <link rel="stylesheet" href="/lib/font-awesome-4.6.3/css/font-awesome.css" />
 </head>
-<!--<div id="wndEntryDetails" class="container-fluid">-->
 <div class="container-fluid row">
     <h4>Track Data</h4>
     <table id="trackTable" class="table table-striped table-condensed ">
@@ -18,11 +17,9 @@
             <tr>
                 <td id="tdWaypoint" class="col-md-3">
                     {{track.fromLocation}}
-                    <!--<input type="text" class="form-control input-sm" style="width:130px" [readonly]="wnd.isReadOnly" value="{{wnd.direction}}" />-->
                 </td>
                 <td id="tdAltitude" class="col-md-3">
                     {{track.altitude}}
-                    <!--<input type="text" class="form-control input-sm" style="width:130px"  [readonly]="wnd.isReadOnly" value="{{wnd.windspeed}}" />-->
                 </td>
                 <td>
                     <i class="fa fa-trash xp-form-button" (click)="onRemove(wind)"></i>
@@ -34,7 +31,6 @@
 <div class="container-fluid row">
     <form *ngIf="active" (ngSubmit)="onAdd()" #windForm="ngForm" class="form-inline">
         <div class="form-group">
-            <!--<label for="waypoint">Direction</label>-->
             <div>
                 <input type="text" class="form-control" id="waypoint" placeholder="Enter waypoint code"
                        required
@@ -44,14 +40,9 @@
                        [(ngModel)]="model.fromLocation" name="fromLocation"
                        style="width:170px"
                        #fromLocation="ngModel">
-                <!--<div [hidden]="direction.valid || direction.pristine"
-                     class="alert alert-danger">
-                    Wind direction is required
-                </div>-->
             </div>
         </div>
         <div class="form-group">
-            <!--<label for="altitude">Altitude</label>-->
             <div>
                 <select class="form-control" id="altitude"
                         required
@@ -62,9 +53,6 @@
                         #altitude="ngModel">
                     <option *ngFor="let p of altList" [value]="p">{{p}}</option>
                 </select>
-                <!--<div [hidden]="altitude.valid || altitude.pristine" class="alert alert-danger">
-                    Altitude is required
-                </div>-->
             </div>
         </div>
         <div class="form-group">
@@ -84,44 +72,4 @@
             Altitude is required
         </div>-->
     </form>
-
-
-
-
-
-
-    <!--<form [ngFormModel]="windForm" class="form-inline" name="windForm">
-        <div>
-            <div class="form-group">
-                <div >
-                    <input type="text" data-toggle="tooltip" title="Use 3 digit format, eg 270 " ngControl="windDirection" class="form-control xp-form-input" [(ngModel)]="wnd.direction" placeholder="Enter direction (T)" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div >
-                    <input type="text" data-toggle="tooltip" title="Use format Nxxx, eg N120"  ngControl="windSpeed"  class="form-control xp-form-input"  [(ngModel)]="wnd.windspeed" placeholder="Enter speed [kts]" />
-                </div>
-            </div>
-            <div class="form-group">
-                <select  ngControl="windAltitude" class="form-control xp-form-input" [(ngModel)]="wnd.altitude" placeholder="Select altitude [ft]">
-                    <option>A020</option>
-                    <option>A030</option>
-                    <option>A040</option>
-                    <option>A050</option>
-                    <option>A060</option>
-                    <option>A070</option>
-                    <option>A080</option>
-                    <option>A090</option>
-                    <option>FL010</option>
-                    <option>FL011</option>
-                    <option>FL012</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success xp-form-button" (click)="onAdd(wnd)">
-                    <i class="fa fa-plus-square xp-form-button" (click)="onAdd(wnd)"></i>
-                </button>
-            </div>
-        </div>
-    </form>-->
 </div>
