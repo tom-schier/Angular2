@@ -1,7 +1,6 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {WeatherService, WindDetails} from '../services/weather.service';
 import {SpeedValidator} from './flightplanning.validators';
-//import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 import {Subject} from 'rxjs/Subject';
 
 
@@ -20,7 +19,6 @@ export class WindData implements OnInit{
 
     active = true;
 
-    //windForm: ControlGroup;
     wnd: WindDetails;
     // WeatherService will be injected from the parent component. This is because it is not listed
     // as a provider in the @Component decorator
@@ -60,8 +58,6 @@ export class WindData implements OnInit{
     }
 
     onAdd() { 
-
-      //  if (this.windForm.valid) {
             var newWind = new WindDetails();
             newWind.altitude = this.model.altitude;
             newWind.direction = this.model.direction;
@@ -69,16 +65,8 @@ export class WindData implements OnInit{
             newWind.isReadOnly = true;
             newWind.btnEditClass = this.stBtnEditDefaultClass;
             newWind.btnRemoveClass = this.stBtnRemoveClass;
-            // also add the wind to the service
+ 
             this._weatherService.AddWind(newWind);
-
-            this.wnd.altitude = null;
-            this.wnd.windspeed = null;
-            this.wnd.direction = null;
-        //}
-        //else {
-        //    alert('form is not valid!');
-        //}
     }
 
     onRemove(aWind) {

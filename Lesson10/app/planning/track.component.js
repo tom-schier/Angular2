@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var weather_service_1 = require('../services/weather.service');
 var aircraft_service_1 = require('../services/aircraft.service');
-//import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 var track_service_1 = require('../services/track.service');
 var TrackData = (function () {
     function TrackData(_trackService, _weatherService, _elRef, _acService) {
@@ -23,8 +22,6 @@ var TrackData = (function () {
         this.active = true;
         this.tr = new track_service_1.TrackComponent();
         this.model = new track_service_1.TrackComponent();
-        //this.model.altitude = "A020";
-        //this.model.fromLocation = "Monkey shit";
         this.tracks = new Array();
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
         this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
@@ -72,14 +69,8 @@ var TrackData = (function () {
         newTrack.fromLocation = this.model.fromLocation;
         newTrack.altitude = this.model.altitude;
         newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-        //newTrack.isReadOnly = true;
-        //aTrack.btnEditClass = this.stBtnEditDefaultClass;
-        //aTrack.btnRemoveClass = this.stBtnRemoveClass;
         // also add the wind to the service
         this._trackService.AddTrack(newTrack);
-        // reset the initial values for the input box
-        //this.aHeading = null;
-        //this.aDistance = null;
     };
     TrackData.prototype.onRemove = function (aTrack) {
         this._trackService.RemoveTrack(aTrack);

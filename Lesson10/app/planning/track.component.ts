@@ -2,7 +2,6 @@ import {Component, OnInit, ElementRef} from '@angular/core';
 import {WeatherService, WindDetails} from '../services/weather.service';
 import {AircraftService} from '../services/aircraft.service';
 import {AircraftSpeed, AircraftWeight, Aircraft} from '../data/aircraft.types';
-//import {FORM_DIRECTIVES, NgForm, NgControl, NgControlGroup, Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
 import {TrackComponent, TrackService} from '../services/track.service';
 import {SpeedValidator} from './flightplanning.validators';
 
@@ -40,8 +39,7 @@ export class TrackData implements OnInit {
         {
             this.tr = new TrackComponent();            
             this.model = new TrackComponent();
-            //this.model.altitude = "A020";
-            //this.model.fromLocation = "Monkey shit";
+
             this.tracks = new Array();
             this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
             this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
@@ -99,20 +97,13 @@ export class TrackData implements OnInit {
     active = true;
 
     onAdd() {
-
         var newTrack = new TrackComponent();
         newTrack.fromLocation = this.model.fromLocation;
         newTrack.altitude = this.model.altitude;
         newTrack.tas = this.currAircraft.acSpeeds.find(x => x.name == "TAS").val;
-        //newTrack.isReadOnly = true;
-        
-        //aTrack.btnEditClass = this.stBtnEditDefaultClass;
-        //aTrack.btnRemoveClass = this.stBtnRemoveClass;
+
         // also add the wind to the service
         this._trackService.AddTrack(newTrack);
-        // reset the initial values for the input box
-        //this.aHeading = null;
-        //this.aDistance = null;
     }
 
     onRemove(aTrack) {

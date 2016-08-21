@@ -47,7 +47,6 @@ var WindData = (function () {
         this.loadWinds();
     };
     WindData.prototype.onAdd = function () {
-        //  if (this.windForm.valid) {
         var newWind = new weather_service_1.WindDetails();
         newWind.altitude = this.model.altitude;
         newWind.direction = this.model.direction;
@@ -55,15 +54,7 @@ var WindData = (function () {
         newWind.isReadOnly = true;
         newWind.btnEditClass = this.stBtnEditDefaultClass;
         newWind.btnRemoveClass = this.stBtnRemoveClass;
-        // also add the wind to the service
         this._weatherService.AddWind(newWind);
-        this.wnd.altitude = null;
-        this.wnd.windspeed = null;
-        this.wnd.direction = null;
-        //}
-        //else {
-        //    alert('form is not valid!');
-        //}
     };
     WindData.prototype.onRemove = function (aWind) {
         this._weatherService.RemoveWind(aWind);
