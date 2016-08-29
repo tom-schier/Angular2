@@ -1,6 +1,5 @@
 "use strict";
 var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
-var lesson08_component_1 = require('./lesson08.component');
-var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
-platform_browser_dynamic_1.bootstrap(lesson08_component_1.Lesson08, [ng2_bootstrap_1.BS_VIEW_PROVIDERS]);
+var app_module_1 = require('./app.module');
+platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(app_module_1.Lesson08Module);
 //# sourceMappingURL=main.js.map

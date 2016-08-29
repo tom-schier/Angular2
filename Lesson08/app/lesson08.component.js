@@ -9,37 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
-var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
-// webpack html imports
-//let template = require('./alert-demo.html');
+var Subject_1 = require('rxjs/Subject');
+var location_service_1 = require('./location.service');
+require('./rxjs-operators');
 var Lesson08 = (function () {
-    function Lesson08() {
-        this.alerts = [
-            {
-                type: 'danger',
-                msg: 'Oh snap! Change a few things up and try submitting again.'
-            },
-            {
-                type: 'success',
-                msg: 'Well done! You successfully read this important alert message.',
-                closable: true
-            }
-        ];
+    function Lesson08(locationService) {
+        this.locationService = locationService;
+        this.mode = 'Observable';
+        this.searchTermStream = new Subject_1.Subject();
     }
-    Lesson08.prototype.closeAlert = function (i) {
-        this.alerts.splice(i, 1);
+    Lesson08.prototype.search = function (term) {
+        this.searchTermStream.next(term);
     };
-    Lesson08.prototype.addAlert = function () {
-        this.alerts.push({ msg: 'Another alert!', type: 'warning', closable: true });
+    Lesson08.prototype.getLocations = function () {
+        var _this = this;
+        this.locationService.search(this.searchString)
+            .subscribe(function (heroes) { return _this.locations = heroes; }, function (error) { return _this.errorMessage = error; });
     };
     Lesson08 = __decorate([
         core_1.Component({
-            selector: 'alert-demo',
-            templateUrl: './views/lesson08.htm',
-            directives: [ng2_bootstrap_1.AlertComponent, common_1.CORE_DIRECTIVES]
+            selector: 'lesson-08',
+            templateUrl: './views/lesson08.html',
+            providers: [location_service_1.LocationService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [location_service_1.LocationService])
     ], Lesson08);
     return Lesson08;
 }());

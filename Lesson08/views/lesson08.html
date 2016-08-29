@@ -1,7 +1,9 @@
-﻿<alert *ngFor="let alert of alerts;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
-    {{ alert?.msg }}
-</alert>
-
-<alert dismissOnTimeout="3000">This alert will dismiss in 3s</alert>
-
-<button type="button" class='btn btn-primary' (click)="addAlert()">Add Alert</button>
+﻿
+<h1>Get Locations</h1>
+<p><i>Fetches when typing stops</i></p>
+<input #term (keyup)="search(term.value)" />
+<input type="text" [(ngModel)]="searchString" />
+<button (click)="getLocations()">Search</button>
+<ul>
+    <li *ngFor="let item of items | async">{{item}}</li>
+</ul>

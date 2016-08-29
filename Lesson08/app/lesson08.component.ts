@@ -1,33 +1,41 @@
-﻿import {Component } from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
+﻿import { Component }        from '@angular/core';
+import { Observable }       from 'rxjs/Observable';
+import { Subject }          from 'rxjs/Subject';
 
-// webpack html imports
-//let template = require('./alert-demo.html');
+import { LocationService } from './location.service';
+import {Location} from './location.component';
+import './rxjs-operators';
 
 @Component({
-    selector: 'alert-demo',
-    templateUrl: './views/lesson08.htm',
-    directives: [AlertComponent, CORE_DIRECTIVES]
+    selector: 'lesson-08',
+    templateUrl: './views/lesson08.html',
+    providers: [LocationService]
 })
 export class Lesson08 {
-    public alerts: Array<Object> = [
-        {
-            type: 'danger',
-            msg: 'Oh snap! Change a few things up and try submitting again.'
-        },
-        {
-            type: 'success',
-            msg: 'Well done! You successfully read this important alert message.',
-            closable: true
-        }
-    ];
 
-    public closeAlert(i: number): void {
-        this.alerts.splice(i, 1);
+    constructor(private locationService: LocationService) { }
+
+    errorMessage: string;
+    locations: Location[];
+    mode = 'Observable';
+
+    private searchTermStream = new Subject<string>();
+    searchString: string;
+
+    search(term: string) {
+
+        this.searchTermStream.next(term);
     }
 
-    public addAlert(): void {
-        this.alerts.push({ msg: 'Another alert!', type: 'warning', closable: true });
+    getLocations() {
+        this.locationService.search(this.searchString)
+            .subscribe(
+            heroes => this.locations = heroes,
+            error => this.errorMessage = <any>error);
     }
+
+    //items: Observable<string[]> = this.searchTermStream
+    //    .debounceTime(300)
+    //    .distinctUntilChanged()
+    //    .switchMap((term: string) => this.wikipediaService.search(term));
 }

@@ -35,7 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "planning", "planning", "{77
 	ProjectSection(SolutionItems) = preProject
 		Lesson10\app\planning\flightplanning.component.ts = Lesson10\app\planning\flightplanning.component.ts
 		Lesson10\app\planning\flightplanning.validators.ts = Lesson10\app\planning\flightplanning.validators.ts
-		map.component.ts = map.component.ts
 		Lesson10\app\planning\mapcontainer.component.ts = Lesson10\app\planning\mapcontainer.component.ts
 		Lesson10\app\planning\track.component.ts = Lesson10\app\planning\track.component.ts
 		Lesson10\trackData.html = Lesson10\trackData.html
@@ -143,7 +142,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson08", "Lesson08", "{9656DE7F-AACF-4B37-9AF4-3F072F50DC59}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson08\favicon.ico = Lesson08\favicon.ico
-		Lesson08\app\lesson08.component.ts = Lesson08\app\lesson08.component.ts
 		Lesson08\main.html = Lesson08\main.html
 		Lesson08\ReadMe.txt = Lesson08\ReadMe.txt
 		Lesson08\styles.css = Lesson08\styles.css
@@ -151,8 +149,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson08", "Lesson08", "{96
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{A372D65B-49F0-470E-9C4A-B24B1E212CAB}"
 	ProjectSection(SolutionItems) = preProject
+		Lesson08\app\app.module.ts = Lesson08\app\app.module.ts
 		Lesson08\app\lesson08.component.ts = Lesson08\app\lesson08.component.ts
+		Lesson08\app\location.component.ts = Lesson08\app\location.component.ts
+		Lesson08\app\location.service.ts = Lesson08\app\location.service.ts
 		Lesson08\app\main.ts = Lesson08\app\main.ts
+		Lesson08\app\rxjs-operators.ts = Lesson08\app\rxjs-operators.ts
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson01", "Lesson01", "{DBE6A28D-F3C4-4B7D-9C6A-68C67B45B522}"
