@@ -1,17 +1,17 @@
 import { Injectable }     from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Jsonp } from '@angular/http';
 import { Location }           from './location.component';
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
 export class LocationService {
-    constructor(private http: Http) { }
+    constructor(private http: Http, private jsonp: Jsonp) { }
 
     private locServiceUrl = 'http://localhost:25920/api/location';  // URL to web API
 
     search(term: string): Observable<Location[]> {
         return this.http.get(this.locServiceUrl + "/?st=" + term)
-            .map(this.extractData)
+            .map(response => <string[]>response.json())
             .catch(this.handleError);
     }
     private extractData(res: Response) {

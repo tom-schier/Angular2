@@ -11,20 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
 var location_service_1 = require('./location.service');
+var location_component_1 = require('./location.component');
 require('./rxjs-operators');
 var Lesson08 = (function () {
     function Lesson08(locationService) {
+        var _this = this;
         this.locationService = locationService;
         this.mode = 'Observable';
         this.searchTermStream = new Subject_1.Subject();
+        this.items = this.searchTermStream
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .switchMap(function (term) { return _this.locationService.search(term); });
     }
+    Lesson08.prototype.ngOnInit = function () {
+        this.aLoc = new location_component_1.Location();
+    };
     Lesson08.prototype.search = function (term) {
         this.searchTermStream.next(term);
-    };
-    Lesson08.prototype.getLocations = function () {
-        var _this = this;
-        this.locationService.search(this.searchString)
-            .subscribe(function (heroes) { return _this.locations = heroes; }, function (error) { return _this.errorMessage = error; });
     };
     Lesson08 = __decorate([
         core_1.Component({

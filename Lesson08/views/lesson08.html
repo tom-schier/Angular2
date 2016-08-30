@@ -1,9 +1,13 @@
 ﻿
 <h1>Get Locations</h1>
-<p><i>Fetches when typing stops</i></p>
-<input #term (keyup)="search(term.value)" />
-<input type="text" [(ngModel)]="searchString" />
-<button (click)="getLocations()">Search</button>
-<ul>
-    <li *ngFor="let item of items | async">{{item}}</li>
-</ul>
+<div class="form-group">
+    <div>
+        <input list="browsers" name="browser" #term (keyup)="search(term.value)">
+        <datalist id="browsers">
+            <option *ngFor="let item of items | async">
+                {{item.code + " " + item.description}}
+            </option>
+        </datalist>
+        <input type="submit">
+    </div>
+</div>

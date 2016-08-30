@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
+var http_1 = require('@angular/http');
+var Observable_1 = require('rxjs/Observable');
 var TrackComponent = (function () {
     function TrackComponent() {
     }
@@ -17,7 +19,10 @@ var TrackComponent = (function () {
 }());
 exports.TrackComponent = TrackComponent;
 var TrackService = (function () {
-    function TrackService() {
+    function TrackService(http, jsonp) {
+        this.http = http;
+        this.jsonp = jsonp;
+        this.locServiceUrl = 'http://localhost:25920/api/location'; // URL to web API
         // Observable string sources
         this.obTrackDetails = new Subject_1.Subject();
         // Observable string streams
@@ -27,10 +32,6 @@ var TrackService = (function () {
     }
     // Service message commands
     TrackService.prototype.AddTrack = function (aTrack) {
-        //var newTrack = new TrackComponent();
-        //newTrack.headingTrue = aTrack.headingTrue;
-        //newTrack.distance = aTrack.distance;
-        //newTrack.tas = aTrack.tas;
         aTrack.variation = -11.5;
         aTrack.headingMag;
         aTrack.isReadOnly = true;
@@ -48,12 +49,29 @@ var TrackService = (function () {
         this.tracks[idx] = aTrack;
         this.obTrackDetails.next(this.tracks);
     };
+    TrackService.prototype.search = function (term) {
+        return this.http.get(this.locServiceUrl + "/?st=" + term)
+            .map(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    TrackService.prototype.extractData = function (res) {
+        var body = res.json();
+        return body.data || {};
+    };
+    TrackService.prototype.handleError = function (error) {
+        // In a real world app, we might use a remote logging infrastructure
+        // We'd also dig deeper into the error to get a better message
+        var errMsg = (error.message) ? error.message :
+            error.status ? error.status + " - " + error.statusText : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable_1.Observable.throw(errMsg);
+    };
     TrackService.prototype.logError = function (err) {
         console.error('There was an error: ' + err);
     };
     TrackService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http, http_1.Jsonp])
     ], TrackService);
     return TrackService;
 }());

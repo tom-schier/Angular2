@@ -29,17 +29,24 @@
     </table>
 </div>
 <div class="container-fluid row">
-    <form *ngIf="active" (ngSubmit)="onAdd()" #windForm="ngForm" class="form-inline">
+    <form *ngIf="active" (ngSubmit)="onAdd(item)" #windForm="ngForm" class="form-inline">
         <div class="form-group">
             <div>
-                <input type="text" class="form-control" id="waypoint" placeholder="Enter waypoint code"
+                <input list="browsers" class="form-control" 
+                       name="browser" 
                        required
                        data-toggle="tooltip"
-                       data-placement="bootom"
+                       data-placement="bottom"
+                       (onclick)="setItem()"
                        title="Waypoint code as published in ERSA"
-                       [(ngModel)]="model.fromLocation" name="fromLocation"
-                       style="width:170px"
-                       #fromLocation="ngModel">
+                       #term (keyup)="search(term.value)" 
+                       placeholder="Enter waypoint code" 
+                       [(ngModel)]="model.fromLocation" >
+                <datalist id="browsers" >
+                    <option *ngFor="let item of items | async" >
+                        {{item.code + " " + item.description}}
+                    </option>
+                </datalist>
             </div>
         </div>
         <div class="form-group">
@@ -50,7 +57,7 @@
                         data-placement="bootom"
                         title="Wind altitude in feet. Select from standard met altitudes"
                         [(ngModel)]="model.altitude" name="altitude"
-                        #altitude="ngModel">
+                        #altitude="ngModel" >
                     <option *ngFor="let p of altList" [value]="p">{{p}}</option>
                 </select>
             </div>

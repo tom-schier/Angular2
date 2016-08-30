@@ -12,13 +12,21 @@ var core_1 = require('@angular/core');
 var weather_service_1 = require('../services/weather.service');
 var aircraft_service_1 = require('../services/aircraft.service');
 var track_service_1 = require('../services/track.service');
+var Subject_1 = require('rxjs/Subject');
+require('../rxjs-operators');
 var TrackData = (function () {
     function TrackData(_trackService, _weatherService, _elRef, _acService) {
+        var _this = this;
         this._trackService = _trackService;
         this._weatherService = _weatherService;
         this._elRef = _elRef;
         this._acService = _acService;
         this.submitted = false;
+        this.searchTermStream = new Subject_1.Subject();
+        this.items = this.searchTermStream
+            .debounceTime(200)
+            .distinctUntilChanged()
+            .switchMap(function (term) { return _this._trackService.search(term); });
         this.active = true;
         this.tr = new track_service_1.TrackComponent();
         this.model = new track_service_1.TrackComponent();
@@ -49,8 +57,14 @@ var TrackData = (function () {
         this.loadTracks();
         this.currAircraft = this._acService.currentAircraft;
     };
+    TrackData.prototype.search = function (term) {
+        this.searchTermStream.next(term);
+    };
     TrackData.prototype.loadTracks = function () {
         this.tracks = this._trackService.tracks;
+    };
+    TrackData.prototype.setItem = function () {
+        var tt = 4;
     };
     TrackData.prototype.UpdateTracks = function (theTracks) {
         this.tracks = theTracks;
@@ -64,7 +78,7 @@ var TrackData = (function () {
     TrackData.prototype.onSubmit = function () {
         this.submitted = true;
     };
-    TrackData.prototype.onAdd = function () {
+    TrackData.prototype.onAdd = function (item) {
         var newTrack = new track_service_1.TrackComponent();
         newTrack.fromLocation = this.model.fromLocation;
         newTrack.altitude = this.model.altitude;

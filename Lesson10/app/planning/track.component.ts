@@ -4,7 +4,10 @@ import {AircraftService} from '../services/aircraft.service';
 import {AircraftSpeed, AircraftWeight, Aircraft} from '../data/aircraft.types';
 import {TrackComponent, TrackService} from '../services/track.service';
 import {SpeedValidator} from './flightplanning.validators';
-
+import { Observable }       from 'rxjs/Observable';
+import { Subject }          from 'rxjs/Subject';
+import {Location} from './location';
+import '../rxjs-operators';
 
 
 @Component({
@@ -74,10 +77,27 @@ export class TrackData implements OnInit {
         this.currAircraft = this._acService.currentAircraft;
     }
 
+    private searchTermStream = new Subject<string>();
+
+    search(term: string) {
+        this.searchTermStream.next(term);
+    }
+
+    items: Observable<Location[]> = this.searchTermStream
+        .debounceTime(200)
+        .distinctUntilChanged()
+        .switchMap(
+                    (term: string) => this._trackService.search(term)
+                  );
+
     loadTracks() {
         this.tracks = this._trackService.tracks;
     }
 
+
+    setItem() {
+        var tt = 4;
+    }
     UpdateTracks(theTracks: TrackComponent[]) {
         this.tracks = theTracks;
     }
@@ -96,7 +116,7 @@ export class TrackData implements OnInit {
     }
     active = true;
 
-    onAdd() {
+    onAdd(item: Location) {
         var newTrack = new TrackComponent();
         newTrack.fromLocation = this.model.fromLocation;
         newTrack.altitude = this.model.altitude;

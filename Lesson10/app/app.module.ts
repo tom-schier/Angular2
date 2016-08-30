@@ -11,7 +11,7 @@ import {AircraftListComponent}           from './aircraft/aircraftlist.component
 import {FlightPlanningComponent}   from './planning/flightplanning.component';
 import {MapContainer}   from './planning/mapcontainer.component';
 import {AircraftDetailsComponent} from './aircraft/aircraft-detail.component';
-
+import { HttpModule, JsonpModule } from '@angular/http';
 
 /*******************NEW NEW*********************************************/
 import { NgModule }      from '@angular/core';
@@ -23,7 +23,9 @@ import {Lesson10} from './lesson10.component';
     imports: [
         BrowserModule,
         FormsModule,
-        routing
+        routing,
+        HttpModule,
+        JsonpModule
     ],
     providers: [
         HTTP_PROVIDERS,
