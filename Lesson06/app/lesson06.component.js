@@ -21,7 +21,7 @@ var Lesson06 = (function () {
         this.setMarker = function (results, status) {
             if (status === 'OK') {
                 _this.lat = results[0].geometry.location.lat();
-                _this.clearMarkers();
+                // this.clearMarkers();
                 _this.map.setCenter(results[0].geometry.location);
                 _this.addMarker(results[0].geometry.location);
             }
@@ -35,8 +35,12 @@ var Lesson06 = (function () {
             _this.markers.push(marker);
             _this.lat = location.lat();
             _this.lng = location.lng();
+            if (_this.markers.length > 1) {
+                _this.drawLine(_this.markers[_this.markers.length - 1], _this.markers[_this.markers.length - 2]);
+            }
         };
         this.markers = new Array();
+        this.lines = new Array();
     }
     Lesson06.prototype.ngOnInit = function () {
         this.initMap();
@@ -52,6 +56,20 @@ var Lesson06 = (function () {
         // calls the geocode method in the Google API, specifies setMarker as the event handler
         this.geocoder.geocode({ 'address': this.address }, this.setMarker);
     };
+    Lesson06.prototype.drawLine = function (point1, point2) {
+        var line = new google.maps.Polyline({
+            path: [
+                point1.getPosition(),
+                point2.getPosition()
+            ],
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 5,
+            geodesic: true,
+            map: this.map
+        });
+        this.lines.push(line);
+    };
     // Sets the map on all markers in the array.
     Lesson06.prototype.setMapOnAll = function (map) {
         for (var i = 0; i < this.markers.length; i++) {
@@ -63,6 +81,12 @@ var Lesson06 = (function () {
     // Removes the markers from the map, but keeps them in the array.
     Lesson06.prototype.clearMarkers = function () {
         this.setMapOnAll(null);
+        for (var i = 0; i < this.lines.length; i++) {
+            // by calling the setMap function on the Google marker object the marker will be placed on the map
+            // if map == null the marker will be removed if it exists on the map
+            this.lines[i].setMap(null);
+        }
+        this.lines = [];
     };
     // Shows any markers currently in the array.
     Lesson06.prototype.showMarkers = function () {
