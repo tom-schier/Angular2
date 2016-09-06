@@ -1,4 +1,6 @@
-Use of bootstrap modal.
+Use of backend data look up.
+(This will only work if you also have the appropriate backend process running)
+In my WebAPIServices template repository
 
 To run:
 

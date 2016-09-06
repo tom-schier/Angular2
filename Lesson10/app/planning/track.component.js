@@ -63,7 +63,10 @@ var TrackData = (function () {
     TrackData.prototype.loadTracks = function () {
         this.tracks = this._trackService.tracks;
     };
-    TrackData.prototype.setItem = function () {
+    TrackData.prototype.onChange = function (item) {
+        console.log(item);
+    };
+    TrackData.prototype.onSelect = function (item) {
         var tt = 4;
     };
     TrackData.prototype.UpdateTracks = function (theTracks) {
@@ -75,7 +78,7 @@ var TrackData = (function () {
     TrackData.prototype.UpdateWeather = function (theWinds) {
         this.selWindspeed = theWinds[0].windspeed;
     };
-    TrackData.prototype.onSubmit = function () {
+    TrackData.prototype.onSubmit = function (item) {
         this.submitted = true;
     };
     TrackData.prototype.onAdd = function (item) {

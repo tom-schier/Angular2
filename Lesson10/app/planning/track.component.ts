@@ -94,8 +94,11 @@ export class TrackData implements OnInit {
         this.tracks = this._trackService.tracks;
     }
 
+    onChange(item) {
+        console.log(item);
+    }
 
-    setItem() {
+    onSelect(item: Location) {
         var tt = 4;
     }
     UpdateTracks(theTracks: TrackComponent[]) {
@@ -111,7 +114,7 @@ export class TrackData implements OnInit {
     }
 
 
-    onSubmit() {
+    onSubmit(item: Location) {
         this.submitted = true;
     }
     active = true;

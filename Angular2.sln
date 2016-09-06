@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson10", "Lesson10", "{77B7B48C-E1E8-4D3C-A89C-904A9C1B8937}"
 	ProjectSection(SolutionItems) = preProject
@@ -88,7 +88,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson06", "Lesson06", "{AA36830E-A916-442F-8D2E-329C9086D704}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson06\favicon.ico = Lesson06\favicon.ico
-		Lesson06\lesson06B.html = Lesson06\lesson06B.html
 		Lesson06\main.html = Lesson06\main.html
 		Lesson06\ReadMe.txt = Lesson06\ReadMe.txt
 		Lesson06\styles.css = Lesson06\styles.css
