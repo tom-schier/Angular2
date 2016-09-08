@@ -25,6 +25,7 @@ export class TrackComponent {
     sector: number;
     btnEditClass: string;
     btnRemoveClass: string;
+    marker: google.maps.LatLng;
 }
 
 @Injectable()
@@ -32,7 +33,7 @@ export class TrackService {
 
     public tracks: TrackComponent[];
 
-    private locServiceUrl = 'http://localhost:25920/api/location';  // URL to web API
+    private locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/location';  // URL to web API
 
 
     // Observable string sources
@@ -74,6 +75,13 @@ export class TrackService {
             .map(response => <Location[]>response.json())
             .catch(this.handleError);
     }
+
+    getLocation(id: number) {
+        return this.http.get(this.locServiceUrl + "/?id=" + id);
+            //.map(response => <Location>response.json())
+            //.catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};

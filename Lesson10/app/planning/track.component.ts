@@ -20,6 +20,7 @@ export class TrackData implements OnInit {
     aDistance: number;
     aTas: number;
     model: TrackComponent;
+    
     selWindspeed: number;
     selDirection: number;
     selAltitude: number;
@@ -77,6 +78,12 @@ export class TrackData implements OnInit {
         this.currAircraft = this._acService.currentAircraft;
     }
 
+    errorMessage: string;
+    locations: Location[];
+    mode = 'Observable';
+    displayValue: string;
+
+
     private searchTermStream = new Subject<string>();
 
     search(term: string) {
@@ -84,7 +91,7 @@ export class TrackData implements OnInit {
     }
 
     items: Observable<Location[]> = this.searchTermStream
-        .debounceTime(200)
+        .debounceTime(400)
         .distinctUntilChanged()
         .switchMap(
                     (term: string) => this._trackService.search(term)
@@ -117,11 +124,12 @@ export class TrackData implements OnInit {
     active = true;
 
     onAdd(item: Location) {
+
         var newTrack = new TrackComponent();
         newTrack.fromLocation = this.model.fromLocation;
         newTrack.altitude = this.model.altitude;
         newTrack.tas = this.currAircraft.acSpeeds.find(x => x.name == "TAS").val;
-
+        //newTrack.marker = new 
         // also add the wind to the service
         this._trackService.AddTrack(newTrack);
     }

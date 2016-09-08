@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Injectable } from '@angular/core';
+import {TrackComponent, TrackService} from '../services/track.service';
 
 declare var map: any;
 declare var geocoder: any;
@@ -15,6 +16,8 @@ export class MapContainer implements OnInit {
     address: string;
     // the markers array will contain a list of Google marker objects
     markers: Array<google.maps.Marker>;
+    lines: Array<google.maps.Polyline>;
+
     lat: number = -33.8688;
     lng: number = 151.2093;
     initialZoom: number = 9;
@@ -22,12 +25,13 @@ export class MapContainer implements OnInit {
     geocoder: google.maps.Geocoder;
     map: google.maps.Map;
 
-    constructor() {
+    constructor(private _trackService: TrackService) {
         this.markers = new Array<google.maps.Marker>();
+        this.lines = new Array<google.maps.Polyline>();
     }
 
     ngOnInit() {
-
+        console.log('Initialising MapContainer');
         this.initMap();
     }
 
@@ -66,6 +70,10 @@ export class MapContainer implements OnInit {
         this.markers.push(marker);
         this.lat = location.lat();
         this.lng = location.lng();
+
+        if (this.markers.length > 1) {
+            this.drawLine(this.markers[this.markers.length - 1], this.markers[this.markers.length - 2]);
+        }
     }
 
     // Sets the map on all markers in the array.
@@ -80,6 +88,12 @@ export class MapContainer implements OnInit {
     // Removes the markers from the map, but keeps them in the array.
     private clearMarkers() {
         this.setMapOnAll(null);
+        for (var i = 0; i < this.lines.length; i++) {
+            // by calling the setMap function on the Google marker object the marker will be placed on the map
+            // if map == null the marker will be removed if it exists on the map
+            this.lines[i].setMap(null);
+        }
+        this.lines = [];
     }
 
     // Shows any markers currently in the array.
@@ -91,6 +105,23 @@ export class MapContainer implements OnInit {
     private deleteMarkers() {
         this.clearMarkers();
         this.markers = [];
+    }
+
+    public drawLine(point1: google.maps.Marker, point2: google.maps.Marker) {
+        var line = new google.maps.Polyline({
+            path: [
+                point1.getPosition(),
+                point2.getPosition()
+                // new google.maps.LatLng(37.4419, -122.1419),
+                // new google.maps.LatLng(37.4519, -122.1519)
+            ],
+            strokeColor: "#FF0000",
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+            geodesic: true,
+            map: this.map
+        });
+        this.lines.push(line);
     }
 
 }

@@ -22,9 +22,10 @@ var TrackData = (function () {
         this._elRef = _elRef;
         this._acService = _acService;
         this.submitted = false;
+        this.mode = 'Observable';
         this.searchTermStream = new Subject_1.Subject();
         this.items = this.searchTermStream
-            .debounceTime(200)
+            .debounceTime(400)
             .distinctUntilChanged()
             .switchMap(function (term) { return _this._trackService.search(term); });
         this.active = true;
@@ -83,6 +84,7 @@ var TrackData = (function () {
         newTrack.fromLocation = this.model.fromLocation;
         newTrack.altitude = this.model.altitude;
         newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+        //newTrack.marker = new 
         // also add the wind to the service
         this._trackService.AddTrack(newTrack);
     };

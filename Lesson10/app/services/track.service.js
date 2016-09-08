@@ -22,7 +22,7 @@ var TrackService = (function () {
     function TrackService(http, jsonp) {
         this.http = http;
         this.jsonp = jsonp;
-        this.locServiceUrl = 'http://localhost:25920/api/location'; // URL to web API
+        this.locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/location'; // URL to web API
         // Observable string sources
         this.obTrackDetails = new Subject_1.Subject();
         // Observable string streams
@@ -50,9 +50,14 @@ var TrackService = (function () {
         this.obTrackDetails.next(this.tracks);
     };
     TrackService.prototype.search = function (term) {
-        return this.http.get(this.locServiceUrl + "/?st=" + term)
-            .map(function (response) { return response.json(); })
-            .catch(this.handleError);
+        return this.http.get(this.locServiceUrl + "/?st=" + term);
+        // .map(response => <Location[]>response.json())
+        //  .catch(this.handleError);
+    };
+    TrackService.prototype.getLocation = function (id) {
+        return this.http.get(this.locServiceUrl + "/?id=" + id);
+        //.map(response => <Location>response.json())
+        //.catch(this.handleError);
     };
     TrackService.prototype.extractData = function (res) {
         var body = res.json();

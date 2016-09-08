@@ -7,7 +7,7 @@ import { Observable }     from 'rxjs/Observable';
 export class LocationService {
     constructor(private http: Http, private jsonp: Jsonp) { }
 
-    private locServiceUrl = 'http://localhost:25920/api/location';  // URL to web API
+    private locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/location';  // URL to web API
 
     search(term: string): Observable<Location[]> {
         return this.http.get(this.locServiceUrl + "/?st=" + term)

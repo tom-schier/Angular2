@@ -77,7 +77,6 @@ export class Lesson06 implements OnInit
         this.lines.push(line);
     }
 
-
     // Adds a marker to the map and push to the array. The parameter is expected to be a 
     private addMarker = (location: google.maps.LatLng) => {
         var marker = new google.maps.Marker({
