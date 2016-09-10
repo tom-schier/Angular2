@@ -10,6 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var weather_service_1 = require('../services/weather.service');
+var forms_1 = require('@angular/forms');
+var Comment = (function () {
+    function Comment(st) {
+        this.st = st;
+        this.commentSt = st;
+    }
+    return Comment;
+}());
 var WindData = (function () {
     // WeatherService will be injected from the parent component. This is because it is not listed
     // as a provider in the @Component decorator
@@ -20,6 +28,7 @@ var WindData = (function () {
         this.wnd = new weather_service_1.WindDetails();
         this.windRows = new Array();
         this.altList = new Array();
+        this.stComments = new Array();
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
         this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
         this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
@@ -31,6 +40,7 @@ var WindData = (function () {
         this.altList.push('A060');
         this.altList.push('A070');
         this.altList.push('A080');
+        // this.stComments = ["My arse", "Does not", "stink"];
     }
     WindData.prototype.ngOnInit = function () {
         var _this = this;
@@ -38,7 +48,13 @@ var WindData = (function () {
         this._weatherService.windDetailsChange$.subscribe(function (wnd) {
             _this.UpdateWinds(wnd);
         });
+        this.windForm = new forms_1.FormGroup({
+            speed: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(3), forms_1.Validators.maxLength(3), forms_1.Validators.pattern("^[0-9][0-9][0-9]$")]),
+            direction: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.pattern("^[0-3][0-9][0-9]$")]),
+            altitude: new forms_1.FormControl('', [forms_1.Validators.required])
+        });
         this.loadWinds();
+        this.subcribeToChanges();
     };
     WindData.prototype.loadWinds = function () {
         this.windRows = this._weatherService.winds;
@@ -46,11 +62,18 @@ var WindData = (function () {
     WindData.prototype.UpdateWinds = function (theWinds) {
         this.loadWinds();
     };
-    WindData.prototype.onAdd = function () {
+    WindData.prototype.onAdd = function (model, isValid) {
+        this.stComments = [];
+        if (this.windForm.controls["altitude"].valid == false)
+            this.stComments.push("Altitude is invalid. Select one from the list");
+        if (this.windForm.controls["direction"].valid == false)
+            this.stComments.push("Direction is invalid.");
+        if (this.windForm.controls["speed"].valid == false)
+            this.stComments.push("Speed is invalid.");
+        if (isValid == false)
+            return;
         var newWind = new weather_service_1.WindDetails();
-        newWind.altitude = this.model.altitude;
-        newWind.direction = this.model.direction;
-        newWind.windspeed = this.model.windspeed;
+        newWind = model;
         newWind.isReadOnly = true;
         newWind.btnEditClass = this.stBtnEditDefaultClass;
         newWind.btnRemoveClass = this.stBtnRemoveClass;
@@ -73,6 +96,13 @@ var WindData = (function () {
         aWind.isReadOnly = (aWind.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil");
         if (aWind.btnEditClass == "btn btn-primary glyphicon glyphicon-pencil")
             this._weatherService.UpdateWind(aWind);
+    };
+    WindData.prototype.subcribeToChanges = function () {
+        var _this = this;
+        // initialize stream
+        var myFormValueChanges$ = this.windForm.valueChanges;
+        // subscribe to the stream 
+        myFormValueChanges$.subscribe(function (x) { _this.stComments = []; });
     };
     WindData.prototype.validateWind = function (aWind) {
         if (isNaN(aWind.direction) == true)

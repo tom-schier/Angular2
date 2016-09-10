@@ -20,7 +20,7 @@
                     {{wind.direction}}
                 </td>
                 <td id="tdSpeed" class="col-md-3">
-                    {{wind.windspeed}}
+                    {{wind.speed}}
                 </td>
                 <td id="tdAltitude" class="col-md-3">
                     {{wind.altitude}}
@@ -33,7 +33,7 @@
     </table>
 </div>
 <div class="container-fluid row">
-    <form *ngIf="active" (ngSubmit)="onAdd()" #windForm="ngForm" class="form-inline">
+    <!--<form *ngIf="active" (ngSubmit)="onAdd()" #windForm="ngForm" class="form-inline">
         <div class="form-group">
             <div>
                 <input type="text" class="form-control" id="direction" placeholder="Enter direction [0-360]"                                      
@@ -76,18 +76,60 @@
                 <i class="fa fa-plus-square xp-form-button"></i>
             </button>
         </div>
-        <!--<div [hidden]="direction.valid || direction.pristine"
-             class="alert alert-danger">
-            Wind direction is required
+    </form>-->
+    <form [formGroup]="windForm" novalidate (ngSubmit)="onAdd(windForm.value, windForm.valid)" class="form-inline col-md-6">
+        <div>
+            <!-- We'll add our form controls here -->
+            <div id="speedEntry" class="row">
+                <span>
+                    <label class="col-md-4">Speed</label>
+                    <input type="text"
+                           formControlName="speed"
+                           data-toggle="tooltip"
+                           data-placement="bootom"
+                           style="width:170px"
+                           title="Speed [kts] is required. Must be a three digit number. If you fly supersonic you can afford the expensive version."
+                           class="col-md-4 form-control"
+                           [hidden]="windForm.controls.speed.valid || (windForm.controls.speed.pristine && !submitted)" >
+                </span>
+            </div>
+            <div id="directionEntry" class="row">
+                <label class="col-md-4">Direction</label>
+                <input type="text"
+                       formControlName="direction"
+                       data-toggle="tooltip"
+                       data-placement="bootom"
+                       title="Direction is required. Must be numeric and between 0 and 360 unless you have a compass from another planet."
+                       style="width:170px"
+                       class="col-md-4 form-control "
+                       [hidden]="windForm.controls.direction.valid || (windForm.controls.direction.pristine && !submitted)">
+            </div>
+            <div id="altitudeEntry" class="row">
+                <span>
+                    <label class="col-md-4">Altitude</label>
+                    <select formControlName="altitude"
+                            data-toggle="tooltip"
+                            data-placement="bootom"
+                            title="Altitude [feet]. Obviously the values are positive."
+                            [hidden]="windForm.controls.altitude.valid || (windForm.controls.altitude.pristine && !submitted)"
+                            class="col-md-4 form-control">
+                        <option *ngFor="let p of altList" [value]="p">{{p}}</option>
+                    </select>
+                </span>
+                <span class="form-group">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-plus-square xp-form-button"></i>
+                    </button>
+                </span>
+            </div>
         </div>
-        <div [hidden]="speed.valid || speed.pristine"
-             class="alert alert-danger">
-            Wind speed is required
-        </div>
-        <div [hidden]="altitude.valid || altitude.pristine" class="alert alert-danger">
-            Altitude is required
-        </div>-->
-    </form>
 
-
+</form>
+<div class="col-md-6">
+    <ul>
+        <li *ngFor="let st of stComments">
+            {{ st }}
+        </li>
+    </ul>
+</div>
 </div>
