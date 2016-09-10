@@ -19,7 +19,7 @@ export class Lesson07 implements OnInit {
     model: Wind;
     submitted = false;
     altList: string[];
-
+    public events: any[] = []; // use to publish for m changes
     // the form groupd where we capture speed, direction, and altitude of the Wind (model)
     windForm: FormGroup;
 
@@ -39,33 +39,35 @@ export class Lesson07 implements OnInit {
         this.model = new Wind(0, 0, this.altList[0], 0);
 
         this.windForm = new FormGroup({
-            speed: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]),
-            direction: new FormControl('', [Validators.required, Validators.minLength(3)]),
+            speed: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3), Validators.pattern("^[0-9][0-9][0-9]$")]),
+            direction: new FormControl('', [Validators.required, Validators.pattern("^[0-3][0-9][0-9]$")]),
             altitude: new FormControl('', [Validators.required])
         });
+        this.subcribeToChanges();
     }
 
     onSubmit() {
         this.submitted = true;
     }
 
+    subcribeToChanges() {
+        // initialize stream
+        const myFormValueChanges$ = this.windForm.valueChanges;
+        // subscribe to the stream 
+        myFormValueChanges$.subscribe(x => this.events
+            .push({
+                        event: 'SOME EVENT', object: x 
+                    })
+                );
+     }
+
     save(model: Wind, isValid: boolean) {
         this.submitted = true; // set form submit to true
 
+        if (isValid) 
+            this.model = model;
         // check if model is valid
         // if valid, call API to save customer
         console.log(model, isValid);
-    }
-
-    // Reset the form with a new hero AND restore 'pristine' class state
-    // by toggling 'active' flag which causes the form
-    // to be removed/re-added in a tick via NgIf
-    // TODO: Workaround until NgForm has a reset method (#6822)
-    active = true;
-
-    newWind() {
-        this.model = new Wind(0, 0, this.altList[0], 0);
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
     }
 }
