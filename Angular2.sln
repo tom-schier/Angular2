@@ -125,7 +125,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lesson07", "Lesson07", "{33
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{844E8D44-9613-4D23-855D-17827B7B2285}"
 	ProjectSection(SolutionItems) = preProject
+		app.component.ts = app.component.ts
 		Lesson07\app\app.module.ts = Lesson07\app\app.module.ts
+		Lesson07\app\hero-form.component.ts = Lesson07\app\hero-form.component.ts
+		Lesson07\app\hero.component.ts = Lesson07\app\hero.component.ts
+		Lesson07\app\hero.module.ts = Lesson07\app\hero.module.ts
+		Lesson07\app\hero.ts = Lesson07\app\hero.ts
 		Lesson07\app\lesson07.component.ts = Lesson07\app\lesson07.component.ts
 		Lesson07\app\main.ts = Lesson07\app\main.ts
 		Lesson07\app\validator.ts = Lesson07\app\validator.ts
@@ -133,6 +138,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{844E8D44-961
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "views", "views", "{90F888A5-F5C3-4B7F-8854-C62470950F2A}"
 	ProjectSection(SolutionItems) = preProject
+		Lesson07\views\hero-form.component.html = Lesson07\views\hero-form.component.html
 		Lesson07\views\lesson07.html = Lesson07\views\lesson07.html
 	EndProjectSection
 EndProject

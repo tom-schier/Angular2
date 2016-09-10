@@ -1,15 +1,15 @@
-﻿<div class="container">
+﻿<!--<div class="container">
     <h1>Validation Form</h1>
     <div>This example demonstrates the use of form-group and form-control in Angular2</div>
     <div>All fields are required. Try and click Submit with an empty input field</div>
     <br /><br />
     <div [hidden]="submitted">
         <h1>Wind Form</h1>
-        <!-- The windForm variable is declared here as a ngForm. This will be used below for validation-->
+         The windForm variable is declared here as a ngForm. This will be used below for validation
         <form *ngIf="active" (ngSubmit)="onSubmit()" #windForm="ngForm">
-            <div class="form-group">
+            <div class="form-group" [formGroup]="windForm">
                 <label for="speed">Windspeed</label>
-                <input type="text" class="form-control" id="speed"
+                <input type="text" class="form-control" id="speed" [formControl]="speed"
                        required
                        [(ngModel)]="model.speed" name="speed"
                        #speed="ngModel">
@@ -20,12 +20,12 @@
             </div>
             <div class="form-group">
                 <label for="alterEgo">Wind direction</label>
-                <input type="text" class="form-control" id="direction"
+                <input type="text" class="form-control" id="direction" [formControl]="direction"
                        [(ngModel)]="model.direction" name="alterEgo" #direction="ngModel">
             </div>
             <div class="form-group">
                 <label for="altitude">Altitude</label>
-                <select class="form-control" id="altitude"
+                <select class="form-control" id="altitude" [formControl]="altitude"
                         required
                         [(ngModel)]="model.altitude" name="altitude"
                         #altitude="ngModel">
@@ -56,5 +56,34 @@
         <br>
         <button class="btn btn-default" (click)="submitted=false">Edit</button>
     </div>
-</div>
+</div>-->
+<!-- app.component.html -->
+
+<form [formGroup]="windForm" novalidate (ngSubmit)="save(windForm.value, windForm.valid)">
+
+    <!-- We'll add our form controls here -->
+    <div id="speedEntry">
+        <label>Speed</label>
+        <input type="text" formControlName="speed">
+        <small [hidden]="windForm.controls.speed.valid || (windForm.controls.speed.pristine && !submitted)">
+            Speed is required (minimum 5 characters).
+        </small>
+    </div>
+    <div id="directionEntry">
+        <label>Direction</label>
+        <input type="text" formControlName="direction">
+        <small [hidden]="windForm.controls.direction.valid || (windForm.controls.direction.pristine && !submitted)">
+            Speed is required. Must be numeric and between 0 and 360.
+        </small>
+    </div>
+    <div id="altitudeEntry">
+        <label>Altitude</label>
+        <input type="text" formControlName="altitude">
+        <small [hidden]="windForm.controls.altitude.valid || (windForm.controls.altitude.pristine && !submitted)">
+            Speed is required (minimum 5 characters).
+        </small>
+    </div>
+    <button type="submit">Submit</button>
+
+</form>
 

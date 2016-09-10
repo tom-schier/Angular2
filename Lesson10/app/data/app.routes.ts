@@ -47,7 +47,7 @@ const appRoutes: Routes = [
     { path: 'FlightPlanning', component: FlightPlanningComponent },
     { path: 'AircraftDetails', component: AircraftDetailsComponent },
     { path: 'MapContainer', component: MapContainer },
-    { path: '**', component: AircraftDetailsComponent }
+    { path: '**', component: AircraftDetailsComponent },
     { path: '', component: AircraftDetailsComponent }];
 export const appRoutingProviders: any[] = [
 ];

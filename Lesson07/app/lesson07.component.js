@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var Wind = (function () {
     function Wind(id, speed, altitude, direction) {
         this.id = id;
@@ -22,12 +23,20 @@ exports.Wind = Wind;
 ;
 var Lesson07 = (function () {
     function Lesson07() {
+        //this.speedControl = new FormControl("speed");
+        //this.dirControl = new FormControl("direction");
+        //this.altControl = new FormControl("altitude");
         this.submitted = false;
         // Reset the form with a new hero AND restore 'pristine' class state
         // by toggling 'active' flag which causes the form
         // to be removed/re-added in a tick via NgIf
         // TODO: Workaround until NgForm has a reset method (#6822)
         this.active = true;
+        //let windForm = new FormGroup({
+        //    speedControl: new FormControl("speed"),
+        //    dirControl: new FormControl("direction"),
+        //    altControl: new FormControl("altitude"),
+        //});
         this.altList = new Array();
         this.altList.push('A020');
         this.altList.push('A030');
@@ -39,9 +48,20 @@ var Lesson07 = (function () {
     }
     Lesson07.prototype.ngOnInit = function () {
         this.model = new Wind(0, 0, this.altList[0], 0);
+        this.windForm = new forms_1.FormGroup({
+            speed: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(3), forms_1.Validators.maxLength(3)]),
+            direction: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(3)]),
+            altitude: new forms_1.FormControl('', [forms_1.Validators.required])
+        });
     };
     Lesson07.prototype.onSubmit = function () {
         this.submitted = true;
+    };
+    Lesson07.prototype.save = function (model, isValid) {
+        this.submitted = true; // set form submit to true
+        // check if model is valid
+        // if valid, call API to save customer
+        console.log(model, isValid);
     };
     Lesson07.prototype.newWind = function () {
         var _this = this;

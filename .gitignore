@@ -16,3 +16,9 @@ _temp
 !systemjs.config.js
 !typings/typings.d.ts
 !wallaby.js
+/Lesson07/app/hero.ts
+/Lesson07/app/hero.module.ts
+/Lesson07/app/hero.component.ts
+/Lesson07/app/hero-form.component.ts
+/Lesson07/views/HeroStuff.html
+/Lesson07/views/hero-form.component.html
