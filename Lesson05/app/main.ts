@@ -1,4 +1,4 @@
-import {bootstrap}    from '@angular/platform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {Lesson05} from './lesson05.component';
 import { routing, appRoutingProviders } from './app.routes';
 import {ListA}  from './ListA';
@@ -19,8 +19,6 @@ import { FormsModule }   from '@angular/forms';
     bootstrap: [Lesson05]
 })
 export class Lesson05Module { }
-
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 platformBrowserDynamic().bootstrapModule(Lesson05Module);
 

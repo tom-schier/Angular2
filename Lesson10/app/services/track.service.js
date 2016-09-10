@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
 var http_1 = require('@angular/http');
+var http_2 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 var TrackComponent = (function () {
     function TrackComponent() {
@@ -19,8 +20,8 @@ var TrackComponent = (function () {
 }());
 exports.TrackComponent = TrackComponent;
 var TrackService = (function () {
-    function TrackService(http, jsonp) {
-        this.http = http;
+    function TrackService(_http, jsonp) {
+        this._http = _http;
         this.jsonp = jsonp;
         this.locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/location'; // URL to web API
         // Observable string sources
@@ -50,12 +51,12 @@ var TrackService = (function () {
         this.obTrackDetails.next(this.tracks);
     };
     TrackService.prototype.search = function (term) {
-        return this.http.get(this.locServiceUrl + "/?st=" + term);
-        // .map(response => <Location[]>response.json())
-        //  .catch(this.handleError);
+        return this._http.get(this.locServiceUrl + "/?st=" + term)
+            .toPromise()
+            .then(function (response) { return response.json(); });
     };
     TrackService.prototype.getLocation = function (id) {
-        return this.http.get(this.locServiceUrl + "/?id=" + id);
+        return this._http.get(this.locServiceUrl + "/?id=" + id);
         //.map(response => <Location>response.json())
         //.catch(this.handleError);
     };
@@ -76,7 +77,7 @@ var TrackService = (function () {
     };
     TrackService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, http_1.Jsonp])
+        __metadata('design:paramtypes', [http_1.Http, http_2.Jsonp])
     ], TrackService);
     return TrackService;
 }());

@@ -1,13 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { NgForm }    from '@angular/common';
+import { NgForm }    from '@angular/forms';
 import { TestService }    from './test.service';
 import {ListB} from './ListB';
 import {ListA} from './ListA';
 
 @Component({
     selector: 'lesson-05',
-    templateUrl: './views/lesson05.html',
-    directives: [ListA, ListB]
+    templateUrl: './views/lesson05.html'
+   // directives: [ListA, ListB]
 })
 export class Lesson05 implements OnInit {
 

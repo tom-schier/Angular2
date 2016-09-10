@@ -9,8 +9,8 @@ import {Aircraft, AircraftBrief} from '../data/aircraft.types';
 
 
 @Component({
-    templateUrl: './flightplan.html',
-    directives: [WindData, TrackData]
+    templateUrl: './flightplan.html'
+  //  directives: [WindData, TrackData]
 })
 export class FlightPlanningComponent implements OnInit {
 

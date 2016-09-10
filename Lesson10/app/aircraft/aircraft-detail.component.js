@@ -9,8 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var aircraft_speeds_component_1 = require('./aircraft-speeds.component');
-var aircraft_weights_component_1 = require('./aircraft-weights.component');
 var aircraft_service_1 = require('../services/aircraft.service');
 var AircraftDetailsComponent = (function () {
     function AircraftDetailsComponent(_acService) {
@@ -31,8 +29,7 @@ var AircraftDetailsComponent = (function () {
     AircraftDetailsComponent = __decorate([
         core_1.Component({
             selector: 'ac-details',
-            templateUrl: './acDetails.html',
-            directives: [aircraft_speeds_component_1.AircraftSpeedsComponent, aircraft_weights_component_1.AircraftWeightsComponent]
+            templateUrl: './acDetails.html'
         }), 
         __metadata('design:paramtypes', [aircraft_service_1.AircraftService])
     ], AircraftDetailsComponent);

@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+//import { Routes, RouterModule } from '@angular/router';
 import {FlightPlanningComponent}   from '../planning/flightplanning.component';
 import {AircraftDetailsComponent} from '../aircraft/aircraft-detail.component';
 import {MapContainer} from '../planning/mapcontainer.component';
@@ -38,12 +38,20 @@ import {MapContainer} from '../planning/mapcontainer.component';
 //import { PeopleListComponent } from './people-list.component';
 //import { PersonDetailsComponent } from './person-details.component';
 
-const routes: Routes = [
+//import {AircraftDetailsComponent} from './aircraft/aircraft-detail.component';
+//import {FlightPlanningComponent} from './planning/flightplanning.component';
+//import {MapContainer} from './planning/mapcontainer.component';
+import { Routes, RouterModule } from '@angular/router';
+
+const appRoutes: Routes = [
     { path: 'FlightPlanning', component: FlightPlanningComponent },
     { path: 'AircraftDetails', component: AircraftDetailsComponent },
     { path: 'MapContainer', component: MapContainer },
     { path: '**', component: AircraftDetailsComponent }
+    { path: '', component: AircraftDetailsComponent }];
+export const appRoutingProviders: any[] = [
 ];
+export const routing = RouterModule.forRoot(appRoutes);
 
 // - Updated Export
-export const routing = RouterModule.forRoot(routes);
+

@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
 import {WindDetails} from './weather.service'
-import { Http, Response, Jsonp } from '@angular/http';
+import {Http} from '@angular/http';
+import { Response, Jsonp, URLSearchParams } from '@angular/http';
 import { Location }           from '../planning/location';
 import { Observable }     from 'rxjs/Observable';
 
@@ -43,7 +44,7 @@ export class TrackService {
     trackDetailsChange$ = this.obTrackDetails.asObservable();
 
 
-    constructor(private http: Http, private jsonp: Jsonp) {
+    constructor(private _http: Http, private jsonp: Jsonp) {
         console.log('creating flight planning service');
         this.tracks = new Array();
     }
@@ -70,14 +71,15 @@ export class TrackService {
         this.obTrackDetails.next(this.tracks);
     }
 
-    search(term: string): Observable<Location[]> {
-        return this.http.get(this.locServiceUrl + "/?st=" + term)
-            .map(response => <Location[]>response.json())
-            .catch(this.handleError);
+    search(term: string) {
+        return this._http.get(this.locServiceUrl + "/?st=" + term)
+            .toPromise()
+            .then((response) => response.json());
     }
 
+
     getLocation(id: number) {
-        return this.http.get(this.locServiceUrl + "/?id=" + id);
+        return this._http.get(this.locServiceUrl + "/?id=" + id);
             //.map(response => <Location>response.json())
             //.catch(this.handleError);
     }

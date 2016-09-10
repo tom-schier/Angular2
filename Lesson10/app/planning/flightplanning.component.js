@@ -9,9 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var track_service_1 = require('../services/track.service');
-var wind_component_1 = require('./wind.component');
 var weather_service_1 = require('../services/weather.service');
-var track_component_1 = require('./track.component');
 var core_1 = require('@angular/core');
 var aircraft_service_1 = require('../services/aircraft.service');
 var FlightPlanningComponent = (function () {
@@ -52,8 +50,7 @@ var FlightPlanningComponent = (function () {
     };
     FlightPlanningComponent = __decorate([
         core_1.Component({
-            templateUrl: './flightplan.html',
-            directives: [wind_component_1.WindData, track_component_1.TrackData]
+            templateUrl: './flightplan.html'
         }), 
         __metadata('design:paramtypes', [aircraft_service_1.AircraftService, weather_service_1.WeatherService, track_service_1.TrackService])
     ], FlightPlanningComponent);

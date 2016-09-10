@@ -3,7 +3,7 @@ import {Child} from './child.component';
 
 @Component({
     selector: 'parent',
-    directives: [Child],
+   // directives: [Child],
     template: `
                 <h3 (click)="sendMsgToDecendants()" style="width:300">This is Parent</h3>
                     <div style="width:300;color: red">Message to all descendants:</div><input type="text" [(ngModel)]="msgFromParent" style="width:500;color: red" ><br>

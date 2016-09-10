@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var lesson06_component_1 = require('./lesson06.component');
+var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
@@ -32,6 +33,5 @@ var Lesson06Module = (function () {
     return Lesson06Module;
 }());
 exports.Lesson06Module = Lesson06Module;
-var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(Lesson06Module);
 //# sourceMappingURL=main.js.map

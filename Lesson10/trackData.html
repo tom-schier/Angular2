@@ -32,21 +32,10 @@
     <form *ngIf="active" (ngSubmit)="onAdd(item)" #windForm="ngForm" class="form-inline">
         <div class="form-group">
             <div>
-                <input list="browsers" class="form-control" 
-                       name="browser" 
-                       required
-                       data-toggle="tooltip"
-                       data-placement="bottom"
-                       (onclick)="setItem()"
-                       title="Waypoint code as published in ERSA"
-                       #term (keyup)="search(term.value)" 
-                       placeholder="Enter waypoint code" 
-                       [(ngModel)]="model.fromLocation" >
-                <datalist id="browsers" >
-                    <option *ngFor="let item of items | async" >
-                        {{item.code + " " + item.description}}
-                    </option>
-                </datalist>
+                <input id="searchInput" type="text" [formControl]="term" class="form-control" [(ngModel)]="model.fromLocation" />
+                <ul *ngIf="showList" style="margin-bottom:0px">
+                    <li *ngFor="let item of items | async; let i=item" (click)="onSelectLocation($event, item)">{{item.code + " : " + item.description}}</li>
+                </ul>
             </div>
         </div>
         <div class="form-group">

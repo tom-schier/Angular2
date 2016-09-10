@@ -10,12 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var mock_aircraft_data_1 = require('../data/mock-aircraft-data');
-var http_1 = require('@angular/http');
 var aircraft_types_1 = require('../data/aircraft.types');
 var Subject_1 = require('rxjs/Subject');
 var AircraftService = (function () {
-    function AircraftService(http) {
-        this.http = http;
+    function AircraftService() {
         // Observable string sources
         this.obAircraftDetails = new Subject_1.Subject();
         // Observable string streams
@@ -52,7 +50,7 @@ var AircraftService = (function () {
     };
     AircraftService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [])
     ], AircraftService);
     return AircraftService;
 }());

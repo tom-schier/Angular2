@@ -2,7 +2,7 @@
 
 import {Injectable,  Output, EventEmitter} from '@angular/core';
 import {aircraftList} from '../data/mock-aircraft-data';
-import {Http, HTTP_PROVIDERS} from '@angular/http';
+import {Http} from '@angular/http';
 import {AircraftSpeed, AircraftWeight, Aircraft, AircraftBrief} from '../data/aircraft.types';
 import {iAircraftService} from '../aircraft/aircraft.interface';
 import {Subject} from 'rxjs/Subject';
@@ -20,7 +20,7 @@ export class AircraftService {
     // Observable string streams
     aircraftDetailsChange$ = this.obAircraftDetails.asObservable();
 
-    constructor(private http: Http) {
+    constructor() {
         console.log('Creating Aircraft service');
         this.currentAircraft = aircraftList.filter(x => x.id == 1)[0];
     }

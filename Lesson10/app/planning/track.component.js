@@ -13,6 +13,7 @@ var weather_service_1 = require('../services/weather.service');
 var aircraft_service_1 = require('../services/aircraft.service');
 var track_service_1 = require('../services/track.service');
 var Subject_1 = require('rxjs/Subject');
+var forms_1 = require('@angular/forms');
 require('../rxjs-operators');
 var TrackData = (function () {
     function TrackData(_trackService, _weatherService, _elRef, _acService) {
@@ -24,14 +25,10 @@ var TrackData = (function () {
         this.submitted = false;
         this.mode = 'Observable';
         this.searchTermStream = new Subject_1.Subject();
-        this.items = this.searchTermStream
-            .debounceTime(400)
-            .distinctUntilChanged()
-            .switchMap(function (term) { return _this._trackService.search(term); });
         this.active = true;
-        this.tr = new track_service_1.TrackComponent();
         this.model = new track_service_1.TrackComponent();
         this.tracks = new Array();
+        this.showList = true;
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
         this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
         this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
@@ -43,6 +40,11 @@ var TrackData = (function () {
         this.altList.push('A060');
         this.altList.push('A070');
         this.altList.push('A080');
+        this.term = new forms_1.FormControl();
+        this.items = this.term.valueChanges
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .switchMap(function (term) { return _this._trackService.search(term); });
     }
     TrackData.prototype.ngOnInit = function () {
         var _this = this;
@@ -64,8 +66,9 @@ var TrackData = (function () {
     TrackData.prototype.loadTracks = function () {
         this.tracks = this._trackService.tracks;
     };
-    TrackData.prototype.setItem = function () {
-        var tt = 4;
+    TrackData.prototype.onSelectLocation = function (event, item) {
+        this.model.fromLocation = item.description;
+        this.showList = false;
     };
     TrackData.prototype.UpdateTracks = function (theTracks) {
         this.tracks = theTracks;
@@ -78,18 +81,36 @@ var TrackData = (function () {
     };
     TrackData.prototype.onSubmit = function () {
         this.submitted = true;
+        this.term.get("searchInput").setValue;
     };
-    TrackData.prototype.onAdd = function (item) {
-        var newTrack = new track_service_1.TrackComponent();
-        newTrack.fromLocation = this.model.fromLocation;
-        newTrack.altitude = this.model.altitude;
-        newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-        //newTrack.marker = new 
-        // also add the wind to the service
-        this._trackService.AddTrack(newTrack);
+    TrackData.prototype.onAdd = function () {
+        //first add the new waypoint to the array
+        //this.waypoints.push(this.loc);
+        if (this.tracks.length > 0) {
+            //get the previous waypoint
+            var idx = this.tracks.length - 1;
+            var lastWaypoint = this.tracks[idx];
+            var newTrack = new track_service_1.TrackComponent();
+            newTrack.fromLocation = lastWaypoint.fromLocation;
+            newTrack.toLocation = this.model.fromLocation;
+            newTrack.altitude = this.model.altitude;
+            newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+            this._trackService.AddTrack(newTrack);
+        }
+        else {
+            //get the previous waypoint
+            //let idx = this.tracks.length - 1;
+            //let lastWaypoint = this.tracks[idx];
+            var newTrack = new track_service_1.TrackComponent();
+            newTrack.fromLocation = this.model.fromLocation;
+            //newTrack.toLocation = this.model.fromLocation;
+            newTrack.altitude = this.model.altitude;
+            newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+            this._trackService.AddTrack(newTrack);
+        }
     };
-    TrackData.prototype.onRemove = function (aTrack) {
-        this._trackService.RemoveTrack(aTrack);
+    TrackData.prototype.onRemove = function (aLoc) {
+        // this._trackService.RemoveTrack(aTrack);
     };
     TrackData.prototype.onEdit = function (aTrack) {
         aTrack.btnEditClass = this.toggleClass(aTrack.btnEditClass, "btn btn-primary glyphicon glyphicon-pencil", "btn btn-primary glyphicon glyphicon-ok");

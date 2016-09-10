@@ -9,14 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var parent_component_1 = require('./parent.component');
 var Lesson02 = (function () {
     function Lesson02() {
     }
     Lesson02 = __decorate([
         core_1.Component({
             selector: 'lesson-02',
-            directives: [parent_component_1.Parent],
+            //directives: [Parent],
             template: '<h1>This is Lesson-02</h1><div><parent></parent></div>'
         }), 
         __metadata('design:paramtypes', [])

@@ -7,6 +7,7 @@ import {SpeedValidator} from './flightplanning.validators';
 import { Observable }       from 'rxjs/Observable';
 import { Subject }          from 'rxjs/Subject';
 import {Location} from './location';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import '../rxjs-operators';
 
 
@@ -27,24 +28,32 @@ export class TrackData implements OnInit {
     selIdx: number;
     selTrackComp: TrackComponent;
     currAircraft: Aircraft;
+    //waypoints: Location[];
     tracks: TrackComponent[];
-    tr: TrackComponent;
+    //model: Location;
     altList: string[];
     submitted = false;
+    showList: boolean;
+    errorMessage: string;
+    locations: Location[];
+    mode = 'Observable';
+    displayValue: string;
 
     private stBtnEditDefaultClass: string;
     private stBtnEditSaveClass: string;
     private stBtnRemoveClass: string;
 
-    
+    items: Observable<Array<string>>;
+    term: FormControl;
 
     constructor(private _trackService: TrackService, private _weatherService: WeatherService, private _elRef: ElementRef,
          private _acService: AircraftService)
         {
-            this.tr = new TrackComponent();            
+         
             this.model = new TrackComponent();
-
             this.tracks = new Array();
+            this.showList = true;
+
             this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
             this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
             this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
@@ -57,6 +66,13 @@ export class TrackData implements OnInit {
             this.altList.push('A060');
             this.altList.push('A070');
             this.altList.push('A080');
+            this.term = new FormControl();
+
+            this.items = this.term.valueChanges
+                .debounceTime(400)
+                .distinctUntilChanged()
+                .switchMap(term => this._trackService.search(term));
+
 
     }
 
@@ -78,33 +94,22 @@ export class TrackData implements OnInit {
         this.currAircraft = this._acService.currentAircraft;
     }
 
-    errorMessage: string;
-    locations: Location[];
-    mode = 'Observable';
-    displayValue: string;
-
-
     private searchTermStream = new Subject<string>();
 
     search(term: string) {
         this.searchTermStream.next(term);
     }
 
-    items: Observable<Location[]> = this.searchTermStream
-        .debounceTime(400)
-        .distinctUntilChanged()
-        .switchMap(
-                    (term: string) => this._trackService.search(term)
-                  );
-
     loadTracks() {
         this.tracks = this._trackService.tracks;
     }
 
 
-    setItem() {
-        var tt = 4;
+    onSelectLocation(event, item: Location) {
+        this.model.fromLocation = item.description;
+        this.showList =false;
     }
+
     UpdateTracks(theTracks: TrackComponent[]) {
         this.tracks = theTracks;
     }
@@ -120,22 +125,42 @@ export class TrackData implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        this.term.get("searchInput").setValue
     }
     active = true;
 
-    onAdd(item: Location) {
+    onAdd() {
+        
+        //first add the new waypoint to the array
+        //this.waypoints.push(this.loc);
+        if (this.tracks.length > 0) {
+            //get the previous waypoint
+            let idx = this.tracks.length - 1;         
+            let lastWaypoint = this.tracks[idx];
 
-        var newTrack = new TrackComponent();
-        newTrack.fromLocation = this.model.fromLocation;
-        newTrack.altitude = this.model.altitude;
-        newTrack.tas = this.currAircraft.acSpeeds.find(x => x.name == "TAS").val;
-        //newTrack.marker = new 
-        // also add the wind to the service
-        this._trackService.AddTrack(newTrack);
+            var newTrack = new TrackComponent();
+            newTrack.fromLocation = lastWaypoint.fromLocation;
+            newTrack.toLocation = this.model.fromLocation;
+            newTrack.altitude = this.model.altitude;
+            newTrack.tas = this.currAircraft.acSpeeds.find(x => x.name == "TAS").val;
+            this._trackService.AddTrack(newTrack);
+        }
+        else {
+            //get the previous waypoint
+            //let idx = this.tracks.length - 1;
+            //let lastWaypoint = this.tracks[idx];
+
+            var newTrack = new TrackComponent();
+            newTrack.fromLocation = this.model.fromLocation;
+            //newTrack.toLocation = this.model.fromLocation;
+            newTrack.altitude = this.model.altitude;
+            newTrack.tas = this.currAircraft.acSpeeds.find(x => x.name == "TAS").val;
+            this._trackService.AddTrack(newTrack);
+        }        
     }
 
-    onRemove(aTrack) {
-        this._trackService.RemoveTrack(aTrack);
+    onRemove(aLoc: Location) {
+       // this._trackService.RemoveTrack(aTrack);
     }
 
     onEdit(aTrack) {

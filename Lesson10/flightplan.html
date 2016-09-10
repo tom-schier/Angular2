@@ -17,7 +17,8 @@
         <table id="trackTable" class="table table-condensed table-striped table-hover">
             <thead>
                 <tr>
-                    <th>Waypoint</th>
+                    <th>From</th>
+                    <th>To</th>
                     <th>TAS [kts]</th>
                     <th>Altitude</th>
                     <th>GS [kts]</th>
@@ -27,8 +28,11 @@
             </thead>
             <tbody *ngFor="let tr of _trackService.tracks; let i=index" class="xp-font-md">
                 <tr class="xp-font-md">
-                    <td id="tdWaypoint">
+                    <td id="tdFromLocation">
                         {{tr.fromLocation}}
+                    </td>
+                    <td id="tdFromLocation">
+                        {{tr.toLocation}}
                     </td>
                     <td id="tdTas">
                         {{acFlightPlanSpeed}}

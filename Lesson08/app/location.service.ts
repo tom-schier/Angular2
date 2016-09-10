@@ -11,7 +11,7 @@ export class LocationService {
 
     search(term: string): Observable<Location[]> {
         return this.http.get(this.locServiceUrl + "/?st=" + term)
-            .map(response => <string[]>response.json())
+            .map(response => <Location[]>response.json())
             .catch(this.handleError);
     }
     private extractData(res: Response) {

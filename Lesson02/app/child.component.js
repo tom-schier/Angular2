@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var grandchild_component_1 = require('./grandchild.component');
 var Child = (function () {
     function Child() {
         this.msgFromGrandchild = new core_1.EventEmitter();
@@ -28,7 +27,7 @@ var Child = (function () {
     Child = __decorate([
         core_1.Component({
             selector: 'child',
-            directives: [grandchild_component_1.GrandChild],
+            //directives: [GrandChild],
             template: "<h3>This is child</h3>\n               <div style=\"width:300\">Message from parent:</div><input type=\"text\" [ngModel]=\"msgFromParent\" readonly=\"true\" style=\"width:500;background-color: lightgrey\"><br>\n               <div><grand-child [msgFromParent]=\"msgFromParent\"  (msgPassthrough)=\"handleMyEvent($event)\"></grand-child></div>"
         }), 
         __metadata('design:paramtypes', [])

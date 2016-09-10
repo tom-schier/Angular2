@@ -152,6 +152,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{A372D65B-49F0-470E-9C4A-B24B1E212CAB}"
 	ProjectSection(SolutionItems) = preProject
 		Lesson08\app\app.module.ts = Lesson08\app\app.module.ts
+		Lesson10\app\app.routes.ts = Lesson10\app\app.routes.ts
 		Lesson08\app\lesson08.component.ts = Lesson08\app\lesson08.component.ts
 		Lesson08\app\location.component.ts = Lesson08\app\location.component.ts
 		Lesson08\app\location.service.ts = Lesson08\app\location.service.ts

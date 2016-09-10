@@ -6,8 +6,8 @@ import {Aircraft, AircraftBrief} from '../data/aircraft.types';
 
 @Component({
     selector: 'ac-details',
-    templateUrl: './acDetails.html',
-    directives: [AircraftSpeedsComponent, AircraftWeightsComponent]
+    templateUrl: './acDetails.html'
+   // directives: [AircraftSpeedsComponent, AircraftWeightsComponent]
 })
 export class AircraftDetailsComponent implements OnInit{
 

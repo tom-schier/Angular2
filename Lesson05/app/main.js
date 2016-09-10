@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var lesson05_component_1 = require('./lesson05.component');
 var app_routes_1 = require('./app.routes');
 var ListA_1 = require('./ListA');
@@ -35,6 +36,5 @@ var Lesson05Module = (function () {
     return Lesson05Module;
 }());
 exports.Lesson05Module = Lesson05Module;
-var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(Lesson05Module);
 //# sourceMappingURL=main.js.map

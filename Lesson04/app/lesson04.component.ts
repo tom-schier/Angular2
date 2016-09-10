@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { NgForm }    from '@angular/common';
+import { NgForm }    from '@angular/forms';
 
 
 

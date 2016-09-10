@@ -8,7 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var lesson02_component_1 = require('./lesson02.component');
+var parent_component_1 = require("./parent.component");
+var child_component_1 = require("./child.component");
+var grandchild_component_1 = require("./grandchild.component");
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
@@ -23,7 +27,10 @@ var Lesson02Module = (function () {
             ],
             providers: [],
             declarations: [
-                lesson02_component_1.Lesson02
+                lesson02_component_1.Lesson02,
+                parent_component_1.Parent,
+                child_component_1.Child,
+                grandchild_component_1.GrandChild
             ],
             bootstrap: [lesson02_component_1.Lesson02]
         }), 
@@ -32,6 +39,5 @@ var Lesson02Module = (function () {
     return Lesson02Module;
 }());
 exports.Lesson02Module = Lesson02Module;
-var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 platform_browser_dynamic_1.platformBrowserDynamic().bootstrapModule(Lesson02Module);
 //# sourceMappingURL=main.js.map

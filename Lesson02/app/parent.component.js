@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var child_component_1 = require('./child.component');
 var Parent = (function () {
     function Parent() {
     }
@@ -19,7 +18,7 @@ var Parent = (function () {
     Parent = __decorate([
         core_1.Component({
             selector: 'parent',
-            directives: [child_component_1.Child],
+            // directives: [Child],
             template: "\n                <h3 (click)=\"sendMsgToDecendants()\" style=\"width:300\">This is Parent</h3>\n                    <div style=\"width:300;color: red\">Message to all descendants:</div><input type=\"text\" [(ngModel)]=\"msgFromParent\" style=\"width:500;color: red\" ><br>\n                    <div style=\"width:300\">Message from grand child:</div> <input type=\"text\" [(ngModel)]=\"msgFromGrandChild\" style=\"width:500;background-color: lightgrey\" readonly=\"true\" ><br>\n                <div><child [msgFromParent]=\"msgFromParent\" (msgFromGrandchild)=\"handleChildEvent($event)\" ></child></div> "
         }), 
         __metadata('design:paramtypes', [])
