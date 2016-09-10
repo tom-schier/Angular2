@@ -10,12 +10,12 @@
         "noImplicitAny": false,
         "suppressImplicitAnyIndexErrors": true
     },
-    "exclude": [
-        "node_modules",
-        "lib",
-        "res",
-        "typings/main",
-        "typings/main.d.ts",
-        "typings/otherStuff.d.ts"
-    ]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "res",
+    "typings/main",
+    "typings/main.d.ts",
+    "typings/otherStuff.d.ts"
+  ]
 }

@@ -2,9 +2,10 @@
 <h1>Get Locations</h1>
 <div class="form-group">
     <div>
-        <input list="browsers" name="browser" #term (keyup)="search(term.value)">
+        <div>{{aLoc.Name}}</div>
+        <input list="browsers" name="browser" #term (keyup)="search(term.value)" >
         <datalist id="browsers">
-            <option *ngFor="let item of items | async">
+            <option *ngFor="let item of items | async" >
                 {{item.code + " " + item.description}}
             </option>
         </datalist>
