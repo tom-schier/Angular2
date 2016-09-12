@@ -1,4 +1,4 @@
-﻿import { Component, OnInit }        from '@angular/core';
+﻿import { Component, OnInit, ElementRef, Renderer }        from '@angular/core';
 import { Observable }       from 'rxjs/Observable';
 import { Subject }          from 'rxjs/Subject';
 import { LocationService } from './location.service';
@@ -12,7 +12,7 @@ import './rxjs-operators';
 })
 export class Lesson08 implements OnInit{
 
-    constructor(private locationService: LocationService) { }
+    constructor(private locationService: LocationService, private _elem: ElementRef) { }
 
     aLoc: Location;
 
@@ -29,6 +29,10 @@ export class Lesson08 implements OnInit{
 
     search(term: string) {
         this.searchTermStream.next(term);
+    }
+
+    onClick() {
+        console.log("Got ya");
     }
 
     items: Observable<Location[]> = this.searchTermStream

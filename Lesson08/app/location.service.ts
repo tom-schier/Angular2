@@ -7,13 +7,20 @@ import { Observable }     from 'rxjs/Observable';
 export class LocationService {
     constructor(private http: Http, private jsonp: Jsonp) { }
 
-    private locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/location';  // URL to web API
+    private locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/';  // URL to web API
 
     search(term: string): Observable<Location[]> {
-        return this.http.get(this.locServiceUrl + "/?st=" + term)
+        return this.http.get(this.locServiceUrl + "location/?st=" + term)
             .map(response => <Location[]>response.json())
             .catch(this.handleError);
     }
+
+    findByDesc(term: string): Observable<Location> {
+        return this.http.get(this.locServiceUrl + "LocByDesc/?descr=" + term)
+            .map(response => <Location>response.json())
+            .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};

@@ -1,4 +1,4 @@
-﻿<head>
+﻿<!--<head>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="./styles/lesson10.styles.css" />
     <link rel="stylesheet" href="/lib/font-awesome-4.6.3/css/font-awesome.css" />
@@ -56,7 +56,7 @@
                 <i class="fa fa-plus-square xp-form-button"></i>
             </button>
         </div>
-        <!--<div [hidden]="direction.valid || direction.pristine"
+        <div [hidden]="direction.valid || direction.pristine"
              class="alert alert-danger">
             Wind direction is required
         </div>
@@ -66,6 +66,89 @@
         </div>
         <div [hidden]="altitude.valid || altitude.pristine" class="alert alert-danger">
             Altitude is required
-        </div>-->
+        </div>
     </form>
+</div>-->
+
+<head>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./styles/lesson10.styles.css" />
+    <link rel="stylesheet" href="/lib/font-awesome-4.6.3/css/font-awesome.css" />
+</head>
+<div class="container-fluid row">
+    <h4>Track Data</h4>
+    <table id="trackTable" class="table table-striped table-condensed ">
+        <thead>
+            <tr>
+                <th>Waypoint</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let point of waypoints; let i=index">
+
+            <tr>
+                <td id="tdWaypoint" class="col-md-3">
+                    {{point.code}}
+                </td>
+                <td id="tdAltitude" class="col-md-3">
+                    {{point.description}}
+                </td>
+                <td>
+                    <i class="fa fa-trash xp-form-button" (click)="onRemove(wind)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+<div class="container-fluid row">
+    <form [formGroup]="trackForm" novalidate (ngSubmit)="onAdd(trackForm.value, trackForm.valid)" class="form-inline form-group col-md-8">
+        <div>
+            <div id="waypointEntry" class="row">
+                <div>
+                    <label class="col-md-4">Waypoint</label>
+                    <input id="searchInput"
+                           type="text"
+                           list="waypoints"
+                           formControlName="waypoint"
+                           style="width:300px"
+                           data-toggle="tooltip"
+                           data-placement="bootom"
+                           title="Direction is required. Must be numeric and between 0 and 360 unless you have a compass from another planet."
+                           class="form-control"
+                            [hidden]="trackForm.controls.waypoint.valid || (trackForm.controls.waypoint.pristine && !submitted)"/>
+                    <datalist id="waypoints" >
+                        <option  *ngFor="let item of items | async; let i = index">
+                            {{item.description}}                                                  
+                        </option>
+                    </datalist>
+                </div>
+            </div>
+            <div id="altitudeEntry" class="row">
+                <span>
+                    <label class="col-md-4">Altitude</label>
+                    <select formControlName="altitude"
+                            data-toggle="tooltip"
+                            data-placement="bootom"
+                            title="Altitude [feet]. Obviously the values are positive."
+                            [hidden]="trackForm.controls.altitude.valid || (trackForm.controls.altitude.pristine && !submitted)"
+                            class="col-md-4 form-control">
+                        <option *ngFor="let p of altList" [value]="p">{{p}}</option>
+                    </select>
+                </span>
+                <span>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-plus-square xp-form-button"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </form>
+    <div class="col-md-4">
+        <ul>
+            <li *ngFor="let st of stComments">
+                {{ st }}
+            </li>
+        </ul>
+    </div>
+</div>
+

@@ -13,11 +13,11 @@ var weather_service_1 = require('../services/weather.service');
 var aircraft_service_1 = require('../services/aircraft.service');
 var track_service_1 = require('../services/track.service');
 var Subject_1 = require('rxjs/Subject');
+var location_1 = require('./location');
 var forms_1 = require('@angular/forms');
 require('../rxjs-operators');
 var TrackData = (function () {
     function TrackData(_trackService, _weatherService, _elRef, _acService) {
-        var _this = this;
         this._trackService = _trackService;
         this._weatherService = _weatherService;
         this._elRef = _elRef;
@@ -27,7 +27,7 @@ var TrackData = (function () {
         this.searchTermStream = new Subject_1.Subject();
         this.active = true;
         this.model = new track_service_1.TrackComponent();
-        this.tracks = new Array();
+        this.trackRows = new Array();
         this.showList = true;
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
         this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
@@ -40,16 +40,19 @@ var TrackData = (function () {
         this.altList.push('A060');
         this.altList.push('A070');
         this.altList.push('A080');
-        this.term = new forms_1.FormControl();
-        this.items = this.term.valueChanges
-            .debounceTime(400)
-            .distinctUntilChanged()
-            .switchMap(function (term) { return _this._trackService.search(term); });
+        this.isSelected = false;
+        this.stLocation = "";
+        this.loc = new location_1.Location();
+        this.tracks = this._trackService.tracks;
+        this.waypoints = this._trackService.waypoints;
     }
     TrackData.prototype.ngOnInit = function () {
         var _this = this;
         this._trackService.trackDetailsChange$.subscribe(function (trackDetails) {
             _this.UpdateTracks(trackDetails);
+        });
+        this._trackService.waypointDetailsChange$.subscribe(function (waypointDetails) {
+            _this.UpdateWaypoints(waypointDetails);
         });
         this._weatherService.windDetailsChange$.subscribe(function (windDetails) {
             _this.UpdateWeather(windDetails);
@@ -57,21 +60,38 @@ var TrackData = (function () {
         this._acService.aircraftDetailsChange$.subscribe(function (acDetails) {
             _this.UpdateAircraft(acDetails);
         });
+        this.trackForm = new forms_1.FormGroup({
+            waypoint: new forms_1.FormControl('', [forms_1.Validators.required]),
+            altitude: new forms_1.FormControl('', [forms_1.Validators.required])
+        });
+        this.items = this.trackForm.controls["waypoint"].valueChanges
+            .debounceTime(400)
+            .distinctUntilChanged()
+            .switchMap(function (term) { return _this._trackService.search(term); });
         this.loadTracks();
         this.currAircraft = this._acService.currentAircraft;
     };
-    TrackData.prototype.search = function (term) {
-        this.searchTermStream.next(term);
+    TrackData.prototype.search = function (waypoint) {
+        this.searchTermStream.next(waypoint);
+    };
+    TrackData.prototype.hideList = function () {
+        this.isSelected = false;
+        this.stComments = [];
     };
     TrackData.prototype.loadTracks = function () {
-        this.tracks = this._trackService.tracks;
+        this.trackRows = this._trackService.tracks;
     };
-    TrackData.prototype.onSelectLocation = function (event, item) {
-        this.model.fromLocation = item.description;
-        this.showList = false;
+    TrackData.prototype.onSelectLocation = function (event) {
+        var ee = 5;
+        //this.model.fromLocation = item.description;
+        //this.showList = false;
+        //this.isSelected = true;
     };
     TrackData.prototype.UpdateTracks = function (theTracks) {
-        this.tracks = theTracks;
+        this.trackRows = theTracks;
+    };
+    TrackData.prototype.UpdateWaypoints = function (theWaypoints) {
+        this.waypoints = theWaypoints;
     };
     TrackData.prototype.UpdateAircraft = function (theAircraft) {
         this.currAircraft = theAircraft;
@@ -79,35 +99,27 @@ var TrackData = (function () {
     TrackData.prototype.UpdateWeather = function (theWinds) {
         this.selWindspeed = theWinds[0].windspeed;
     };
-    TrackData.prototype.onSubmit = function () {
-        this.submitted = true;
-        this.term.get("searchInput").setValue;
+    TrackData.prototype.onSelect = function (item) {
+        this.stLocation = item.description;
+        this.isSelected = true;
+        //this.trackForm.controls['waypoint'].value = item.description;
+        ////trackForm.controls.waypoint
+        //var ee = 7;
     };
-    TrackData.prototype.onAdd = function () {
-        //first add the new waypoint to the array
-        //this.waypoints.push(this.loc);
-        if (this.tracks.length > 0) {
-            //get the previous waypoint
-            var idx = this.tracks.length - 1;
-            var lastWaypoint = this.tracks[idx];
-            var newTrack = new track_service_1.TrackComponent();
-            newTrack.fromLocation = lastWaypoint.fromLocation;
-            newTrack.toLocation = this.model.fromLocation;
-            newTrack.altitude = this.model.altitude;
-            newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-            this._trackService.AddTrack(newTrack);
-        }
-        else {
-            //get the previous waypoint
-            //let idx = this.tracks.length - 1;
-            //let lastWaypoint = this.tracks[idx];
-            var newTrack = new track_service_1.TrackComponent();
-            newTrack.fromLocation = this.model.fromLocation;
-            //newTrack.toLocation = this.model.fromLocation;
-            newTrack.altitude = this.model.altitude;
-            newTrack.tas = this.currAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-            this._trackService.AddTrack(newTrack);
-        }
+    TrackData.prototype.onSubmit = function (event) {
+        this.submitted = true;
+        //  this.term.get("searchInput").setValue
+    };
+    TrackData.prototype.onAdd = function (model, isValid) {
+        var _this = this;
+        this.stComments = [];
+        if (this.trackForm.controls["altitude"].valid == false)
+            this.stComments.push("Select valid altitude from list.");
+        if (this.trackForm.controls["waypoint"].valid == false)
+            this.stComments.push("Waypoint is invalid.");
+        if (isValid == false)
+            return;
+        this._trackService.getLocationByDescr(this.trackForm.controls["waypoint"].value).subscribe(function (x) { return _this._trackService.AddTrack(x, _this.trackForm.controls["altitude"].value); });
     };
     TrackData.prototype.onRemove = function (aLoc) {
         // this._trackService.RemoveTrack(aTrack);
@@ -131,7 +143,7 @@ var TrackData = (function () {
             selector: 'track-data',
             templateUrl: './trackData.html'
         }), 
-        __metadata('design:paramtypes', [track_service_1.TrackService, weather_service_1.WeatherService, core_1.ElementRef, aircraft_service_1.AircraftService])
+        __metadata('design:paramtypes', [track_service_1.TrackService, weather_service_1.WeatherService, core_1.Renderer, aircraft_service_1.AircraftService])
     ], TrackData);
     return TrackData;
 }());

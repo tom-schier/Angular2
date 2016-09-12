@@ -14,9 +14,10 @@ var location_service_1 = require('./location.service');
 var location_component_1 = require('./location.component');
 require('./rxjs-operators');
 var Lesson08 = (function () {
-    function Lesson08(locationService) {
+    function Lesson08(locationService, _elem) {
         var _this = this;
         this.locationService = locationService;
+        this._elem = _elem;
         this.mode = 'Observable';
         this.searchTermStream = new Subject_1.Subject();
         this.items = this.searchTermStream
@@ -30,13 +31,16 @@ var Lesson08 = (function () {
     Lesson08.prototype.search = function (term) {
         this.searchTermStream.next(term);
     };
+    Lesson08.prototype.onClick = function () {
+        console.log("Got ya");
+    };
     Lesson08 = __decorate([
         core_1.Component({
             selector: 'lesson-08',
             templateUrl: './views/lesson08.html',
             providers: [location_service_1.LocationService]
         }), 
-        __metadata('design:paramtypes', [location_service_1.LocationService])
+        __metadata('design:paramtypes', [location_service_1.LocationService, core_1.ElementRef])
     ], Lesson08);
     return Lesson08;
 }());

@@ -112,7 +112,7 @@
                             data-placement="bootom"
                             title="Altitude [feet]. Obviously the values are positive."
                             [hidden]="windForm.controls.altitude.valid || (windForm.controls.altitude.pristine && !submitted)"
-                            class="col-md-4 form-control">
+                            class="form-control">
                         <option *ngFor="let p of altList" [value]="p">{{p}}</option>
                     </select>
                 </span>
