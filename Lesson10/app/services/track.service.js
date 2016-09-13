@@ -39,13 +39,38 @@ var TrackService = (function () {
         this.waypoints = new Array();
     }
     // Service message commands
-    TrackService.prototype.AddTrack = function (aLoc, altitude) {
+    TrackService.prototype.AddLocation = function (aLoc, altitude) {
         if (aLoc == null)
             return;
+        aLoc.altitude = altitude;
         this.waypoints.push(aLoc);
         this.obWaypointDetails.next(this.waypoints);
-        this.createNewTrack(aLoc, altitude);
+        // this.createNewTrack(aLoc, altitude);
+        this.updateTracks();
         this.obTrackDetails.next(this.tracks);
+    };
+    TrackService.prototype.updateTracks = function () {
+        var lastLoc;
+        var idx = 0;
+        this.tracks = [];
+        for (var _i = 0, _a = this.waypoints; _i < _a.length; _i++) {
+            var aLoc = _a[_i];
+            if (idx == 0) {
+            }
+            else {
+                var newTrack = new TrackComponent();
+                newTrack.variation = -11.5;
+                newTrack.headingMag;
+                newTrack.sector = idx;
+                newTrack.fromLocation = lastLoc.code;
+                newTrack.toLocation = aLoc.code;
+                newTrack.altitude = aLoc.altitude;
+                newTrack.tas = this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+                this.tracks.push(newTrack);
+            }
+            lastLoc = aLoc;
+            idx = idx + 1;
+        }
     };
     TrackService.prototype.createNewTrack = function (aLoc, altitude) {
         if (aLoc == null)
@@ -82,9 +107,11 @@ var TrackService = (function () {
             this.tracks.push(newTrack);
         }
     };
-    TrackService.prototype.RemoveTrack = function (aTrack) {
-        var idx = this.tracks.indexOf(aTrack);
-        this.tracks.splice(idx, 1);
+    TrackService.prototype.RemoveWaypoint = function (aLoc) {
+        var idx = this.waypoints.indexOf(aLoc);
+        this.waypoints.splice(idx, 1);
+        this.obWaypointDetails.next(this.waypoints);
+        this.updateTracks();
         this.obTrackDetails.next(this.tracks);
     };
     TrackService.prototype.UpdateTrack = function (aTrack) {

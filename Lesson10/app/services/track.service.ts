@@ -58,16 +58,42 @@ export class TrackService {
 
 
     // Service message commands
-    AddTrack(aLoc: Location, altitude: string) {
+    AddLocation(aLoc: Location, altitude: string) {
         if (aLoc == null)
             return;
+        aLoc.altitude = altitude;
         this.waypoints.push(aLoc);
         this.obWaypointDetails.next(this.waypoints);
 
-        this.createNewTrack(aLoc, altitude);
+       // this.createNewTrack(aLoc, altitude);
+        this.updateTracks();
         this.obTrackDetails.next(this.tracks);
     }
 
+    updateTracks() {
+        let lastLoc: Location;
+        let idx = 0;
+        this.tracks = [];
+        for (let aLoc of this.waypoints) {
+            
+            if (idx == 0) {
+                
+            }
+            else {
+                var newTrack = new TrackComponent();
+                newTrack.variation = -11.5;
+                newTrack.headingMag
+                newTrack.sector = idx;
+                newTrack.fromLocation = lastLoc.code;
+                newTrack.toLocation = aLoc.code;
+                newTrack.altitude = aLoc.altitude;
+                newTrack.tas = this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
+                this.tracks.push(newTrack);
+            }
+            lastLoc = aLoc;
+            idx = idx + 1;
+        }
+    }
 
     createNewTrack(aLoc: Location, altitude: string) {
         if (aLoc == null)
@@ -109,9 +135,12 @@ export class TrackService {
     }
 
 
-    RemoveTrack(aTrack: TrackComponent) {
-        var idx = this.tracks.indexOf(aTrack);
-        this.tracks.splice(idx, 1);
+    RemoveWaypoint(aLoc: Location) {
+        var idx = this.waypoints.indexOf(aLoc);
+        this.waypoints.splice(idx, 1);
+        this.obWaypointDetails.next(this.waypoints);
+
+        this.updateTracks();
         this.obTrackDetails.next(this.tracks);
     }
 

@@ -119,10 +119,10 @@ var TrackData = (function () {
             this.stComments.push("Waypoint is invalid.");
         if (isValid == false)
             return;
-        this._trackService.getLocationByDescr(this.trackForm.controls["waypoint"].value).subscribe(function (x) { return _this._trackService.AddTrack(x, _this.trackForm.controls["altitude"].value); });
+        this._trackService.getLocationByDescr(this.trackForm.controls["waypoint"].value).subscribe(function (x) { return _this._trackService.AddLocation(x, _this.trackForm.controls["altitude"].value); });
     };
     TrackData.prototype.onRemove = function (aLoc) {
-        // this._trackService.RemoveTrack(aTrack);
+        this._trackService.RemoveWaypoint(aLoc);
     };
     TrackData.prototype.onEdit = function (aTrack) {
         aTrack.btnEditClass = this.toggleClass(aTrack.btnEditClass, "btn btn-primary glyphicon glyphicon-pencil", "btn btn-primary glyphicon glyphicon-ok");

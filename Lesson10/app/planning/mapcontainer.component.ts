@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import {TrackComponent, TrackService} from '../services/track.service';
 
@@ -12,7 +12,7 @@ declare var google: any;
     styleUrls: ['./styles/lesson10.styles.css']
 }
 )
-export class MapContainer implements OnInit {
+export class MapContainer implements OnInit, AfterViewInit {
     address: string;
     // the markers array will contain a list of Google marker objects
     markers: Array<google.maps.Marker>;
@@ -30,9 +30,46 @@ export class MapContainer implements OnInit {
         this.lines = new Array<google.maps.Polyline>();
     }
 
+    ngAfterViewInit() {
+        this.UpdateMap();
+    }
+
     ngOnInit() {
         console.log('Initialising MapContainer');
+
         this.initMap();
+       // this.UpdateMap();
+        this._trackService.waypointDetailsChange$.subscribe(
+            trackDetails => {
+                this.UpdateMap();
+            });
+    }
+
+    UpdateMap() {
+        this.clearMarkers();
+        for (let aLoc of this._trackService.waypoints) {
+            let locLatLng: google.maps.LatLng;
+            let latitude = this.convertCoordStringToNumber(aLoc.latitude, aLoc.latdir);
+            let longitude = this.convertCoordStringToNumber(aLoc.longitude, aLoc.lngdir);
+            locLatLng = new google.maps.LatLng(latitude, longitude, false);
+            this.addMarker(locLatLng);
+        }
+        this.showMarkers();
+    }
+
+    convertCoordStringToNumber(coordinates: string, dir: string): number {
+        let values = coordinates.split(' ');
+
+        let major = values[0];
+        let minor = values[1];
+        let minorNumber = (parseFloat(minor) / 60) ;
+        let majorNumber = parseFloat(major);
+        let incr = values[2];
+        let newCoordinate = majorNumber +  minorNumber;
+        if (dir == 'W' || dir == 'S')     
+            return newCoordinate*(-1);
+        else
+            return newCoordinate;
     }
 
     initMap() {

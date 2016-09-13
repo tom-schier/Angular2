@@ -177,14 +177,14 @@ export class TrackData implements OnInit {
         if (isValid == false)
             return;
 
-        this._trackService.getLocationByDescr(this.trackForm.controls["waypoint"].value).subscribe(x => this._trackService.AddTrack(x, this.trackForm.controls["altitude"].value));     
+        this._trackService.getLocationByDescr(this.trackForm.controls["waypoint"].value).subscribe(x => this._trackService.AddLocation(x, this.trackForm.controls["altitude"].value));     
     }
 
 
 
 
     onRemove(aLoc: Location) {
-       // this._trackService.RemoveTrack(aTrack);
+        this._trackService.RemoveWaypoint(aLoc);
     }
 
     onEdit(aTrack) {
