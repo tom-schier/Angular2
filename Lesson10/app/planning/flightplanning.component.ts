@@ -48,6 +48,7 @@ export class FlightPlanningComponent implements OnInit {
     UpdateAircraft(theAircraft: Aircraft) {
         this.selectedAircraft = theAircraft;
         this.acFlightPlanSpeed = theAircraft.acSpeeds.find(x => x.name == "TAS").val;
+        this._trackService.updateTracks();
     }
 
     CalculateWindEffect(winds: WindDetails[]) {

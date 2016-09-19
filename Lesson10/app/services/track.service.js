@@ -22,6 +22,7 @@ var TrackComponent = (function () {
 exports.TrackComponent = TrackComponent;
 var TrackService = (function () {
     function TrackService(_http, jsonp, _acService) {
+        var _this = this;
         this._http = _http;
         this.jsonp = jsonp;
         this._acService = _acService;
@@ -30,22 +31,34 @@ var TrackService = (function () {
         // Observable string sources
         this.obTrackDetails = new Subject_1.Subject();
         this.obWaypointDetails = new Subject_1.Subject();
-        // Observable string sources
         // Observable string streams
         this.trackDetailsChange$ = this.obTrackDetails.asObservable();
         this.waypointDetailsChange$ = this.obWaypointDetails.asObservable();
         console.log('creating flight planning service');
         this.tracks = new Array();
         this.waypoints = new Array();
+        this._acService.aircraftDetailsChange$.subscribe(function (acDetails) {
+            _this.UpdateAircraft(acDetails);
+        });
     }
-    // Service message commands
+    //ngOnInit() {
+    //    this._acService.aircraftDetailsChange$.subscribe(
+    //        acDetails => {
+    //            this.UpdateAircraft(acDetails);
+    //        });
+    //}
+    TrackService.prototype.UpdateAircraft = function (theAircraft) {
+        this.selectedAircraft = theAircraft;
+        //
+        //this.updateTracks();
+        //this.acFlightPlanSpeed = theAircraft.acSpeeds.find(x => x.name == "TAS").val;
+    };
     TrackService.prototype.AddLocation = function (aLoc, altitude) {
         if (aLoc == null)
             return;
         aLoc.altitude = altitude;
         this.waypoints.push(aLoc);
         this.obWaypointDetails.next(this.waypoints);
-        // this.createNewTrack(aLoc, altitude);
         this.updateTracks();
         this.obTrackDetails.next(this.tracks);
     };
@@ -65,47 +78,38 @@ var TrackService = (function () {
                 newTrack.fromLocation = lastLoc.code;
                 newTrack.toLocation = aLoc.code;
                 newTrack.altitude = aLoc.altitude;
-                newTrack.tas = this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+                this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+                //newTrack.tas = this.selectedAircraft.acSpeeds.find(x => x.name == "TAS").val;
+                newTrack.gs = this.calculateGroundspeed(aLoc.altitude);
+                var pos1 = new google.maps.LatLng(parseFloat(lastLoc.latitude), parseFloat(lastLoc.longitude), false);
+                var pos2 = new google.maps.LatLng(parseFloat(aLoc.latitude), parseFloat(aLoc.longitude), false);
+                var tmp = this.getDistance(pos1, pos2) * 0.000539957;
+                newTrack.ti = ((tmp / newTrack.gs) * 60).toFixed(0);
+                newTrack.distance = (this.getDistance(pos1, pos2) * 0.000539957).toFixed(0);
                 this.tracks.push(newTrack);
             }
             lastLoc = aLoc;
             idx = idx + 1;
         }
     };
-    TrackService.prototype.createNewTrack = function (aLoc, altitude) {
-        if (aLoc == null)
-            return;
-        if (this.tracks.length > 0) {
-            //get the previous waypoint
-            var idx = this.tracks.length - 1;
-            var lastWaypoint = this.tracks[idx];
-            if (this.tracks.length == 1 && lastWaypoint.toLocation == null) {
-                lastWaypoint.toLocation = aLoc.code;
-                lastWaypoint.altitude = altitude;
-                lastWaypoint.tas = this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-            }
-            else {
-                var newTrack = new TrackComponent();
-                newTrack.variation = -11.5;
-                newTrack.headingMag;
-                newTrack.sector = 1;
-                newTrack.fromLocation = lastWaypoint.toLocation;
-                newTrack.toLocation = aLoc.code;
-                newTrack.altitude = altitude;
-                newTrack.tas = this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-                this.tracks.push(newTrack);
-            }
-        }
-        else {
-            var newTrack = new TrackComponent();
-            newTrack.fromLocation = aLoc.code;
-            newTrack.altitude = altitude;
-            newTrack.variation = -11.5;
-            newTrack.headingMag;
-            newTrack.sector = 1;
-            newTrack.tas = this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-            this.tracks.push(newTrack);
-        }
+    TrackService.prototype.rad = function (x) {
+        return x * Math.PI / 180;
+    };
+    ;
+    TrackService.prototype.getDistance = function (p1, p2) {
+        var R = 6378137; // Earth�s mean radius in meter
+        var dLat = this.rad(p2.lat() - p1.lat());
+        var dLong = this.rad(p2.lng() - p1.lng());
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(this.rad(p1.lat())) * Math.cos(this.rad(p2.lat())) *
+                Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        return d; // returns the distance in meter
+    };
+    ;
+    TrackService.prototype.calculateGroundspeed = function (altitude) {
+        return this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
     };
     TrackService.prototype.RemoveWaypoint = function (aLoc) {
         var idx = this.waypoints.indexOf(aLoc);
@@ -134,14 +138,6 @@ var TrackService = (function () {
         return this._http.get(this.locServiceUrl + "LocByDesc/?descr=" + outSt)
             .map(function (res) { return res.json(); });
     };
-    //getLocationByDescr(desc: string) {
-    //    let params: URLSearchParams = new URLSearchParams();
-    //    let outSt = encodeURIComponent(desc);
-    //  //  params.set('descr', outSt);
-    //    return this._http.get(this.locServiceUrl + "LocByDesc/?descr=" + outSt)
-    //        .toPromise()
-    //        .then((response) => response.json());
-    //}
     TrackService.prototype.extractData = function (res) {
         var body = res.json();
         return body.data || {};

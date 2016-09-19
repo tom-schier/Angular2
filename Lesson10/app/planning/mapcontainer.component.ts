@@ -31,6 +31,7 @@ export class MapContainer implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        console.log('After Init MapContainer');
         this.UpdateMap();
     }
 
@@ -46,6 +47,8 @@ export class MapContainer implements OnInit, AfterViewInit {
     }
 
     UpdateMap() {
+        if (this.map == null)
+            return;
         this.clearMarkers();
         for (let aLoc of this._trackService.waypoints) {
             let locLatLng: google.maps.LatLng;
@@ -72,7 +75,7 @@ export class MapContainer implements OnInit, AfterViewInit {
             return newCoordinate;
     }
 
-    initMap() {
+    private initMap() {
         this.geocoder = new google.maps.Geocoder();
         this.map = new google.maps.Map(document.getElementById('map'), {
             zoom: this.initialZoom,
@@ -114,17 +117,23 @@ export class MapContainer implements OnInit, AfterViewInit {
     }
 
     // Sets the map on all markers in the array.
-    private setMapOnAll(map) {
+    private setMapOnAll() {
         for (var i = 0; i < this.markers.length; i++) {
             // by calling the setMap function on the Google marker object the marker will be placed on the map
             // if map == null the marker will be removed if it exists on the map
-            this.markers[i].setMap(map);
+            this.markers[i].setMap(this.map);
         }
     }
 
     // Removes the markers from the map, but keeps them in the array.
     private clearMarkers() {
-        this.setMapOnAll(null);
+       // this.setMapOnAll(null);
+
+        for (var i = 0; i < this.markers.length; i++) {
+            // by calling the setMap function on the Google marker object the marker will be placed on the map
+            // if map == null the marker will be removed if it exists on the map
+            this.markers[i].setMap(null);
+        }
         for (var i = 0; i < this.lines.length; i++) {
             // by calling the setMap function on the Google marker object the marker will be placed on the map
             // if map == null the marker will be removed if it exists on the map
@@ -135,7 +144,7 @@ export class MapContainer implements OnInit, AfterViewInit {
 
     // Shows any markers currently in the array.
     private showMarkers() {
-        this.setMapOnAll(map);
+        this.setMapOnAll();
     }
 
     // Deletes all markers in the array by removing references to them.

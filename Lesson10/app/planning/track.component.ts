@@ -18,7 +18,7 @@ import '../rxjs-operators';
 export class TrackData implements OnInit {
 
     aHeading: number;
-    aDistance: number;
+    aDistance: string;
     aTas: number;
     model: TrackComponent;
     tracks: TrackComponent[];
