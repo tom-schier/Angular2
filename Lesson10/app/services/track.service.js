@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var Subject_1 = require('rxjs/Subject');
-var aircraft_service_1 = require('./aircraft.service');
+var weather_service_1 = require('./weather.service');
 var http_1 = require('@angular/http');
 var http_2 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
@@ -21,11 +21,12 @@ var TrackComponent = (function () {
 }());
 exports.TrackComponent = TrackComponent;
 var TrackService = (function () {
-    function TrackService(_http, jsonp, _acService) {
-        var _this = this;
+    //geocoder: google.maps.Geocoder;
+    //map: google.maps.Map;
+    function TrackService(_http, jsonp, _weatherSvc) {
         this._http = _http;
         this.jsonp = jsonp;
-        this._acService = _acService;
+        this._weatherSvc = _weatherSvc;
         this.locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/'; // URL to web API
         //private locServiceUrl = 'http://localhost:25920/api/';
         // Observable string sources
@@ -37,21 +38,9 @@ var TrackService = (function () {
         console.log('creating flight planning service');
         this.tracks = new Array();
         this.waypoints = new Array();
-        this._acService.aircraftDetailsChange$.subscribe(function (acDetails) {
-            _this.UpdateAircraft(acDetails);
-        });
     }
-    //ngOnInit() {
-    //    this._acService.aircraftDetailsChange$.subscribe(
-    //        acDetails => {
-    //            this.UpdateAircraft(acDetails);
-    //        });
-    //}
     TrackService.prototype.UpdateAircraft = function (theAircraft) {
         this.selectedAircraft = theAircraft;
-        //
-        //this.updateTracks();
-        //this.acFlightPlanSpeed = theAircraft.acSpeeds.find(x => x.name == "TAS").val;
     };
     TrackService.prototype.AddLocation = function (aLoc, altitude) {
         if (aLoc == null)
@@ -78,14 +67,35 @@ var TrackService = (function () {
                 newTrack.fromLocation = lastLoc.code;
                 newTrack.toLocation = aLoc.code;
                 newTrack.altitude = aLoc.altitude;
-                this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
-                //newTrack.tas = this.selectedAircraft.acSpeeds.find(x => x.name == "TAS").val;
+                //this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
+                newTrack.tas = this.selectedAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
                 newTrack.gs = this.calculateGroundspeed(aLoc.altitude);
-                var pos1 = new google.maps.LatLng(parseFloat(lastLoc.latitude), parseFloat(lastLoc.longitude), false);
-                var pos2 = new google.maps.LatLng(parseFloat(aLoc.latitude), parseFloat(aLoc.longitude), false);
-                var tmp = this.getDistance(pos1, pos2) * 0.000539957;
+                // last location calc
+                var theLatParts = lastLoc.latitude.split(" ");
+                var decPart1 = theLatParts[1].split(".");
+                var theLat = parseFloat(theLatParts[0]) + parseFloat(theLatParts[1]) / 60;
+                if (lastLoc.latdir == 'W')
+                    theLat = theLat * (-1);
+                var theLngParts = lastLoc.longitude.split(" ");
+                var theLng = parseFloat(theLngParts[0]) + parseFloat(theLngParts[1]) / 60;
+                if (lastLoc.latdir == 'S')
+                    theLng = theLng * (-1);
+                // the new location
+                var theLatParts1 = aLoc.latitude.split(" ");
+                var theLat1 = parseFloat(theLatParts1[0]) + parseFloat(theLatParts1[1]) / 60;
+                if (aLoc.latdir == 'W')
+                    theLat1 = theLat1 * (-1);
+                var theLngParts1 = aLoc.longitude.split(" ");
+                var theLng1 = parseFloat(theLngParts1[0]) + parseFloat(theLngParts1[1]) / 60;
+                if (aLoc.latdir == 'S')
+                    theLng1 = theLng1 * (-1);
+                var pos1 = new google.maps.LatLng(theLat, theLng, false);
+                var pos2 = new google.maps.LatLng(theLat1, theLng1, false);
+                var tmp = this.getDistance(pos1, pos2) * 0.000539957; //convert distance from m to nm
                 newTrack.ti = ((tmp / newTrack.gs) * 60).toFixed(0);
                 newTrack.distance = (this.getDistance(pos1, pos2) * 0.000539957).toFixed(0);
+                newTrack.headingTrue = this.calculateHeading(pos2, pos1, newTrack);
+                newTrack.headingMag = newTrack.headingTrue;
                 this.tracks.push(newTrack);
             }
             lastLoc = aLoc;
@@ -97,7 +107,7 @@ var TrackService = (function () {
     };
     ;
     TrackService.prototype.getDistance = function (p1, p2) {
-        var R = 6378137; // Earth�s mean radius in meter
+        var R = 6378137; // Earth’s mean radius in meter
         var dLat = this.rad(p2.lat() - p1.lat());
         var dLong = this.rad(p2.lng() - p1.lng());
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -108,8 +118,55 @@ var TrackService = (function () {
         return d; // returns the distance in meter
     };
     ;
+    TrackService.prototype.calculateHeading = function (p1, p2, aTrack) {
+        var λ1 = this._toRad(p1.lng());
+        var λ2 = this._toRad(p2.lng());
+        var φ1 = this._toRad(p1.lat());
+        var φ2 = this._toRad(p2.lat());
+        var y = Math.sin(λ2 - λ1) * Math.cos(φ2);
+        var x = Math.cos(φ1) * Math.sin(φ2) -
+            Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2 - λ1);
+        var brng = this._toDeg(Math.atan2(y, x));
+        if (brng < 0)
+            brng = 360 + brng;
+        if (this._weatherSvc.winds.length > 0 && aTrack.altitude != "") {
+            //find the wind altitude closest to the one for the track
+            //  let aWind = this._weatherSvc.winds.find(x => x.altitude == aTrack.altitude);
+            //aWind.direction
+            return Math.round(brng);
+        }
+        else {
+            // no wind therfore no correction
+            return Math.round(brng);
+        }
+    };
+    /**
+  * Since not all browsers implement this we have our own utility that will
+  * convert from degrees into radians
+  *
+  * @param deg - The degrees to be converted into radians
+  * @return radians
+  */
+    TrackService.prototype._toRad = function (deg) {
+        return deg * Math.PI / 180;
+    };
+    /**
+     * Since not all browsers implement this we have our own utility that will
+     * convert from radians into degrees
+     *
+     * @param rad - The radians to be converted into degrees
+     * @return degrees
+     */
+    TrackService.prototype._toDeg = function (rad) {
+        return rad * 180 / Math.PI;
+    };
     TrackService.prototype.calculateGroundspeed = function (altitude) {
-        return this._acService.currentAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+        //find the wind altitude closest to the one for the track
+        if (this._weatherSvc.winds.length > 0) {
+            return this.selectedAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
+        }
+        else
+            return this.selectedAircraft.acSpeeds.find(function (x) { return x.name == "TAS"; }).val;
     };
     TrackService.prototype.RemoveWaypoint = function (aLoc) {
         var idx = this.waypoints.indexOf(aLoc);
@@ -155,7 +212,7 @@ var TrackService = (function () {
     };
     TrackService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, http_2.Jsonp, aircraft_service_1.AircraftService])
+        __metadata('design:paramtypes', [http_1.Http, http_2.Jsonp, weather_service_1.WeatherService])
     ], TrackService);
     return TrackService;
 }());

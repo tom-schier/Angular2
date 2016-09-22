@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
+﻿import {Injectable, OnInit, Component} from '@angular/core';
 import { Subject }    from 'rxjs/Subject';
 import {WindDetails} from './weather.service'
 import {AircraftService} from './aircraft.service';
+import {WeatherService} from './weather.service';
 import {Aircraft} from '../data/aircraft.types';
 import {AircraftDetailsComponent} from '../aircraft/aircraft-detail.component';
 import {Http} from '@angular/http';
@@ -51,30 +52,17 @@ export class TrackService  {
     trackDetailsChange$ = this.obTrackDetails.asObservable();
     waypointDetailsChange$ = this.obWaypointDetails.asObservable();
 
-    constructor(private _http: Http, private jsonp: Jsonp, private _acService: AircraftService) {
+    //geocoder: google.maps.Geocoder;
+    //map: google.maps.Map;
+
+    constructor(private _http: Http, private jsonp: Jsonp, private _weatherSvc: WeatherService) {
         console.log('creating flight planning service');
         this.tracks = new Array();
         this.waypoints = new Array();
-
-        this._acService.aircraftDetailsChange$.subscribe(
-            acDetails => {
-                this.UpdateAircraft(acDetails);
-            });
-
     }
-
-    //ngOnInit() {
-    //    this._acService.aircraftDetailsChange$.subscribe(
-    //        acDetails => {
-    //            this.UpdateAircraft(acDetails);
-    //        });
-    //}
 
     UpdateAircraft(theAircraft: Aircraft) {
         this.selectedAircraft = theAircraft;
-        //
-        //this.updateTracks();
-        //this.acFlightPlanSpeed = theAircraft.acSpeeds.find(x => x.name == "TAS").val;
     }
 
     AddLocation(aLoc: Location, altitude: string) {
@@ -106,14 +94,42 @@ export class TrackService  {
                 newTrack.fromLocation = lastLoc.code;
                 newTrack.toLocation = aLoc.code;
                 newTrack.altitude = aLoc.altitude;
-                this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
-                //newTrack.tas = this.selectedAircraft.acSpeeds.find(x => x.name == "TAS").val;
+                //this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
+                newTrack.tas = this.selectedAircraft.acSpeeds.find(x => x.name == "TAS").val;
                 newTrack.gs = this.calculateGroundspeed(aLoc.altitude);
-                let pos1 = new google.maps.LatLng(parseFloat(lastLoc.latitude), parseFloat(lastLoc.longitude), false);
-                let pos2 = new google.maps.LatLng(parseFloat(aLoc.latitude), parseFloat(aLoc.longitude), false);
-                let tmp = this.getDistance(pos1, pos2) * 0.000539957;
+                // last location calc
+                let theLatParts = lastLoc.latitude.split(" ");
+                let decPart1 = theLatParts[1].split(".");
+                let theLat = parseFloat(theLatParts[0]) + parseFloat(theLatParts[1]) / 60;
+
+                if (lastLoc.latdir == 'W')
+                    theLat = theLat * (-1);
+
+                let theLngParts = lastLoc.longitude.split(" ");
+                let theLng = parseFloat(theLngParts[0]) + parseFloat(theLngParts[1]) / 60;
+
+                if (lastLoc.latdir == 'S')
+                    theLng = theLng * (-1);
+                // the new location
+                let theLatParts1 = aLoc.latitude.split(" ");
+                let theLat1 = parseFloat(theLatParts1[0]) + parseFloat(theLatParts1[1]) / 60;
+
+                if (aLoc.latdir == 'W')
+                    theLat1 = theLat1 * (-1);
+
+                let theLngParts1 = aLoc.longitude.split(" ");
+                let theLng1 = parseFloat(theLngParts1[0]) + parseFloat(theLngParts1[1]) / 60;
+
+                if (aLoc.latdir == 'S')
+                    theLng1 = theLng1 * (-1);
+
+                let pos1 = new google.maps.LatLng(theLat, theLng, false);
+                let pos2 = new google.maps.LatLng(theLat1,theLng1, false);
+                let tmp = this.getDistance(pos1, pos2) * 0.000539957; //convert distance from m to nm
                 newTrack.ti = ((tmp / newTrack.gs)*60).toFixed(0);
                 newTrack.distance = (this.getDistance(pos1, pos2) * 0.000539957).toFixed(0);
+                newTrack.headingTrue = this.calculateHeading(pos2, pos1, newTrack);
+                newTrack.headingMag = newTrack.headingTrue;
                 this.tracks.push(newTrack);
             }
             lastLoc = aLoc;
@@ -121,14 +137,12 @@ export class TrackService  {
         }
     }
 
-
     rad(x: number) {
         return x * Math.PI / 180;
     };
 
-
     getDistance (p1: google.maps.LatLng, p2: google.maps.LatLng): number {
-        var R = 6378137; // Earth�s mean radius in meter
+        var R = 6378137; // Earth’s mean radius in meter
         var dLat = this.rad(p2.lat() - p1.lat());
         var dLong = this.rad(p2.lng() - p1.lng());
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -139,8 +153,63 @@ export class TrackService  {
         return d; // returns the distance in meter
     };
 
-    calculateGroundspeed(altitude: string): number {
-        return this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
+    calculateHeading(p1: google.maps.LatLng, p2: google.maps.LatLng, aTrack: TrackComponent): number {
+
+        let λ1 = this._toRad(p1.lng());
+        let λ2 = this._toRad(p2.lng());
+        let φ1 = this._toRad(p1.lat());
+        let φ2 = this._toRad(p2.lat());
+
+        let y = Math.sin(λ2 - λ1) * Math.cos(φ2);
+        let x = Math.cos(φ1) * Math.sin(φ2) -
+            Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2 - λ1);
+        let brng = this._toDeg(Math.atan2(y, x));
+
+        if (brng < 0)
+            brng = 360 + brng;
+        if (this._weatherSvc.winds.length > 0 && aTrack.altitude != "") {
+            //find the wind altitude closest to the one for the track
+          //  let aWind = this._weatherSvc.winds.find(x => x.altitude == aTrack.altitude);
+            //aWind.direction
+            return Math.round(brng);
+        }
+        else {
+            // no wind therfore no correction
+            return Math.round(brng);
+        }
+    }
+
+
+    /**
+  * Since not all browsers implement this we have our own utility that will
+  * convert from degrees into radians
+  *
+  * @param deg - The degrees to be converted into radians
+  * @return radians
+  */
+    _toRad(deg: number): number {
+        return deg * Math.PI / 180;
+    }
+
+    /**
+     * Since not all browsers implement this we have our own utility that will
+     * convert from radians into degrees
+     *
+     * @param rad - The radians to be converted into degrees
+     * @return degrees
+     */
+    _toDeg(rad: number): number {
+        return rad * 180 / Math.PI;
+    }
+
+    calculateGroundspeed(altitude: string): number
+    {
+        //find the wind altitude closest to the one for the track
+        if (this._weatherSvc.winds.length > 0) {
+            return this.selectedAircraft.acSpeeds.find(x => x.name == "TAS").val;
+        }
+        else
+            return this.selectedAircraft.acSpeeds.find(x => x.name == "TAS").val;
     }
 
     RemoveWaypoint(aLoc: Location) {
@@ -171,19 +240,17 @@ export class TrackService  {
             .then((response) => response.json());
     }
 
-
-
     getLocationByDescr(desc: string): Observable<Location> {
         let outSt = encodeURIComponent(desc);
         return this._http.get(this.locServiceUrl + "LocByDesc/?descr=" + outSt)
             .map((res) => res.json());
     } 
 
-
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};
     }
+
     private handleError(error: any) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message

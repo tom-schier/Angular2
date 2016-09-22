@@ -62,7 +62,7 @@ var TrackData = (function () {
         });
         this.trackForm = new forms_1.FormGroup({
             waypoint: new forms_1.FormControl('', [forms_1.Validators.required]),
-            altitude: new forms_1.FormControl('', [forms_1.Validators.required])
+            altitude: new forms_1.FormControl('altitude', [forms_1.Validators.required])
         });
         this.items = this.trackForm.controls["waypoint"].valueChanges
             .debounceTime(400)
@@ -73,6 +73,14 @@ var TrackData = (function () {
     };
     TrackData.prototype.search = function (waypoint) {
         this.searchTermStream.next(waypoint);
+        this.isSelected = false;
+    };
+    TrackData.prototype.onKeyUp = function (event) {
+        if (this.trackForm.controls['waypoint'].value.length > 1)
+            // if (event.target.innerHTML.length > 1)
+            this.isSelected = false;
+        else
+            this.isSelected = true;
     };
     TrackData.prototype.hideList = function () {
         this.isSelected = false;
@@ -82,10 +90,8 @@ var TrackData = (function () {
         this.trackRows = this._trackService.tracks;
     };
     TrackData.prototype.onSelectLocation = function (event) {
-        var ee = 5;
-        //this.model.fromLocation = item.description;
-        //this.showList = false;
-        //this.isSelected = true;
+        this.trackForm.controls['waypoint'].setValue(event.target.innerHTML);
+        this.isSelected = true;
     };
     TrackData.prototype.UpdateTracks = function (theTracks) {
         this.trackRows = theTracks;

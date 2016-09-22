@@ -72,9 +72,6 @@ var WeatherService = (function () {
     WeatherService.prototype.logError = function (err) {
         console.error('There was an error: ' + err);
     };
-    WeatherService.prototype.getWindForSector = function (aSector, aAltitude) {
-        return this.winds.find(function (wnd) { return wnd.sector == aSector && wnd.altitude == aAltitude; });
-    };
     WeatherService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

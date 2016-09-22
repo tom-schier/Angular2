@@ -21,6 +21,7 @@ export class TrackData implements OnInit {
     aDistance: string;
     aTas: number;
     model: TrackComponent;
+    //selLocation: string;
     tracks: TrackComponent[];
     selWindspeed: number;
     selDirection: number;
@@ -100,7 +101,7 @@ export class TrackData implements OnInit {
 
         this.trackForm = new FormGroup({
             waypoint: new FormControl('', [Validators.required]),
-            altitude: new FormControl('', [Validators.required])
+            altitude: new FormControl('altitude', [Validators.required])
         });
 
         this.items = this.trackForm.controls["waypoint"].valueChanges
@@ -116,8 +117,16 @@ export class TrackData implements OnInit {
 
     search(waypoint: string) {
         this.searchTermStream.next(waypoint);
+        this.isSelected = false;
     }
 
+    onKeyUp(event) {
+        if (this.trackForm.controls['waypoint'].value.length > 1)
+       // if (event.target.innerHTML.length > 1)
+            this.isSelected = false;
+        else
+            this.isSelected = true;
+    }
 
     hideList() {
         this.isSelected = false;
@@ -130,10 +139,8 @@ export class TrackData implements OnInit {
 
 
     onSelectLocation(event) {
-        var ee = 5;
-        //this.model.fromLocation = item.description;
-        //this.showList = false;
-        //this.isSelected = true;
+        this.trackForm.controls['waypoint'].setValue(event.target.innerHTML);
+        this.isSelected = true;
     }
 
     UpdateTracks(theTracks: TrackComponent[]) {

@@ -28,6 +28,7 @@ export class FlightPlanningComponent implements OnInit {
     ngOnInit() {
         console.log('ngOnInit Flight Planning Component');
         this.selectedAircraft = this._acService.getSelectedAircraft();
+        this._trackService.UpdateAircraft(this.selectedAircraft);
         this._acService.aircraftDetailsChange$.subscribe(
             acDetails => {
                 this.UpdateAircraft(acDetails);
@@ -42,12 +43,13 @@ export class FlightPlanningComponent implements OnInit {
             tr => {
                 this.CalculateTrackChanges(tr);
             });
-        this.acFlightPlanSpeed = this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
+      //  this.acFlightPlanSpeed = this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
     }
 
     UpdateAircraft(theAircraft: Aircraft) {
         this.selectedAircraft = theAircraft;
         this.acFlightPlanSpeed = theAircraft.acSpeeds.find(x => x.name == "TAS").val;
+        this._trackService.UpdateAircraft(theAircraft);
         this._trackService.updateTracks();
     }
 
