@@ -33,6 +33,12 @@ var FlightPlanningComponent = (function () {
         this._trackService.trackDetailsChange$.subscribe(function (tr) {
             _this.CalculateTrackChanges(tr);
         });
+        this._trackService.totalDistanceChanged$.subscribe(function (td) {
+            _this.totalDistance = td;
+        });
+        this._trackService.totalTimeChanged$.subscribe(function (ti) {
+            _this.totalTime = ti;
+        });
         this.totalTime = this._trackService.totalTimeString;
         this.totalDistance = this._trackService.totalDistanceString;
     };

@@ -32,9 +32,13 @@ var TrackService = (function () {
         // Observable string sources
         this.obTrackDetails = new Subject_1.Subject();
         this.obWaypointDetails = new Subject_1.Subject();
+        this.obTotalTime = new Subject_1.Subject();
+        this.obTotalDistance = new Subject_1.Subject();
         // Observable string streams
         this.trackDetailsChange$ = this.obTrackDetails.asObservable();
         this.waypointDetailsChange$ = this.obWaypointDetails.asObservable();
+        this.totalTimeChanged$ = this.obTotalTime.asObservable();
+        this.totalDistanceChanged$ = this.obTotalDistance.asObservable();
         console.log('creating flight planning service');
         this.tracks = new Array();
         this.waypoints = new Array();
@@ -107,6 +111,8 @@ var TrackService = (function () {
             lastLoc = aLoc;
             idx = idx + 1;
         }
+        this.obTotalTime.next(this.totalTimeString);
+        this.obTotalDistance.next(this.totalDistanceString);
     };
     TrackService.prototype.rad = function (x) {
         return x * Math.PI / 180;

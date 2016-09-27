@@ -50,10 +50,14 @@ export class TrackService  {
     // Observable string sources
     private obTrackDetails = new Subject<TrackComponent[]>();
     private obWaypointDetails = new Subject<Location[]>();
+    private obTotalTime = new Subject<string>();
+    private obTotalDistance = new Subject<string>();
 
     // Observable string streams
     trackDetailsChange$ = this.obTrackDetails.asObservable();
     waypointDetailsChange$ = this.obWaypointDetails.asObservable();
+    totalTimeChanged$ = this.obTotalTime.asObservable();
+    totalDistanceChanged$ = this.obTotalDistance.asObservable();
 
     //geocoder: google.maps.Geocoder;
     //map: google.maps.Map;
@@ -144,6 +148,8 @@ export class TrackService  {
             lastLoc = aLoc;
             idx = idx + 1;
         }
+        this.obTotalTime.next(this.totalTimeString);
+        this.obTotalDistance.next(this.totalDistanceString);
     }
 
     rad(x: number) {

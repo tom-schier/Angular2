@@ -43,6 +43,15 @@ export class FlightPlanningComponent implements OnInit {
             tr => {
                 this.CalculateTrackChanges(tr);
             });
+
+        this._trackService.totalDistanceChanged$.subscribe(td => {
+            this.totalDistance = td;
+        });
+
+        this._trackService.totalTimeChanged$.subscribe(ti => {
+            this.totalTime = ti;
+        });
+
         this.totalTime = this._trackService.totalTimeString;
         this.totalDistance = this._trackService.totalDistanceString;
     }
