@@ -54,6 +54,8 @@ var TrackService = (function () {
     TrackService.prototype.updateTracks = function () {
         var lastLoc;
         var idx = 0;
+        this.totalDistance = 0;
+        this.totalTime = 0;
         this.tracks = [];
         for (var _i = 0, _a = this.waypoints; _i < _a.length; _i++) {
             var aLoc = _a[_i];
@@ -94,6 +96,10 @@ var TrackService = (function () {
                 var tmp = this.getDistance(pos1, pos2) * 0.000539957; //convert distance from m to nm
                 newTrack.ti = ((tmp / newTrack.gs) * 60).toFixed(0);
                 newTrack.distance = (this.getDistance(pos1, pos2) * 0.000539957).toFixed(0);
+                this.totalDistance += (this.getDistance(pos1, pos2) * 0.000539957);
+                this.totalTime += ((tmp / newTrack.gs) * 60);
+                this.totalDistanceString = this.totalDistance.toFixed(0);
+                this.totalTimeString = this.totalTime.toFixed(0);
                 newTrack.headingTrue = this.calculateHeading(pos2, pos1, newTrack);
                 newTrack.headingMag = newTrack.headingTrue;
                 this.tracks.push(newTrack);

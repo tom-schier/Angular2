@@ -38,7 +38,10 @@ export class TrackService  {
 
     public tracks: TrackComponent[];
     public waypoints: Location[];
-
+    public totalDistance: number;
+    public totalTime: number;
+    public totalDistanceString: string;
+    public totalTimeString: string;
     private selectedAircraft: Aircraft;
 
     private locServiceUrl = 'http://xpwebapp.azurewebsites.net/api/';  // URL to web API
@@ -80,6 +83,8 @@ export class TrackService  {
     updateTracks() {
         let lastLoc: Location;
         let idx = 0;
+        this.totalDistance = 0;
+        this.totalTime = 0;
         this.tracks = [];
         for (let aLoc of this.waypoints) {
             
@@ -128,6 +133,10 @@ export class TrackService  {
                 let tmp = this.getDistance(pos1, pos2) * 0.000539957; //convert distance from m to nm
                 newTrack.ti = ((tmp / newTrack.gs)*60).toFixed(0);
                 newTrack.distance = (this.getDistance(pos1, pos2) * 0.000539957).toFixed(0);
+                this.totalDistance += (this.getDistance(pos1, pos2) * 0.000539957);
+                this.totalTime += ((tmp / newTrack.gs) * 60);
+                this.totalDistanceString = this.totalDistance.toFixed(0);
+                this.totalTimeString = this.totalTime.toFixed(0);
                 newTrack.headingTrue = this.calculateHeading(pos2, pos1, newTrack);
                 newTrack.headingMag = newTrack.headingTrue;
                 this.tracks.push(newTrack);

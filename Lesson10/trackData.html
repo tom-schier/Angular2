@@ -110,6 +110,7 @@
                            type="text"
                            list="waypoints"
                            formControlName="waypoint"
+                           [(ngModel)]="waypointRef"
                            style="width:300px"
                            data-toggle="tooltip"
                            (keyup)="onKeyUp($event)"
@@ -117,14 +118,9 @@
                            title="Direction is required. Must be numeric and between 0 and 360 unless you have a compass from another planet."
                            class="form-control"
                            [hidden]="trackForm.controls.waypoint.valid || (trackForm.controls.waypoint.pristine && !submitted)"/>
-                    <ul   [hidden]="isSelected" >
+                    <ul   [hidden]="!showList" >
                         <li *ngFor="let item of items | async; let i = index" (click)="onSelectLocation($event)" >{{item.description}}</li>
                     </ul>
-                    <!--<datalist id="waypoints" >
-                        <option  *ngFor="let item of items | async; let i = index">
-                            {{item.description}}                                                  
-                        </option>
-                    </datalist>-->
                 </div>
             </div>
             <div id="altitudeEntry" class="row">
@@ -140,7 +136,7 @@
                     </select>
                 </span>
                 <span>
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-success" [disabled]="!isSelected">
                         <i class="fa fa-plus-square xp-form-button"></i>
                     </button>
                 </span>

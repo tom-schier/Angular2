@@ -28,7 +28,7 @@ var TrackData = (function () {
         this.active = true;
         this.model = new track_service_1.TrackComponent();
         this.trackRows = new Array();
-        this.showList = true;
+        this.showList = false;
         this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
         this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
         this.stBtnRemoveClass = "btn btn-primary glyphicon glyphicon-remove fa-lg";
@@ -61,8 +61,8 @@ var TrackData = (function () {
             _this.UpdateAircraft(acDetails);
         });
         this.trackForm = new forms_1.FormGroup({
-            waypoint: new forms_1.FormControl('', [forms_1.Validators.required]),
-            altitude: new forms_1.FormControl('altitude', [forms_1.Validators.required])
+            waypoint: new forms_1.FormControl('', [forms_1.Validators.required, forms_1.Validators.minLength(2)]),
+            altitude: new forms_1.FormControl('', [forms_1.Validators.required])
         });
         this.items = this.trackForm.controls["waypoint"].valueChanges
             .debounceTime(400)
@@ -76,21 +76,20 @@ var TrackData = (function () {
         this.isSelected = false;
     };
     TrackData.prototype.onKeyUp = function (event) {
-        if (this.trackForm.controls['waypoint'].value.length > 1)
-            // if (event.target.innerHTML.length > 1)
+        if (this.isSelected == false && this.waypointRef.valueOf().trim().length > 1) {
+            this.showList = true;
+        }
+        else {
+            this.showList = false;
             this.isSelected = false;
-        else
-            this.isSelected = true;
-    };
-    TrackData.prototype.hideList = function () {
-        this.isSelected = false;
-        this.stComments = [];
+        }
     };
     TrackData.prototype.loadTracks = function () {
         this.trackRows = this._trackService.tracks;
     };
     TrackData.prototype.onSelectLocation = function (event) {
         this.trackForm.controls['waypoint'].setValue(event.target.innerHTML);
+        this.showList = false;
         this.isSelected = true;
     };
     TrackData.prototype.UpdateTracks = function (theTracks) {
@@ -108,13 +107,9 @@ var TrackData = (function () {
     TrackData.prototype.onSelect = function (item) {
         this.stLocation = item.description;
         this.isSelected = true;
-        //this.trackForm.controls['waypoint'].value = item.description;
-        ////trackForm.controls.waypoint
-        //var ee = 7;
     };
     TrackData.prototype.onSubmit = function (event) {
         this.submitted = true;
-        //  this.term.get("searchInput").setValue
     };
     TrackData.prototype.onAdd = function (model, isValid) {
         var _this = this;

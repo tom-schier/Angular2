@@ -50,13 +50,16 @@ export class MapContainer implements OnInit, AfterViewInit {
         if (this.map == null)
             return;
         this.clearMarkers();
+        let centreLoc: google.maps.LatLng; 
         for (let aLoc of this._trackService.waypoints) {
             let locLatLng: google.maps.LatLng;
             let latitude = this.convertCoordStringToNumber(aLoc.latitude, aLoc.latdir);
             let longitude = this.convertCoordStringToNumber(aLoc.longitude, aLoc.lngdir);
             locLatLng = new google.maps.LatLng(latitude, longitude, false);
+            centreLoc = locLatLng;
             this.addMarker(locLatLng);
         }
+        this.map.setCenter(centreLoc);
         this.showMarkers();
     }
 

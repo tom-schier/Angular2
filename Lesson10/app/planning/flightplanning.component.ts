@@ -10,7 +10,6 @@ import {Aircraft, AircraftBrief} from '../data/aircraft.types';
 
 @Component({
     templateUrl: './flightplan.html'
-  //  directives: [WindData, TrackData]
 })
 export class FlightPlanningComponent implements OnInit {
 
@@ -18,7 +17,8 @@ export class FlightPlanningComponent implements OnInit {
     acFlightPlanSpeed: number;
     windDirection: number;
     windSpeed: number;
-   // calcTrack: TrackComponent[];
+    totalDistance: string;
+    totalTime: string;
 
     constructor(private _acService: AircraftService,
                 public _weatherService: WeatherService, public _trackService: TrackService) {
@@ -43,7 +43,8 @@ export class FlightPlanningComponent implements OnInit {
             tr => {
                 this.CalculateTrackChanges(tr);
             });
-      //  this.acFlightPlanSpeed = this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
+        this.totalTime = this._trackService.totalTimeString;
+        this.totalDistance = this._trackService.totalDistanceString;
     }
 
     UpdateAircraft(theAircraft: Aircraft) {

@@ -13,7 +13,6 @@ var weather_service_1 = require('../services/weather.service');
 var core_1 = require('@angular/core');
 var aircraft_service_1 = require('../services/aircraft.service');
 var FlightPlanningComponent = (function () {
-    // calcTrack: TrackComponent[];
     function FlightPlanningComponent(_acService, _weatherService, _trackService) {
         this._acService = _acService;
         this._weatherService = _weatherService;
@@ -34,7 +33,8 @@ var FlightPlanningComponent = (function () {
         this._trackService.trackDetailsChange$.subscribe(function (tr) {
             _this.CalculateTrackChanges(tr);
         });
-        //  this.acFlightPlanSpeed = this._acService.currentAircraft.acSpeeds.find(x => x.name == "TAS").val;
+        this.totalTime = this._trackService.totalTimeString;
+        this.totalDistance = this._trackService.totalDistanceString;
     };
     FlightPlanningComponent.prototype.UpdateAircraft = function (theAircraft) {
         this.selectedAircraft = theAircraft;

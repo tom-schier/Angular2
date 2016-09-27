@@ -40,6 +40,7 @@ export class TrackData implements OnInit {
     mode = 'Observable';
     displayValue: string;
     isSelected: boolean;
+    waypointRef: string;
 
     trackForm: FormGroup;
     stComments: string[];
@@ -58,7 +59,7 @@ export class TrackData implements OnInit {
          
             this.model = new TrackComponent();
             this.trackRows = new Array();
-            this.showList = true;
+            this.showList = false;
 
             this.stBtnEditDefaultClass = "btn btn-primary glyphicon glyphicon-pencil fa-lg";
             this.stBtnEditSaveClass = "btn btn-primary glyphicon glyphicon-ok fa-lg";
@@ -100,8 +101,8 @@ export class TrackData implements OnInit {
             });
 
         this.trackForm = new FormGroup({
-            waypoint: new FormControl('', [Validators.required]),
-            altitude: new FormControl('altitude', [Validators.required])
+            waypoint: new FormControl('', [Validators.required, Validators.minLength(2)]),
+            altitude: new FormControl('', [Validators.required])
         });
 
         this.items = this.trackForm.controls["waypoint"].valueChanges
@@ -121,16 +122,13 @@ export class TrackData implements OnInit {
     }
 
     onKeyUp(event) {
-        if (this.trackForm.controls['waypoint'].value.length > 1)
-       // if (event.target.innerHTML.length > 1)
-            this.isSelected = false;
-        else
-            this.isSelected = true;
-    }
-
-    hideList() {
-        this.isSelected = false;
-        this.stComments = [];
+        if (this.isSelected == false && this.waypointRef.valueOf().trim().length > 1) {
+            this.showList = true;
+        }
+        else {
+            this.showList = false;
+            this.isSelected = false
+        }                      
     }
 
     loadTracks() {
@@ -140,6 +138,7 @@ export class TrackData implements OnInit {
 
     onSelectLocation(event) {
         this.trackForm.controls['waypoint'].setValue(event.target.innerHTML);
+        this.showList = false;
         this.isSelected = true;
     }
 
@@ -162,14 +161,10 @@ export class TrackData implements OnInit {
     onSelect(item: Location) {
         this.stLocation = item.description;
         this.isSelected = true;
-        //this.trackForm.controls['waypoint'].value = item.description;
-        ////trackForm.controls.waypoint
-        //var ee = 7;
     }
 
     onSubmit(event) {
         this.submitted = true;
-      //  this.term.get("searchInput").setValue
     }
     active = true;
 
@@ -186,8 +181,6 @@ export class TrackData implements OnInit {
 
         this._trackService.getLocationByDescr(this.trackForm.controls["waypoint"].value).subscribe(x => this._trackService.AddLocation(x, this.trackForm.controls["altitude"].value));     
     }
-
-
 
 
     onRemove(aLoc: Location) {
